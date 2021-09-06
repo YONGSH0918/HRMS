@@ -14,7 +14,8 @@ class CreateEmployeeCareerPathInfosTable extends Migration
     public function up()
     {
         Schema::create('employee_career_path_infos', function (Blueprint $table) {
-            $table->id('employee_CareerPath_Info_ID');
+            $table->id();
+            $table->string('employee_CareerPath_Info_ID');
             $table->string('employee_ID');
             $table->string('employee_Name');
             $table->string('supervisor_Name');

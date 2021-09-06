@@ -7,7 +7,7 @@ body {
 
 p {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.1em;
+    font-size: small;
     font-weight: 300;
     line-height: 1.7em;
     color: #999;
@@ -32,6 +32,10 @@ a:focus {
     box-shadow: none;
     outline: none !important;
     border: none;
+}
+
+.btn {
+    font-size: 1em;
 }
 
 .wrapper {
@@ -66,7 +70,7 @@ a:focus {
 
 #sidebar ul li a {
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 0.9em;
     display: block;
 }
 #sidebar ul li a:hover {
@@ -80,7 +84,7 @@ a:focus {
 }
 
 #sidebar ul ul a {
-    font-size: 0.9em !important;
+    font-size: small !important;
     padding-left: 30px !important;
     background: #6d7fcc;
 }

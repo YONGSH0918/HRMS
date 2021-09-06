@@ -14,7 +14,8 @@ class CreateEmployeeVaccinationsTable extends Migration
     public function up()
     {
         Schema::create('employee_vaccinations', function (Blueprint $table) {
-            $table->id('employee_Vaccination_ID');
+            $table->id();
+            $table->string('employee_Vaccination_ID');
             $table->string('employee_ID');
             $table->string('employee_Name');
             $table->string('employee_Department');

@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 class CreateEmployeesTable extends Migration
 {
     /**
@@ -14,10 +15,11 @@ class CreateEmployeesTable extends Migration
     public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->id('employee_ID');
-            $table->integer('ic')->unsigned();
+            $table->id();
+            $table->string('employee_ID');
+            $table->string('ic')->unique();
             $table->string('employee_Name', 60);
-            $table->string('images');
+            $table->string('image');
             $table->string('gender');
             $table->date('date_of_birth');
             $table->string('race');
@@ -25,14 +27,12 @@ class CreateEmployeesTable extends Migration
             $table->string('national');
             $table->text('address');
             $table->string('contact_Number');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('department');
             $table->string('jobtitle');
             $table->double('salary')->unsigned();
             $table->date('start_Date');
             $table->date('end_Date');
-            $table->text('education');
-            $table->text('work_Experience');
             $table->string('emergency_Name');
             $table->string('emergency_Contact_Number');
             $table->string('document');
@@ -42,9 +42,9 @@ class CreateEmployeesTable extends Migration
             $table->string('salary_structure');
             $table->string('leave_grade');
             $table->string('employee_grade');
-            $table->integer('epf_number')->unsigned();
+            $table->integer('epf_number');
             $table->string('bank_Name');
-            $table->integer('bank_account_number')->unsigned();
+            $table->integer('bank_account_number');
             $table->string('workingSchedule');
             $table->timestamps();
         });
