@@ -88,9 +88,15 @@
                             <a href="{{ route('viewEmployee') }}">Employees</a>
                         </li>
                         <li>
-                            <a href="#">Page2</a>
+                            <a href="#">Career Path Development</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="#">Attendance</a>
+                </li>
+                <li>
+                    <a href="#">Employee Vaccination Management</a>
                 </li>
                 <li>
                     <a href="#">Portfolio</a>

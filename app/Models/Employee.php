@@ -13,7 +13,7 @@ class Employee extends Model
     'date_of_birth', 'race', 'country','national', 'address', 
     'contact_Number', 'email', 'department', 'jobtitle', 
     'salary', 'start_Date', 'end_Date','emergency_Name', 
-    'emergency_Contact_Number', 'document', 'calendar_ID', 
+    'emergency_Contact_Number', 'document', 'status', 
     'employment_ID', 'marital_Status', 'salary_structure', 'leave_grade', 
     'employee_grade', 'epf_number','bank_Name', 'bank_account_number', 'workingSchedule'];
 

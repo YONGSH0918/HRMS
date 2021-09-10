@@ -17,7 +17,6 @@ class CreateEmployeeCareerPathInfosTable extends Migration
             $table->id();
             $table->string('employee_CareerPath_Info_ID');
             $table->string('employee_ID');
-            $table->string('employee_Name');
             $table->string('supervisor_Name');
             $table->string('current_JobTitle');
             $table->string('program_Title');

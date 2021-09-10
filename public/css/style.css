@@ -121,3 +121,9 @@ a:focus {
     margin-left: 10px;
     margin-bottom: 5px;
 }
+
+input{
+    border: solid 2px lightgray;
+    padding: 5px;
+    border-radius: 3px;
+}

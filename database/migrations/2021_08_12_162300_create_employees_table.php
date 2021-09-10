@@ -17,9 +17,9 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('employee_ID');
-            $table->string('ic')->unique();
+            $table->string('ic');
             $table->string('employee_Name', 60);
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('gender');
             $table->date('date_of_birth');
             $table->string('race');
@@ -27,22 +27,22 @@ class CreateEmployeesTable extends Migration
             $table->string('national');
             $table->text('address');
             $table->string('contact_Number');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('department');
             $table->string('jobtitle');
             $table->double('salary')->unsigned();
             $table->date('start_Date');
-            $table->date('end_Date');
+            $table->date('end_Date')->nullable();
             $table->string('emergency_Name');
             $table->string('emergency_Contact_Number');
-            $table->string('document');
-            $table->string('calendar_ID');
+            $table->string('document')->nullable();
+            $table->string('status');
             $table->string('employment_ID'); // fulltime-parttime
             $table->string('marital_Status');
             $table->string('salary_structure');
             $table->string('leave_grade');
             $table->string('employee_grade');
-            $table->integer('epf_number');
+            $table->integer('epf_number')->nullable();
             $table->string('bank_Name');
             $table->integer('bank_account_number');
             $table->string('workingSchedule');

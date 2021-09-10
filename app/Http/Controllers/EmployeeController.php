@@ -14,6 +14,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class EmployeeController extends Controller
 {
 
+    //turn page
     public function add()
     {
         return view('employees-mgmt/addEmployee');
@@ -53,7 +54,7 @@ class EmployeeController extends Controller
             'emergency_Name' => $r->emergency_Name,
             'emergency_Contact_Number' => $r->emergency_Contact_Number,
             'document' => $documentName,
-            'calendar_ID' => $r->calendar_ID,
+            'status' => $r->status,
             'employment_ID' => $r->employment_ID,
             'marital_Status' => $r->marital_Status,
             'salary_structure' => $r->salary_structure,
@@ -72,6 +73,7 @@ class EmployeeController extends Controller
         return redirect()->route('viewEmployee');
     }
 
+    //show employee
     public function show()
     {
 
@@ -80,7 +82,89 @@ class EmployeeController extends Controller
         return view('employees-mgmt/index')->with('employees', $employees);
     }
 
-    public function search(Request $request)
+    //find employee to edit
+    public function edit($id)
     {
+
+        $employees = Employee::all()->where('id', $id);
+
+        return view('employees-mgmt/edit')->with('employees', $employees);
     }
+
+    //edit
+    public function update()
+    {
+        $r = request(); //retrive submited form data
+        $employees = Employee::find($r->ID);  //get the record based on product ID      
+        if ($r->file('employees-image') != '') {
+            $image = $r->file('employees-image');
+            $image->move('images/employeesImages', $image->getClientOriginalName());
+            $imageName = $image->getClientOriginalName();
+            $employees->image = $imageName;
+        }
+        if ($r->file('employees-document') != '') {
+            $document = $r->file('employees-document');
+            $document->move('documents', $document->getClientOriginalName());
+            $documentName = $document->getClientOriginalName();
+            $employees->document = $documentName;
+        }
+        
+        $employees->employee_ID = $r->employee_ID;
+        $employees->ic = $r->ic;
+        $employees->employee_Name = $r->employee_Name;
+        $employees->gender = $r->gender;
+        $employees->date_of_birth = $r->date_of_birth;
+        $employees->race = $r->race;
+        $employees->country = $r->country;
+        $employees->national = $r->national;
+        $employees->address = $r->address;
+        $employees->contact_Number = $r->contact_Number;
+        $employees->email = $r->email;
+        $employees->department = $r->department;
+        $employees->jobtitle = $r->jobtitle;
+        $employees->salary = $r->salary;
+        $employees->start_Date = $r->start_Date;
+        $employees->end_Date = $r->end_Date;
+        $employees->emergency_Name = $r->emergency_Name;
+        $employees->emergency_Contact_Number = $r->emergency_Contact_Number;
+        $employees->status = $r->status;
+        $employees->employment_ID = $r->employment_ID;
+        $employees->marital_Status = $r->marital_Status;
+        $employees->salary_structure = $r->salary_structure;
+        $employees->leave_grade = $r->leave_grade;
+        $employees->employee_grade = $r->employee_grade;
+        $employees->epf_number = $r->epf_number;
+        $employees->bank_Name = $r->bank_Name;
+        $employees->bank_account_number = $r->bank_account_number;
+        $employees->workingSchedule = $r->workingSchedule;
+        $employees->save(); //run the SQL update statment
+        Session::flash('update', "Employee updated Succesful!");
+        return redirect()->route('viewEmployee');
+    }
+
+    //search employee
+    function search()
+    {
+        $request = request();
+        $keyword = $request->search;
+        $employees = DB::table('employees')
+        ->where('employee_ID', 'like', '%' .$keyword. '%')
+        ->paginate(5);
+
+        return view('employees-mgmt/search')->with('employees', $employees);
+    }
+
+
+    public function showEmployeeDetail($id)
+    {
+
+        $employees = Employee::all()->where('id', $id);
+        //select * from products where id='$id'
+
+        return view('employees-mgmt/profileEmployee')->with('employees', $employees);
+    }
+
+
+
+    
 }

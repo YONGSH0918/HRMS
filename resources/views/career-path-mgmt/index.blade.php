@@ -1,4 +1,4 @@
-@extends('employees-mgmt.base')
+@extends('carrer-path-mgmt.base')
 @section('action-content')
 @if(Session::has('success'))
 <div class="alert alert-success" role="alert">
@@ -68,7 +68,7 @@
                   <td class="hidden-xs">{{ $employee->start_Date }}</td>
                   <td class="hidden-xs">{{ $employee->status }}</td>
                   <td>
-                    <a href="{{ route('employee.detail', ['id' => $employee->id]) }}" class="btn btn-info col-sm-3 col-xs-5 btn-margin">
+                    <a href="#" class="btn btn-info col-sm-3 col-xs-5 btn-margin">
                       <i class="fa fa-search"></i>
                     </a>
                     <!--('editEmployee', ['employee_ID' => $employee->employee_ID])-->
