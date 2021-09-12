@@ -1,4 +1,4 @@
-@extends('career-path-mgmt.base')
+@extends('vaccination-mgmt.base')
 @section('action-content')
 
 <!-- Main content -->
@@ -10,7 +10,7 @@
           <h5 class="box-title">List of employees</h5>
         </div>
         <div class="col-sm-4" style="text-align: -webkit-right;">
-          <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewEmployeeCPD') }}">Back</a>
+          <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewEmployeeVA') }}">Back</a>
         </div>
       </div>
     </div>
@@ -29,9 +29,9 @@
             <thead>
               <tr role="row">
                 <th width="9%" class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Id: activate to sort column descending" aria-sort="ascending">Employee ID</th>
-                <th width="12%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Employee Name</th>
-                <th width="12%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="department: activate to sort column ascending">Department</th>
-                <th width="8%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="jobtitle: activate to sort column ascending">Job Title</th>
+                <th width="20%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Employee Name</th>
+                <th width="12%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="department: activate to sort column ascending">Identification Number</th>
+                <th width="12%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="jobtitle: activate to sort column ascending">Department</th>
                 <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">Action</th>
               </tr>
             </thead>
@@ -40,10 +40,10 @@
               <tr role="row" class="odd">
                 <td class="sorting_1">{{ $employee->employee_ID }}</td>
                 <td class="hidden-xs">{{ $employee->employee_Name }}</td>
+                <td class="hidden-xs">{{ $employee->ic }}</td>
                 <td class="hidden-xs">{{ $employee->department }}</td>
-                <td class="hidden-xs">{{ $employee->jobtitle }}</td>
                 <td>
-                  <a href="{{ route('addCPD', ['id' => $employee->id]) }}" class="btn btn-success col-sm-3 col-xs-5 btn-margin">
+                  <a href="{{ route('insertVA', ['id' => $employee->id])}}" class="btn btn-success col-sm-3 col-xs-5 btn-margin">
                     <i class="fa fa-plus"></i>
                   </a>
                 </td>
@@ -53,6 +53,7 @@
           </table>
         </div>
       </div>
+
       <div class="box-footer" style="width: -webkit-fill-available;">
         <div class="row">
           <div class="col-sm-8">
@@ -64,9 +65,7 @@
           </div>
         </div>
       </div>
-
     </div>
-  </div>
   </div>
   </div>
   <!-- /.box-body -->

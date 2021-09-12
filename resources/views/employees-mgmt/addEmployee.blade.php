@@ -7,12 +7,12 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading" style="font-size: larger; color: mediumblue; font-weight: 500;">Add new employee
-                <a href="{{ route('viewEmployee') }}" class="float-right btn btn-info col-sm-3 col-xs-5 btn-margin" style="font-size: initial; width: 110px;">
-                    <i></i>{{ __('Back') }}
-                </a>
+                    <a href="{{ route('viewEmployee') }}" class="float-right btn btn-info col-sm-3 col-xs-5 btn-margin" style="font-size: initial; width: 110px;">
+                        <i></i>{{ __('Back') }}
+                    </a>
                 </div>
                 <div class="panel-body">
-                    <form name="formAddEmployee" class="form-horizontal" role="form" method="POST" action="{{ route('addEmployee') }}" enctype="multipart/form-data" onSubmit="return formValidation();">
+                    <form name="formAddEmployee" class="form-horizontal" role="form" method="POST" action="{{ route('addEmployee') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <!--Employee ID -->
                         <div class="form-group">
@@ -48,6 +48,7 @@
                             <div class="col-md-6">
                                 <input type="radio" id="status" name="status" value="Active">Active
                                 <input type="radio" id="status" name="status" value="Inactive">Inactive
+                                <input type="radio" id="status" name="status" value="Probation Period">Probation Period
                             </div>
                         </div>
                         <!--Employee Gender-->
@@ -69,13 +70,14 @@
                         <div class="form-group">
                             <label for="race" class="col-md-4 control-label">Race<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <select id="race" name="race" style="width: -webkit-fill-available;" onchange="if (this.value=='others'){this.form['others'].style.visibility='visible'}else {this.form['others'].style.visibility='hidden'};">
-                                    <option value="malay">Malay</option>
-                                    <option value="chinese">Chinese</option>
-                                    <option value="indian">Indian</option>
-                                    <option value="others">Others</option>
+                                <select id="race" name="race" style="width: -webkit-fill-available;" onchange="if (this.value=='Others'){this.form['Others'].style.visibility='visible'}else {this.form['Others'].style.visibility='hidden'};">
+                                    <option value="0" disabled="true" selected="true">Please Select</option>
+                                    <option value="Malay">Malay</option>
+                                    <option value="Chinese">Chinese</option>
+                                    <option value="Indian">Indian</option>
+                                    <option value="Others">Others</option>
                                 </select>
-                                <input type="text" name="others" id="race" style="visibility:hidden; width: -webkit-fill-available;" />
+                                <input type="text" name="Others" id="race" style="visibility:hidden; width: -webkit-fill-available;" />
                             </div>
                         </div>
                         <!--Employee Country-->

@@ -5,11 +5,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h2>
-            Career Path Development Management
+            Health Facility Management
         </h2>
         <ol class="breadcrumb">
             <!-- li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li-->
-            <li class="active">Employees</li>
+            <li class="active">Health Facility</li>
         </ol>
     </section>
     @yield('action-content')

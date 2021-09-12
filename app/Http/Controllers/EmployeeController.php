@@ -108,7 +108,7 @@ class EmployeeController extends Controller
             $documentName = $document->getClientOriginalName();
             $employees->document = $documentName;
         }
-        
+
         $employees->employee_ID = $r->employee_ID;
         $employees->ic = $r->ic;
         $employees->employee_Name = $r->employee_Name;
@@ -148,8 +148,9 @@ class EmployeeController extends Controller
         $request = request();
         $keyword = $request->search;
         $employees = DB::table('employees')
-        ->where('employee_ID', 'like', '%' .$keyword. '%')
-        ->paginate(5);
+            ->where('employee_ID', 'like', '%' . $keyword . '%')
+            ->orWhere('department', 'like', '%' . $keyword . '%')
+            ->paginate(5);
 
         return view('employees-mgmt/search')->with('employees', $employees);
     }
@@ -163,8 +164,4 @@ class EmployeeController extends Controller
 
         return view('employees-mgmt/profileEmployee')->with('employees', $employees);
     }
-
-
-
-    
 }

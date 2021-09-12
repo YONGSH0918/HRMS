@@ -37,6 +37,14 @@
                         <tbody style="font-size: 14px;">
                             <tr>
                                 <td>
+                                    <div>{{ __('IC No.') }}</div>
+                                </td>
+                                <td>
+                                    <div>{{$employee->ic}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <div>{{ __('Email') }}</div>
                                 </td>
                                 <td>

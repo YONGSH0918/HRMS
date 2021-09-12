@@ -7,12 +7,12 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading" style="font-size: larger; color: mediumblue; font-weight: 500;">Edit employee
-                <a href="{{ route('viewEmployee') }}" class="float-right btn btn-info col-sm-3 col-xs-5 btn-margin" style="font-size: initial; width: 110px;">
-                    <i></i>{{ __('Back') }}
-                </a>
+                    <a href="{{ route('viewEmployee') }}" class="float-right btn btn-info col-sm-3 col-xs-5 btn-margin" style="font-size: initial; width: 110px;">
+                        <i></i>{{ __('Back') }}
+                    </a>
                 </div>
                 <div class="panel-body">
-                    <form name="formEditEmployee" class="form-horizontal" role="form" method="POST" action="{{ route('updateEmployee') }}" enctype="multipart/form-data" onSubmit="return formValidation();">
+                    <form name="formEditEmployee" class="form-horizontal" role="form" method="POST" action="{{ route('updateEmployee') }}" enctype="multipart/form-data">
                         @csrf
                         @foreach($employees as $employee)
                         <input type="hidden" name="ID" id="ID" value="{{$employee->id}}" style="width: -webkit-fill-available;">
@@ -25,7 +25,7 @@
                         </div>
                         <!--Employee IC -->
                         <div class="form-group">
-                            <label for="ic" class="col-md-4 control-label">Identification Card Numbers<span style="color:red">*</span></label>
+                            <label for="ic" class="col-md-4 control-label">Identification Card Number<span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <input type="text" name="ic" id="ic" value="{{$employee->ic}}" style="width: -webkit-fill-available;" placeholder="i.e. 000000-00-0000" ​pattern="^[0-9]{6}-*[0-9]{2}-*[0-9]{4}$" required>
                             </div>
@@ -48,16 +48,17 @@
                         <div class="form-group">
                             <label for="status" class="col-md-4 control-label">Status<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <input type="radio" id="status" name="status" value="Active">Active
-                                <input type="radio" id="status" name="status" value="Inactive">Inactive
+                                <input type="radio" id="status" name="status" value="Active" @if($employee->status == "Active") checked @endif>Active
+                                <input type="radio" id="status" name="status" value="Inactive" @if($employee->status == "Inactive") checked @endif>Inactive
+                                <input type="radio" id="status" name="status" value="Probation Period" @if($employee->status == "Probation Period") checked @endif>Probation Period
                             </div>
                         </div>
                         <!--Employee Gender-->
                         <div class="form-group">
                             <label for="gender" class="col-md-4 control-label">Gender<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <input type="radio" id="gender" name="gender" value="Male">Male
-                                <input type="radio" id="gender" name="gender" value="Female">Female
+                                <input type="radio" id="gender" name="gender" value="Male" @if($employee->gender == "Male") checked @endif>Male
+                                <input type="radio" id="gender" name="gender" value="Female" @if($employee->gender == "Female") checked @endif>Female
                             </div>
                         </div>
                         <!--Employee DOB-->
@@ -71,13 +72,14 @@
                         <div class="form-group">
                             <label for="race" class="col-md-4 control-label">Race<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <select id="race" name="race" style="width: -webkit-fill-available;" onchange="if (this.value=='others'){this.form['others'].style.visibility='visible'}else {this.form['others'].style.visibility='hidden'};">
-                                    <option value="Malay">Malay</option>
-                                    <option value="Chinese">Chinese</option>
-                                    <option value="Indian">Indian</option>
-                                    <option value="Others">Others</option>
+                                <select id="race" name="race" style="width: -webkit-fill-available;" onchange="if (this.value=='Others'){this.form['Others'].style.visibility='visible'}else {this.form['Others'].style.visibility='hidden'};">
+                                    <option value="0" disabled="true" selected="true">Please Select</option>
+                                    <option value="Malay" @if($employee->race == "Malay") selected @endif>Malay</option>
+                                    <option value="Chinese" @if($employee->race == "Chinese") selected @endif>Chinese</option>
+                                    <option value="Indian" @if($employee->race == "Indian") selected @endif>Indian</option>
+                                    <option value="Others" @if($employee->race == "Others") selected @endif>Others</option>
                                 </select>
-                                <input type="text" name="others" id="race" style="visibility:hidden; width: -webkit-fill-available;" />
+                                <input type="text" name="Others" id="race" value="{{$employee->race}}" style="visibility:hidden; width: -webkit-fill-available;" />
                             </div>
                         </div>
                         <!--Employee Country-->
@@ -237,7 +239,7 @@
                             @endforeach
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" name="edit" class="btn btn-primary">
+                                    <button type="submit" name="edit" class="btn btn-primary" onclick="return confirm('Are you sure you want to edit this item?')">
                                         Update
                                     </button>
                                 </div>

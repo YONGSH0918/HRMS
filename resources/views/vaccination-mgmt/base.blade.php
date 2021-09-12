@@ -5,7 +5,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h2>
-            Career Path Development Management
+            Employee Vaccination Management
         </h2>
         <ol class="breadcrumb">
             <!-- li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li-->

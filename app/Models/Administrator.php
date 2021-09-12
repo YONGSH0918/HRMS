@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Administrator extends Model
 {
     use HasFactory;
-    protected $fillable=['admin_ID', 'admin_Name', 'password', 'employee_ID', 'calendar_ID'];
+    protected $fillable = ['admin_ID', 'admin_Name', 'password', 'employee_ID', 'calendar_ID'];
 
-    public function employee(){
+    public function employee()
+    {
         return $this->belongsTo('App\Models\Employee');
     }
 }
