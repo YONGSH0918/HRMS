@@ -10,7 +10,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.3"
+        "laravel/ui": "^3.3",
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -57,6 +57,7 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+
     "minimum-stability": "dev",
     "prefer-stable": true
 }
