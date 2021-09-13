@@ -65,7 +65,7 @@
             <tr>
                 <td>{{ $event->id }}</td>
                 <td>{{ $event->eventname }}</td>
-                <td style="background-color:{{ $event->color }}"> </td>
+                <td style="background-color:{{$event->color}}"> </td>
                 <td>{{ $event->start_date }}</td>
                 <td>{{ $event->end_date }}</td>
                     

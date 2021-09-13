@@ -103,3 +103,14 @@
 <!-- /.content -->
 </div>
 @endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#employeeTableid').DataTable({
+                "pagingType": "full_numbers",
+                "searching": false,
+            });
+        });
+    </script>
+@endsection

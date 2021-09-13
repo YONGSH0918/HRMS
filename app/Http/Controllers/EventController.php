@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
-use MaddHatter\LaravelFullcalendar\Facades\Calendar;
-use Session;
-use DB;
+use Acaronlex\LaravelCalendar\Facades\Calendar;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {

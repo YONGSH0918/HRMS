@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Nationality;
-use Session;
-use DB;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class NationalityController extends Controller

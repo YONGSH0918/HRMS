@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Department;
-use Session;
-use DB;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class DepartmentController extends Controller
 {

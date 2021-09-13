@@ -53,7 +53,7 @@ class CPDController extends Controller
     public function show()
     {
 
-        $employees = Employee::paginate(5);
+        $employees = Employee::all();
 
         return view('career-path-mgmt/index')->with('employees', $employees);
     }
@@ -61,7 +61,7 @@ class CPDController extends Controller
     public function showCPD()
     {
 
-        $cpds = EmployeeCareerPathInfo::paginate(5);
+        $cpds = EmployeeCareerPathInfo::all();
 
         return view('career-path-mgmt/indexCPD')->with('cpds', $cpds);
     }
@@ -114,7 +114,7 @@ class CPDController extends Controller
         $cpds = DB::table('employee_career_path_infos')
             ->where('employee_CareerPath_Info_ID', 'like', '%' . $keyword . '%')
             ->orWhere('employee_ID', 'like', '%' . $keyword . '%')
-            ->paginate(5);
+            ->get();
 
         return view('career-path-mgmt/searchCPD')->with('cpds', $cpds);
     }
@@ -126,7 +126,7 @@ class CPDController extends Controller
         $employees = DB::table('employees')
             ->where('employee_ID', 'like', '%' . $keyword . '%')
             ->orWhere('department', 'like', '%' . $keyword . '%')
-            ->paginate(5);
+            ->get();
 
         return view('career-path-mgmt/search')->with('employees', $employees);
     }

@@ -12,9 +12,9 @@ use App\Models\City;
 use App\Models\State;
 use App\Models\Jobtitle;
 use App\Models\Employee;
-use Session;
-use DB;
-use Notification;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use App\Notifications\Congratulation;
 use App\Notifications\Unfortunately;
 

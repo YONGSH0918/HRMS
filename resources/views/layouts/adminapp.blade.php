@@ -14,7 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/ext-core/3.1.0/ext-core.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"></script>
-
+    
     <script defer src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
     <script defer src="https://cdn.datatables.net/1.11.2/js/dataTables.bootstrap5.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/dataTables.bootstrap5.min.css">
@@ -37,7 +37,9 @@
                     <a href="{{ route('admin.home') }}">Dashboard</a>
                 </li>
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Employee Management</a>
+                    <a href="#pageSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Employee Management
+                    <i class="fas fa-sort-down" style="margin-left:5%;"></i>
+                    </a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
                             <a href="{{ route('viewEmployee') }}">Employees</a>
@@ -68,10 +70,10 @@
                     <a href="{{ route('showCalendar') }}">Calendar</a>
                 </li>
                 <li>
-                    <a href="#pageSubmenu" class="dropdown-toggle" data-bs-toggle="collapse" aria-expanded="false">
-                        Settings<i class="fas fa-sort-down" style="margin-left:60%;"></i>
+                    <a href="#pageSubmenu1" class="dropdown-toggle" data-bs-toggle="collapse" aria-expanded="false">
+                        Settings<i class="fas fa-sort-down" style="margin-left:64%;"></i>
                     </a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <ul class="collapse list-unstyled" id="pageSubmenu1">
                         <li>
                             <a href="{{ route('showState') }}">{{ __('State') }}</a>
                         </li>

@@ -1,5 +1,6 @@
 @extends('healthFacility-mgmt.base')
 @section('action-content')
+@include('healthFacility-mgmt.addHealthFacility')
 @if(Session::has('success'))
 <div class="alert alert-success" role="alert">
   {{ Session::get('success')}}
@@ -19,7 +20,7 @@
           <h5 class="box-title">List of Health Facility</h5>
         </div>
         <div class="col-sm-4" style="text-align: -webkit-right;">
-          <a class="btn btn-primary" style="font-size: small;" href="{{ route('insertHealthFacility') }}">Add New Health Facility</a>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addHealthFacility">Add Health Facility</button>
         </div>
         <div style="margin-bottom: 10px;">
           <form method="POST" action="{{ route('searchHealthFacility') }}">
@@ -60,13 +61,14 @@
                 <td class="sorting_1">{{ $hf->name }}</td>
                 <td class="hidden-xs">{{ $hf->address }}</td>
                 <td>
-                  <a href="{{ route('editHealthFacility', ['id' => $hf->id]) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editHealthFacility{{$hf->id}}">
                     <i class="fa fa-edit"></i>
-                  </a>
+                  </button>
                   <a href="{{ route('deleteHealthFacility', ['id' => $hf->id]) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">
                     <i class="fa fa-trash"></i>
                   </a>
                 </td>
+                @include('healthFacility-mgmt.edit')
               </tr>
               @endforeach
             </tbody>

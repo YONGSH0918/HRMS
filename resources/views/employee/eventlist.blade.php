@@ -21,7 +21,7 @@
 
     <div class="container">
         <div style="margin-bottom: 20px;">
-            <a href="#" class="btn btn-success">
+            <a href="{{ route('emp.showCalendar') }}" class="btn btn-success">
                 Show Calendar
             </a>
             <div class="col-md-3" style="float:right;">
