@@ -9,10 +9,14 @@ use Illuminate\Support\Facades\DB;
 
 class HealthFacilityController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+   }
     //
     public function add()
     {
-        return view('healthFacility-mgmt/addHealthFacility');
+        return view('admin.healthFacility-mgmt.addHealthFacility');
     }
 
     public function store()
@@ -36,7 +40,7 @@ class HealthFacilityController extends Controller
 
         $hfs = HealthFacility::all();
 
-        return view('healthFacility-mgmt/index')->with('hfs', $hfs);
+        return view('admin.healthFacility-mgmt.index')->with('hfs', $hfs);
     }
 
 
@@ -46,7 +50,7 @@ class HealthFacilityController extends Controller
 
         $hfs = HealthFacility::all()->where('id', $id);
 
-        return view('healthFacility-mgmt/edit')->with('hfs', $hfs);
+        return view('admin.healthFacility-mgmt.edit')->with('hfs', $hfs);
     }
 
     public function delete($id)
@@ -80,6 +84,6 @@ class HealthFacilityController extends Controller
             ->orWhere('name', 'like', '%' . $keyword . '%')
             ->get();
 
-        return view('healthFacility-mgmt/search')->with('hfs', $hfs);
+        return view('admin.healthFacility-mgmt.search')->with('hfs', $hfs);
     }
 }

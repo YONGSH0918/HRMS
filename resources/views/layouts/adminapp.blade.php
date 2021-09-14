@@ -93,6 +93,9 @@
                             <a href="{{ route('showDept') }}">{{ __('Department') }}</a>
                         </li>
                         <li>
+                            <a href="{{ route('showPosition') }}">{{ __('Position') }}</a>
+                        </li>
+                        <li>
                             <a href="{{ route('showJobtitle') }}">{{ __('Job Title') }}</a>
                         </li>
                         <li>

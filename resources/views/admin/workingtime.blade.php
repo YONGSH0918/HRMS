@@ -21,25 +21,6 @@
 
 @include('admin.addworkingtime')
 
-<script>
-
-    function Calc()
-    {
-        var start = document.getElementById('start').value;
-        var end = document.getElementById('end').value;
-
-        var split1 = "{start}".split(":");
-        var split2 = "{end}".split(":");
-
-        var time1 = split1[0] + split1[1] + split1[2];
-        var time2 = split2[0] + split2[1] + split2[2];
-
-        var diff = time2 - time1;
-
-        document.getElementById("duration").value = diff;
-    }
-
-</script>
 
     <div class="container">
 
@@ -70,7 +51,6 @@
                     <th width="5%">ID</th>
                     <th width="25%">Start Time</th>
                     <th width="25%">End Time</th>
-                    <th width="25%">Duration</th>
                     <th width="20%" style="text-align:center;">Action</th>
                 </tr>
             </thead>
@@ -79,7 +59,6 @@
                 <td>{{ $workingtime->id }}</td>
                 <td>{{ $workingtime->start }}</td>
                 <td>{{ $workingtime->end }}</td>
-                <td>{{ $workingtime->duration }}</td>
                     
                 <td style="text-align:center;">
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editWRKtime{{$workingtime->id}}">

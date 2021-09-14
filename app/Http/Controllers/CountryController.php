@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class CountryController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+   }
+
     function create()
     {
         return view('admin.addcountry');

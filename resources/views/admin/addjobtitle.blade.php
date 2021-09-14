@@ -7,32 +7,38 @@
       </div>
       <div class="modal-body">
         <form form method="post" action="{{ route('addJobtitle') }}" enctype="multipart/form-data">
-            @csrf        
-            <div class="mb-3">
-                <label for="">Job Title</label>
-                <input class="form-control" id="jobtitle_name" name="jobtitle_name" placeholder="Enter job title" />      
-            </div>
-            <div class="mb-3">
-                <label for="">Department</label>
-                <select name="department" id="department" class="form-control">
-                    @foreach($departments as $dept)
-                        <option value="{{ $dept->department_name }}">
-                            {{ $dept->department_name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="">Description</label>
-                <textarea type="text" class="form-control" id="description" name="description" placeholder="Enter description of the job"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Add</button>
-            </div>
+          @csrf
+          <div class="mb-3">
+            <label for="">Position</label>
+            <select name="position" id="position" class="form-control">
+              @foreach($positions as $position)
+              <option value="{{ $position->name }}">
+                {{ $position->name }}
+              </option>
+              @endforeach
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="">Department</label>
+            <select name="department" id="department" class="form-control">
+              @foreach($departments as $dept)
+              <option value="{{ $dept->department_name }}">
+                {{ $dept->department_name }}
+              </option>
+              @endforeach
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="">Rate per hour (RM)</label>
+            <input type="text" class="form-control" id="rate_per_hour" name="rate_per_hour">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add</button>
+          </div>
         </form>
       </div>
-      
+
     </div>
   </div>
 </div>

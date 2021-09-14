@@ -1,4 +1,4 @@
-@extends('career-path-mgmt.base')
+@extends('admin.career-path-mgmt.base')
 @section('action-content')
 
 <!-- Main content -->

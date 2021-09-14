@@ -118,6 +118,20 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group row">
+                                    <label for="is_admin" class="col-md-4 col-form-label text-md-right">{{ __('Admin') }}</label>
+
+                                    <div class="col-md-6 form-check form-check-inline" style="padding: 0 15px;">
+                                        <input class="form-check-input" id="is_admin" type="radio" class="form-control @error('is_admin') is-invalid @enderror" name="is_admin" value="1" checked>Yes  
+                                        <input class="form-check-input" id="no_admin" type="radio" class="form-control @error('is_admin') is-invalid @enderror" name="is_admin" value="0">No
+                                        @error('is_admin')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary">

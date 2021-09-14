@@ -1,4 +1,4 @@
-@extends('vaccination-mgmt.base')
+@extends('admin.vaccination-mgmt.base')
 @section('action-content')
 
 <!-- Main content -->
@@ -7,10 +7,20 @@
     <div class="box-header">
       <div class="row">
         <div class="col-sm-8">
-          <h5 class="box-title">List of Career Path Development</h5>
+          <h5 class="box-title">List of employees</h5>
         </div>
         <div class="col-sm-4" style="text-align: -webkit-right;">
           <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewVA') }}">Back</a>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <form method="POST" action="{{ route('searchEmployeeVA') }}">
+            @csrf
+            <input type="text" id="search" name="search" placeholder="Search Employee ID or Department" style="width: 250px;">
+            <button type="submit" class="btn btn-primary">
+              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+              Search
+            </button>
+          </form>
         </div>
       </div>
     </div>
@@ -26,31 +36,23 @@
             <table id="vaTableid" class="table table-bordered table-hover dataTable">
               <thead>
                 <tr role="row">
-                  <th width="12%" class="sorting_asc">Vaccination Appointment ID</th>
-                  <th width="12%" class="sorting_asc">Employee ID</th>
-                  <th width="25%" class="sorting_asc">Employee Name</th>
-                  <th width="15%" class="sorting hidden-xs">Date</th>
-                  <th width="15%" class="sorting hidden-xs">Status</th>
+                  <th width="9%" class="sorting_asc">Employee ID</th>
+                  <th width="20%" class="sorting hidden-xs">Employee Name</th>
+                  <th width="12%" class="sorting hidden-xs">Identification Number</th>
+                  <th width="12%" class="sorting hidden-xs">Department</th>
                   <th tabindex="0">Action</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($vas as $va)
+                @foreach ($employees as $employee)
                 <tr role="row" class="odd">
-                  <td class="sorting_1">{{ $va->employee_Vaccination_ID }}</td>
-                  <td class="hidden-xs">{{ $va->employee_ID }}</td>
-                  <td class="hidden-xs">{{ $va->employee_Name }}</td>
-                  <td class="hidden-xs">{{ $va->vaccination_Date}}</td>
-                  <td class="hidden-xs">{{ $va->vaccination_Status}}</td>
+                  <td class="sorting_1">{{ $employee->employee_ID }}</td>
+                  <td class="hidden-xs">{{ $employee->employee_Name }}</td>
+                  <td class="hidden-xs">{{ $employee->ic }}</td>
+                  <td class="hidden-xs">{{ $employee->department }}</td>
                   <td>
-                    <a href="{{ route('va.detail', ['id' => $va->id]) }}" class="btn btn-info col-sm-3 col-xs-5 btn-margin">
-                      <i class="fa fa-search"></i>
-                    </a>
-                    <a href="{{ route('editVA', ['id' => $va->id]) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
-                      <i class="fa fa-edit"></i>
-                    </a>
-                    <a href="{{ route('deleteVA', ['id' => $va->id]) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">
-                      <i class="fa fa-trash"></i>
+                    <a href="{{ route('insertVA', ['id' => $employee->id])}}" class="btn btn-success col-sm-3 col-xs-5 btn-margin">
+                      <i class="fa fa-plus"></i>
                     </a>
                   </td>
                 </tr>
@@ -59,6 +61,7 @@
             </table>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -66,6 +69,7 @@
 </section>
 <!-- /.content -->
 @endsection
+
 @section('script')
 <script>
   $(document).ready(function() {

@@ -1,4 +1,4 @@
-@extends('employees-mgmt.base')
+@extends('admin.employees-mgmt.base')
 @section('action-content')
 @if(Session::has('success'))
 <div class="alert alert-success" role="alert">

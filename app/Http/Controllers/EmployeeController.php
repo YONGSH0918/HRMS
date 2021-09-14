@@ -2,7 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
+use App\Models\Bankname;
+use App\Models\City;
+use App\Models\Country;
+use App\Models\Department;
+use App\Models\Employment;
+use App\Models\Position;
+use App\Models\Nationality;
+use App\Models\State;
+use App\Models\Workingtime;
 use App\Models\EmployeeCareerPathInfo;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -14,16 +24,46 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class EmployeeController extends Controller
 {
 
+    public function __construct() {
+        $this->middleware('auth');
+   }
+
     //turn page
     public function add()
     {
 
+        $banknames = Bankname::all();
+        $cities = City::all();
+        $countries = Country::all();
+        $departments = Department::all();
+        $employments = Employment::all();
+        $positions = Position::all();
+        $nationalities = Nationality::all();
+        $states = State::all();
+        $workingtimes = Workingtime::all();
         $supervisors = Employee::all();
 
-
-        return view('employees-mgmt/addEmployee')
+        return view('admin.employees-mgmt.addEmployee')
+        ->with('banknames', $banknames)
+        ->with('cities', $cities)
+        ->with('countries', $countries)
+        ->with('departments', $departments)
+        ->with('employments', $employments)
+        ->with('positions', $positions)
+        ->with('nationalities', $nationalities)
+        ->with('states', $states)
+        ->with('supervisors', $supervisors)
+        ->with('workingtimes', $workingtimes)
         ->with('supervisors', $supervisors);
     }
+
+    public function findWorkingSchedule(Request $request)
+    {
+        $employments = Employment::select('workingtime_id')->where('id', $request->id)->first();
+
+        return response()->json($employments);
+    }
+
 
 
     //addEmployee
@@ -87,17 +127,38 @@ class EmployeeController extends Controller
 
         $employees = Employee::all();
 
-        return view('employees-mgmt/index')->with('employees', $employees);
+        return view('admin.employees-mgmt.index')->with('employees', $employees);
     }
 
     //find employee to edit
     public function edit($id)
     {
 
-        $employees = Employee::all()->where('id', $id);
+        $employees = Employee::all()->where('id', $id); 
+        $banknames = Bankname::all();
+        $cities = City::all();
+        $countries = Country::all();
+        $departments = Department::all();
+        $employments = Employment::all();
+        $positions = Position ::all();
+        $nationalities = Nationality::all();
+        $states = State::all();
+        $workingtimes = Workingtime::all();
         $supervisors = Employee::all();
+        
 
-        return view('employees-mgmt/edit')->with('employees', $employees)->with('supervisors', $supervisors);
+        return view('admin.employees-mgmt.edit')->with('employees', $employees)
+        ->with('banknames', $banknames)
+        ->with('cities', $cities)
+        ->with('countries', $countries)
+        ->with('departments', $departments)
+        ->with('employments', $employments)
+        ->with('positions', $positions)
+        ->with('nationalities', $nationalities)
+        ->with('states', $states)
+        ->with('supervisors', $supervisors)
+        ->with('workingtimes', $workingtimes)
+        ->with('supervisors', $supervisors);
     }
 
     //edit
@@ -164,7 +225,7 @@ class EmployeeController extends Controller
             ->orWhere('department', 'like', '%' . $keyword . '%')
             ->get();
 
-        return view('employees-mgmt/search')->with('employees', $employees);
+        return view('admin.employees-mgmt.search')->with('employees', $employees);
     }
 
 
@@ -174,6 +235,6 @@ class EmployeeController extends Controller
         $employees = Employee::all()->where('id', $id);
         //select * from products where id='$id'
 
-        return view('employees-mgmt/profileEmployee')->with('employees', $employees);
+        return view('admin.employees-mgmt.profileEmployee')->with('employees', $employees);
     }
 }

@@ -20,6 +20,7 @@ use App\Notifications\Unfortunately;
 
 class OnlineApplicantController extends Controller
 {
+
     //
     function show()
     {

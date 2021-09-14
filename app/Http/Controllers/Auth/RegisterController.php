@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -22,14 +23,16 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+     use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+
+     protected $redirectTo = RouteServiceProvider::HOME;
+     
 
     /**
      * Create a new controller instance.
@@ -68,6 +71,17 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'is_admin' => $data['is_admin'],
         ]);
+
+        Session::flash('success', "Register Succesful!");
+
+        return redirect()->route('view');
+    }
+
+    public function show()
+    {
+
+        return view('layouts.adminapp');
     }
 }

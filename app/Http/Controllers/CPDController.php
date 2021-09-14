@@ -13,13 +13,16 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class CPDController extends Controller
 {
 
+    public function __construct() {
+        $this->middleware('auth');
+   }
 
     //turn page
     public function addCPD($id)
     {
         $employees = Employee::all()->where('id', $id);
 
-        return view('career-path-mgmt/addCPD')->with('employees', $employees);
+        return view('admin.career-path-mgmt.addCPD')->with('employees', $employees);
     }
 
 
@@ -55,7 +58,7 @@ class CPDController extends Controller
 
         $employees = Employee::all();
 
-        return view('career-path-mgmt/index')->with('employees', $employees);
+        return view('admin.career-path-mgmt.index')->with('employees', $employees);
     }
 
     public function showCPD()
@@ -63,7 +66,7 @@ class CPDController extends Controller
 
         $cpds = EmployeeCareerPathInfo::all();
 
-        return view('career-path-mgmt/indexCPD')->with('cpds', $cpds);
+        return view('admin.career-path-mgmt.indexCPD')->with('cpds', $cpds);
     }
 
     //find employee to edit
@@ -116,7 +119,7 @@ class CPDController extends Controller
             ->orWhere('employee_ID', 'like', '%' . $keyword . '%')
             ->get();
 
-        return view('career-path-mgmt/searchCPD')->with('cpds', $cpds);
+        return view('admin.career-path-mgmt.searchCPD')->with('cpds', $cpds);
     }
 
     function search()
@@ -128,7 +131,7 @@ class CPDController extends Controller
             ->orWhere('department', 'like', '%' . $keyword . '%')
             ->get();
 
-        return view('career-path-mgmt/search')->with('employees', $employees);
+        return view('admin.career-path-mgmt.search')->with('employees', $employees);
     }
 
 
@@ -138,6 +141,6 @@ class CPDController extends Controller
         $cpds = EmployeeCareerPathInfo::all()->where('id', $id);
         //select * from products where id='$id'
 
-        return view('career-path-mgmt/profileCPD')->with('cpds', $cpds);
+        return view('admin.career-path-mgmt.profileCPD')->with('cpds', $cpds);
     }
 }

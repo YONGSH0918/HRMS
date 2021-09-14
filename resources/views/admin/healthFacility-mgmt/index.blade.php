@@ -1,6 +1,6 @@
-@extends('healthFacility-mgmt.base')
+@extends('admin.healthFacility-mgmt.base')
 @section('action-content')
-@include('healthFacility-mgmt.addHealthFacility')
+@include('admin.healthFacility-mgmt.addHealthFacility')
 @if(Session::has('success'))
 <div class="alert alert-success" role="alert">
   {{ Session::get('success')}}
@@ -68,7 +68,7 @@
                     <i class="fa fa-trash"></i>
                   </a>
                 </td>
-                @include('healthFacility-mgmt.edit')
+                @include('admin.healthFacility-mgmt.edit')
               </tr>
               @endforeach
             </tbody>

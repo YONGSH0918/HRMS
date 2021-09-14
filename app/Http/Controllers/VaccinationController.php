@@ -14,13 +14,17 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class VaccinationController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+   }
     //
     public function addVA($id)
     {
         $employees = Employee::all()->where('id', $id);
         $hfs = HealthFacility::all();
 
-        return view('vaccination-mgmt/addVA')->with('employees', $employees)
+        return view('admin.vaccination-mgmt.addVA')->with('employees', $employees)
             ->with('hfs', $hfs);
     }
 
@@ -63,7 +67,7 @@ class VaccinationController extends Controller
 
         $employees = Employee::all();
 
-        return view('vaccination-mgmt/index')->with('employees', $employees);
+        return view('admin.vaccination-mgmt.index')->with('employees', $employees);
     }
 
     public function showVA()
@@ -71,7 +75,7 @@ class VaccinationController extends Controller
 
         $vas = VaccinationInfo::all();
 
-        return view('vaccination-mgmt/indexVA')->with('vas', $vas);
+        return view('admin.vaccination-mgmt.indexVA')->with('vas', $vas);
     }
 
     //find employee to edit
@@ -80,7 +84,7 @@ class VaccinationController extends Controller
 
         $vas = VaccinationInfo::all()->where('id', $id);
 
-        return view('vaccination-mgmt/edit')->with('vas', $vas)
+        return view('admin.vaccination-mgmt.edit')->with('vas', $vas)
             ->with('hfs', HealthFacility::all());
     }
 
@@ -124,7 +128,7 @@ class VaccinationController extends Controller
             ->orWhere('employee_ID', 'like', '%' . $keyword . '%')
             ->get();
 
-        return view('vaccination-mgmt/searchVA')->with('vas', $vas);
+        return view('admin.vaccination-mgmt.searchVA')->with('vas', $vas);
     }
 
     function search()
@@ -136,7 +140,7 @@ class VaccinationController extends Controller
             ->orWhere('department', 'like', '%' . $keyword . '%')
             ->get();
 
-        return view('vaccination-mgmt/search')->with('employees', $employees);
+        return view('admin.vaccination-mgmt.search')->with('employees', $employees);
     }
 
 
@@ -146,6 +150,6 @@ class VaccinationController extends Controller
         $vas = VaccinationInfo::all()->where('id', $id);
         //select * from products where id='$id'
 
-        return view('vaccination-mgmt/profileVA')->with('vas', $vas);
+        return view('admin.vaccination-mgmt.profileVA')->with('vas', $vas);
     }
 }

@@ -1,4 +1,4 @@
-@extends('healthFacility-mgmt.base')
+@extends('admin.healthFacility-mgmt.base')
 @section('action-content')
 
 <!-- Main content -->

@@ -18,7 +18,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\LeavetypeController;
 use App\Http\Controllers\OnlineApplicantController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\PositionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,7 +37,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home',[HomeController::class ,'index'])->name('home');
-Route::get('admin/home',[HomeController::class ,'adminHome'])->name('admin.home')->middleware('is_admin');
+Route::get('/admin/home',[HomeController::class ,'adminHome'])->name('admin.home')->middleware('is_admin');
 
 //Employee Setting Route
 Route::get('/addEmployee', [App\Http\Controllers\EmployeeController::class, 'add'])->name('insertEmployee');
@@ -47,6 +47,8 @@ Route::post('/searchEmployee', [App\Http\Controllers\EmployeeController::class, 
 Route::get('/editEmployee/{id}', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('editEmployee');
 Route::post('/updateEmployee', [App\Http\Controllers\EmployeeController::class, 'update'])->name('updateEmployee');
 Route::get('/employee_detail/{id}', [App\Http\Controllers\EmployeeController::class, 'showEmployeeDetail'])->name('employee.detail');
+Route::get('/findWorkingSchedule', [App\Http\Controllers\EmployeeController::class, 'findWorkingSchedule'])->name('findWorkingSchedule');
+Route::get('/findJobtitle', [App\Http\Controllers\EmployeeController::class, 'findJobtitle'])->name('findJobtitle');
 
 //Career Path Development Route
 Route::get('/addCPD/{id}', [App\Http\Controllers\CPDController::class, 'addCPD'])->name('insertCPD');
@@ -107,6 +109,16 @@ Route::get('/editdepartment/{id}',[DepartmentController::class,'edit'])->name('e
 Route::post('/updateDepartment',[DepartmentController::class,'update'])->name('updateDept');
 Route::get('/deletedepartment/{id}',[DepartmentController::class,'delete'])->name('deleteDept');
 Route::post('/searchdepartment',[DepartmentController::class,'search'])->name('searchDept');
+
+// Position setting route
+Route::get('/position',[PositionController::class,'show'])->name('showPosition');
+Route::get('/position/addposition',[PositionController::class,'create'])->name('showAddPosition');
+Route::post('/position/store',[PositionController::class,'store'])->name('addPosition');
+Route::get('/editposition/{id}',[PositionController::class,'edit'])->name('editPosition');
+Route::post('/updatePosition',[PositionController::class,'update'])->name('updatePosition');
+Route::get('/deleteposition/{id}',[PositionController::class,'delete'])->name('deletePosition');
+Route::post('/searchposition',[PositionController::class,'search'])->name('searchPosition');
+
 
 // job title setting route
 Route::get('/jobtitle',[JobtitleController::class,'show'])->name('showJobtitle');

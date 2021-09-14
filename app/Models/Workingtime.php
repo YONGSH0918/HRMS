@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Workingtime extends Model
 {
     //
-    protected $fillable=['start','end','duration'];
+    protected $fillable=['start','end'];
 
     public function employment(){
         return $this->belongsTo('App\Models\Employment');

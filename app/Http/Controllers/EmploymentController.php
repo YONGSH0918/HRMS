@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class EmploymentController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+   }
+
     function create()
     {
         return view('admin.addemployment')->with('workingtimes', Workingtime::all());
@@ -56,7 +61,7 @@ class EmploymentController extends Controller
 
     function delete($id)
     {
-        $employments = Workingtime::find($id);
+        $employments = Employment::find($id);
         $employments->delete();
 
         Session::flash('success', "Employment deleted.");

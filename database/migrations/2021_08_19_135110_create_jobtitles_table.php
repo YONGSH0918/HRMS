@@ -17,7 +17,7 @@ class CreateJobtitlesTable extends Migration
             $table->bigIncrements('id');
             $table->string('jobtitle_name');
             $table->string('department_id');
-            $table->text('description');
+            $table->double('rate_per_hour', 8, 2);
             $table->timestamps();
         });
     }

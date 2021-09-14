@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Jobtitle extends Model
 {
     //
-    protected $fillable=['jobtitle_name','department_id','description'];
+    protected $fillable=['jobtitle_name','department_id','rate_per_hour'];
 
     public function department(){
         return $this->belongsTo('App\Models\Department');

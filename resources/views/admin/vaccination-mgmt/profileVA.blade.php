@@ -1,4 +1,4 @@
-@extends('vaccination-mgmt.base')
+@extends('admin.vaccination-mgmt.base')
 
 @section('action-content')
 

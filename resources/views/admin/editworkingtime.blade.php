@@ -18,13 +18,6 @@
                   <label>End Time</label>
                   <input type="time" class="form-control" id="end" name="end" value="{{ $workingtime->end }}">
               </div>
-              <div class="mb-3">
-                  <label for="">Duration of Working Time</label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" id="duration" name="duration" placeholder="Duration of time" value="{{ $workingtime->duration }}">
-                    <button class="btn btn-warning" type="button">Calculate</button>
-                  </div>
-              </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   <button type="submit" class="btn btn-primary">Update</button>

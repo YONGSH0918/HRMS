@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class DepartmentController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+   }
+
     function create()
     {
         return view('admin.adddepartment');
