@@ -12,4 +12,9 @@ class Department extends Model
     public function jobtitle(){
         return $this->hasMany('App\Models\Jobtitle');
     }
+
+    public function employee()
+    {
+        return $this->hasMany('App\Models\Employee');
+    }
 }

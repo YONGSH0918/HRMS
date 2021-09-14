@@ -25,14 +25,14 @@
     <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
       <div class="row" style="width: -webkit-fill-available;">
         <div class="col-sm-12">
-          <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+          <table id="vaTableid" class="table table-bordered table-hover dataTable">
             <thead>
               <tr role="row">
-                <th width="9%" class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Id: activate to sort column descending" aria-sort="ascending">Employee ID</th>
-                <th width="20%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Employee Name</th>
-                <th width="12%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="department: activate to sort column ascending">Identification Number</th>
-                <th width="12%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="jobtitle: activate to sort column ascending">Department</th>
-                <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">Action</th>
+                <th width="9%" class="sorting_asc">Employee ID</th>
+                <th width="20%" class="sorting hidden-xs">Employee Name</th>
+                <th width="12%" class="sorting hidden-xs">Identification Number</th>
+                <th width="12%" class="sorting hidden-xs">Department</th>
+                <th tabindex="0">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -53,24 +53,20 @@
           </table>
         </div>
       </div>
-
-      <div class="box-footer" style="width: -webkit-fill-available;">
-        <div class="row">
-          <div class="col-sm-8">
-            <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to {{count($employees)}} of {{count($employees)}} entries</div>
-          </div>
-          <div class="col-sm-7">
-            <nav class=".pagination-circle" id="example2_paginate">
-              {{ $employees->links() }}
-          </div>
-        </div>
-      </div>
     </div>
   </div>
-  </div>
+
   <!-- /.box-body -->
-  </div>
 </section>
 <!-- /.content -->
-</div>
+@endsection
+@section('script')
+<script>
+  $(document).ready(function() {
+    $('#vaTableid').DataTable({
+      "pagingType": "full_numbers",
+      "searching": false,
+    });
+  });
+</script>
 @endsection

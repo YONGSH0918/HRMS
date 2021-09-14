@@ -7,9 +7,9 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading" style="font-size: larger; color: mediumblue; font-weight: 500;">Add New Vaccination Appointment
-                    <a href="{{ route('viewEmployeeVA') }}" class="float-right btn btn-info col-sm-3 col-xs-5 btn-margin" style="font-size: initial; width: 110px;">
-                        <i></i>{{ __('Back') }}
-                    </a>
+                    <div style="text-align: -webkit-right;">
+                        <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewEmployeeVA') }}">Back</a>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <form name="formAddVA" class="form-horizontal" role="form" method="POST" action="{{ route('addVA') }}" enctype="multipart/form-data">
@@ -106,6 +106,7 @@
                             <div class="col-md-6">
                                 <select id="vaccination_Status" name="vaccination_Status" style="width: -webkit-fill-available;" onchange="if (this.value=='others'){this.form['others'].style.visibility='visible'}else {this.form['others'].style.visibility='hidden'};">
                                     <option value="0" disabled="true" selected="true">Please Select</option>
+                                    <option value="N/A">---</option>
                                     <option value="Unvaccinated">Unvaccinated</option>
                                     <option value="Vaccinated">Vaccinated</option>
                                     <option value="others">Others</option>

@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <form method="post" action="{{ route('updateHealthFacility') }}" enctype="multipart/form-data">
                     @csrf
-                    
+                    <input type="hidden" class="form-control" id="ID" name="ID" value="{{ $hf->id }}">
                     <div class="form-group">
                         <label>Name</label>
                         <input type="text" class="form-control" value="{{$hf->name}}" id="name" name="name">

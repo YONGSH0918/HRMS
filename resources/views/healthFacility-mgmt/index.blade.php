@@ -20,7 +20,7 @@
           <h5 class="box-title">List of Health Facility</h5>
         </div>
         <div class="col-sm-4" style="text-align: -webkit-right;">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addHealthFacility">Add Health Facility</button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addHealthFacility">Add New Health Facility</button>
         </div>
         <div style="margin-bottom: 10px;">
           <form method="POST" action="{{ route('searchHealthFacility') }}">
@@ -45,13 +45,13 @@
     <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
       <div class="row" style="width: -webkit-fill-available;">
         <div class="col-sm-12">
-          <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+          <table id="hfTableid" class="table table-bordered table-hover dataTable">
             <thead>
               <tr role="row">
-                <th width="5%" class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Id: activate to sort column descending" aria-sort="ascending">ID</th>
-                <th width="20%" class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Id: activate to sort column descending" aria-sort="ascending">Name</th>
-                <th width="40%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">Address</th>
-                <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">Action</th>
+                <th width="5%" class="sorting_asc">ID</th>
+                <th width="20%" class="sorting_asc">Name</th>
+                <th width="40%" class="sorting hidden-xs">Address</th>
+                <th tabindex="0">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -75,17 +75,6 @@
           </table>
         </div>
       </div>
-      <div class="box-footer" style="width: -webkit-fill-available;">
-        <div class="row">
-          <div class="col-sm-8">
-            <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to {{count($hfs)}} of {{count($hfs)}} entries</div>
-          </div>
-          <div class="col-sm-7">
-            <nav class=".pagination-circle" id="example2_paginate">
-              {{ $hfs->links() }}
-          </div>
-        </div>
-      </div>
 
     </div>
   </div>
@@ -96,4 +85,15 @@
 </section>
 <!-- /.content -->
 </div>
+@endsection
+
+@section('script')
+<script>
+  $(document).ready(function() {
+    $('#hfTableid').DataTable({
+      "pagingType": "full_numbers",
+      "searching": false,
+    });
+  });
+</script>
 @endsection

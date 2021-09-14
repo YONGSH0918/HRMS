@@ -23,12 +23,15 @@ class CreateEmployeesTable extends Migration
             $table->string('gender');
             $table->date('date_of_birth');
             $table->string('race');
-            $table->string('country');
             $table->string('national');
+            $table->string('country');    
+            $table->string('state');
+            $table->string('city');
             $table->text('address');
             $table->string('contact_Number');
             $table->string('email');
             $table->string('department');
+            $table->string('supervisor');
             $table->string('jobtitle');
             $table->double('salary')->unsigned();
             $table->date('start_Date');

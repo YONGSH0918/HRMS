@@ -7,9 +7,9 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading" style="font-size: larger; color: mediumblue; font-weight: 500;">Edit Vaccination Appointment Information
-                    <a href="{{ route('viewVA') }}" class="float-right btn btn-info col-sm-3 col-xs-5 btn-margin" style="font-size: initial; width: 110px;">
-                        <i></i>{{ __('Back') }}
-                    </a>
+                    <div style="text-align: -webkit-right;">
+                        <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewVA') }}">Back</a>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <form name="formAddVA" class="form-horizontal" role="form" method="POST" action="{{ route('addVA') }}" enctype="multipart/form-data">
@@ -98,6 +98,7 @@
                             <div class="col-md-6">
                                 <select id="vaccination_Status" name="vaccination_Status" style="width: -webkit-fill-available;" onchange="if (this.value=='others'){this.form['others'].style.visibility='visible'}else {this.form['others'].style.visibility='hidden'};">
                                     <option value="0" disabled="true" selected="true">Please Select</option>
+                                    <option value="N/A" @if($va->vaccination_Status == "N/A") selected @endif>---</option>
                                     <option value="Unvaccinated" @if($va->vaccination_Status == "Unvaccinated") selected @endif>Unvaccinated</option>
                                     <option value="Vaccinated" @if($va->vaccination_Status == "Vaccinated") selected @endif>Vaccinated</option>
                                     <option value="others" @if($va->vaccination_Status == "others") selected @endif>Others</option>

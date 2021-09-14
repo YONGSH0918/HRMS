@@ -12,7 +12,7 @@ class NationalityController extends Controller
 {
     function create()
     {
-        return view('addnationality');
+        return view('admin.addnational');
     }
 
     function store(Request $request)
@@ -28,19 +28,19 @@ class NationalityController extends Controller
         $nationalities->save();
 
         Session::flash('success', "Nationality added.");
-        return redirect()->route('showNationality');
+        return redirect()->route('showNational');
     }
 
     function show()
     {
-        $nationalities = Nationality::paginate(10);
-        return view('nationalitypage')->with('nationalities', $nationalities);
+        $nationalities = Nationality::all();
+        return view('admin.nationalpage')->with('nationalities', $nationalities);
     }
 
     function edit($id)
     {
         $nationalities = Nationality::find($id);
-        return view('editnationality', compact('nationalities','id'));
+        return view('admin.editnational', compact('nationalities','id'));
     }
 
     function update()
@@ -51,7 +51,7 @@ class NationalityController extends Controller
         $nationalities->name=$r->name;
         
         $nationalities->save(); //run the SQL update statment
-        return redirect()->route('showNationality');
+        return redirect()->route('showNational');
     }
 
     function delete($id)
@@ -60,7 +60,7 @@ class NationalityController extends Controller
         $nationalities->delete();
 
         Session::flash('success', "Nationality deleted.");
-        return redirect()->route('showNationality');
+        return redirect()->route('showNational');
     }
 
     function search()
@@ -71,6 +71,6 @@ class NationalityController extends Controller
         ->where('name', 'like', '%' .$keyword. '%')
         ->get();
 
-        return view('nationalitypage')->with('nationalities', $nationalities);
+        return view('admin.nationalpage')->with('nationalities', $nationalities);
     }
 }

@@ -7,9 +7,9 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading" style="font-size: larger; color: mediumblue; font-weight: 500;">Edit employee
-                    <a href="{{ route('viewEmployee') }}" class="float-right btn btn-info col-sm-3 col-xs-5 btn-margin" style="font-size: initial; width: 110px;">
-                        <i></i>{{ __('Back') }}
-                    </a>
+                    <div style="text-align: -webkit-right;">
+                        <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewEmployee') }}">Back</a>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <form name="formEditEmployee" class="form-horizontal" role="form" method="POST" action="{{ route('updateEmployee') }}" enctype="multipart/form-data">
@@ -82,6 +82,13 @@
                                 <input type="text" name="Others" id="race" value="{{$employee->race}}" style="visibility:hidden; width: -webkit-fill-available;" />
                             </div>
                         </div>
+                        <!--Employee National-->
+                        <div class="form-group">
+                            <label for="national" class="col-md-4 control-label">National<span style="color:red">*</span></label>
+                            <div class="col-md-6">
+                                <input type="text" id="national" name="national" value="{{$employee->national}}" style="width: -webkit-fill-available;" required>
+                            </div>
+                        </div>
                         <!--Employee Country-->
                         <div class="form-group">
                             <label for="country" class="col-md-4 control-label">Country<span style="color:red">*</span></label>
@@ -89,11 +96,18 @@
                                 <input type="country" id="country" name="country" value="{{$employee->country}}" style="width: -webkit-fill-available;" required>
                             </div>
                         </div>
-                        <!--Employee National-->
+                        <!--Employee State-->
                         <div class="form-group">
-                            <label for="national" class="col-md-4 control-label">National<span style="color:red">*</span></label>
+                            <label for="state" class="col-md-4 control-label">State<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <input type="text" id="national" name="national" value="{{$employee->national}}" style="width: -webkit-fill-available;" required>
+                                <input type="text" id="state" name="state" value="{{$employee->state}}" style="width: -webkit-fill-available;" required>
+                            </div>
+                        </div>
+                        <!--Employee City-->
+                        <div class="form-group">
+                            <label for="city" class="col-md-4 control-label">City<span style="color:red">*</span></label>
+                            <div class="col-md-6">
+                                <input type="text" id="city" name="city" value="{{$employee->city}}" style="width: -webkit-fill-available;" required>
                             </div>
                         </div>
                         <!--Employee Address-->
@@ -122,6 +136,20 @@
                             <label for="department" class="col-md-4 control-label">Department<span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <input type="text" id="department" name="department" value="{{$employee->department}}" style="width: -webkit-fill-available;" required>
+                            </div>
+                        </div>
+                         <!--Supervisor-->
+                         <div class="form-group">
+                            <label for="supervisor" class="col-md-4 control-label">Supervisor<span style="color:red">*</span></label>
+                            <div class="col-md-6">
+                                <select name="supervisor" id="supervisor" class="form-control healthFacility">
+                                    <option value="0" disabled="true" selected="true">Please Select</option>
+                                    <option value="Boss" @if($employee->supervisor == "Boss") selected @endif>Boss</option>
+                                    @foreach($supervisors as $supervisor)
+                                    <option value="{{ $supervisor->id }}" @if($employee->supervisor ==$supervisor->id) selected @endif>{{ $supervisor->employee_ID }}</option>
+                                    @endforeach
+                                    <option value="N/A" @if($employee->supervisor == "N/A") selected @endif>---</option>
+                                </select>
                             </div>
                         </div>
                         <!--Employee Job Title-->

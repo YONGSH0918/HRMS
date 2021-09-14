@@ -17,7 +17,12 @@ class EmployeeController extends Controller
     //turn page
     public function add()
     {
-        return view('employees-mgmt/addEmployee');
+
+        $supervisors = Employee::all();
+
+
+        return view('employees-mgmt/addEmployee')
+        ->with('supervisors', $supervisors);
     }
 
 
@@ -41,12 +46,15 @@ class EmployeeController extends Controller
             'gender' => $r->gender,
             'date_of_birth' => $r->date_of_birth,
             'race' => $r->race,
-            'country' => $r->country,
             'national' => $r->national,
+            'country' => $r->country,
+            'state' => $r->state,
+            'city' => $r->city,
             'address' => $r->address,
             'contact_Number' => $r->contact_Number,
             'email' => $r->email,
             'department' => $r->department,
+            'supervisor' => $r->supervisor,
             'jobtitle' => $r->jobtitle,
             'salary' => $r->salary,
             'start_Date' => $r->start_Date,
@@ -77,7 +85,7 @@ class EmployeeController extends Controller
     public function show()
     {
 
-        $employees = Employee::paginate(5);
+        $employees = Employee::all();
 
         return view('employees-mgmt/index')->with('employees', $employees);
     }
@@ -87,8 +95,9 @@ class EmployeeController extends Controller
     {
 
         $employees = Employee::all()->where('id', $id);
+        $supervisors = Employee::all();
 
-        return view('employees-mgmt/edit')->with('employees', $employees);
+        return view('employees-mgmt/edit')->with('employees', $employees)->with('supervisors', $supervisors);
     }
 
     //edit
@@ -115,12 +124,15 @@ class EmployeeController extends Controller
         $employees->gender = $r->gender;
         $employees->date_of_birth = $r->date_of_birth;
         $employees->race = $r->race;
-        $employees->country = $r->country;
         $employees->national = $r->national;
+        $employees->country = $r->country;
+        $employees->state = $r->state;
+        $employees->city = $r->city;
         $employees->address = $r->address;
         $employees->contact_Number = $r->contact_Number;
         $employees->email = $r->email;
         $employees->department = $r->department;
+        $employees->supervisor = $r->supervisor;
         $employees->jobtitle = $r->jobtitle;
         $employees->salary = $r->salary;
         $employees->start_Date = $r->start_Date;
@@ -150,7 +162,7 @@ class EmployeeController extends Controller
         $employees = DB::table('employees')
             ->where('employee_ID', 'like', '%' . $keyword . '%')
             ->orWhere('department', 'like', '%' . $keyword . '%')
-            ->paginate(5);
+            ->get();
 
         return view('employees-mgmt/search')->with('employees', $employees);
     }

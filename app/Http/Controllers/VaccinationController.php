@@ -61,7 +61,7 @@ class VaccinationController extends Controller
     public function show()
     {
 
-        $employees = Employee::paginate(5);
+        $employees = Employee::all();
 
         return view('vaccination-mgmt/index')->with('employees', $employees);
     }
@@ -69,7 +69,7 @@ class VaccinationController extends Controller
     public function showVA()
     {
 
-        $vas = VaccinationInfo::paginate(5);
+        $vas = VaccinationInfo::all();
 
         return view('vaccination-mgmt/indexVA')->with('vas', $vas);
     }
@@ -122,7 +122,7 @@ class VaccinationController extends Controller
         $vas = DB::table('vaccination_infos')
             ->where('employee_Vaccination_ID', 'like', '%' . $keyword . '%')
             ->orWhere('employee_ID', 'like', '%' . $keyword . '%')
-            ->paginate(5);
+            ->get();
 
         return view('vaccination-mgmt/searchVA')->with('vas', $vas);
     }
@@ -134,7 +134,7 @@ class VaccinationController extends Controller
         $employees = DB::table('employees')
             ->where('employee_ID', 'like', '%' . $keyword . '%')
             ->orWhere('department', 'like', '%' . $keyword . '%')
-            ->paginate(5);
+            ->get();
 
         return view('vaccination-mgmt/search')->with('employees', $employees);
     }

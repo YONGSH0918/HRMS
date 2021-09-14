@@ -13,9 +13,9 @@
     <div class="row">
         <div class="col-md-12">
             <h5 class="page-title" style=" padding: 0 0 20px 0; ">{{ __('Employee Profile') }}
-                <a href="{{ route('viewEmployee') }}" class="float-right btn btn-info col-sm-3 col-xs-5 btn-margin" style="font-size: initial; width: 110px;">
-                    <i></i>{{ __('Back') }}
-                </a>
+                <div style="text-align: -webkit-right;">
+                    <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewEmployee') }}">Back</a>
+                </div>
             </h5>
         </div>
     </div>
@@ -106,10 +106,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <p>{{ __('Country') }}</p>
+                                    <p>{{ __('Date Of Birth') }}</p>
                                 </td>
                                 <td>
-                                    <p>{{$employee->country}}</p>
+                                    <p>{{$employee->date_of_birth}}</p>
                                 </td>
                             </tr>
                             <tr>
@@ -122,10 +122,26 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <p>{{ __('Date Of Birth') }}</p>
+                                    <p>{{ __('Country') }}</p>
                                 </td>
                                 <td>
-                                    <p>{{$employee->date_of_birth}}</p>
+                                    <p>{{$employee->country}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>{{ __('State') }}</p>
+                                </td>
+                                <td>
+                                    <p>{{$employee->state}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>{{ __('City') }}</p>
+                                </td>
+                                <td>
+                                    <p>{{$employee->city}}</p>
                                 </td>
                             </tr>
                             <tr>
@@ -155,6 +171,14 @@
                                 </td>
                                 <td>
                                     <p>{{$employee->department}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>{{ __('Supervisor') }}</p>
+                                </td>
+                                <td>
+                                    <p>{{$employee->supervisor}}</p>
                                 </td>
                             </tr>
                             <tr>

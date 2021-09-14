@@ -16,5 +16,10 @@ class Jobtitle extends Model
     public function onlineapplicant() {
         return $this->hasMany('App\Models\OnlineApplicant');
     }
+
+    public function employee()
+    {
+        return $this->hasMany('App\Models\Employee');
+    }
     
 }

@@ -1,5 +1,4 @@
-<form method="post" action="{{route('updateBankname')}}" enctype="multipart/form-data">
-  @csrf 
+
   <div class="modal fade" id="editBankname{{$bankname->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -8,20 +7,19 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-              <div class="mb-3">
-                  <label>Bank ID</label>
-                  <input type="text" class="form-control" id="ID" name="ID" value="{{ $bankname->id }}">
-              </div>
-              <div class="mb-3">
-                  <label>Bank</label>
-                  <input type="text" class="form-control" id="name" name="name" value="{{ $bankname->name }}">
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Update</button>
-              </div>
+          <form method="post" action="{{route('updateBankname')}}" enctype="multipart/form-data">
+            @csrf 
+                <input type="hidden" class="form-control" id="ID" name="ID" value="{{ $bankname->id }}"> 
+                <div class="mb-3">
+                    <label>Bank</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ $bankname->name }}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+          </form>
         </div> 
       </div>
     </div>
   </div>
-</form>

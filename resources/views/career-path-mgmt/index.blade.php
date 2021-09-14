@@ -67,10 +67,8 @@
     </div>
   </div>
   <!-- /.box-body -->
-  </div>
 </section>
 <!-- /.content -->
-</div>
 @endsection
 @section('script')
 <script>

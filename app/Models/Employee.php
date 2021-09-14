@@ -11,8 +11,8 @@ class Employee extends Model
 
     protected $fillable = [
         'employee_ID', 'ic', 'employee_Name', 'image', 'gender',
-        'date_of_birth', 'race', 'country', 'national', 'address',
-        'contact_Number', 'email', 'department', 'jobtitle',
+        'date_of_birth', 'race', 'national', 'country', 'state', 'city', 'address',
+        'contact_Number', 'email', 'department', 'supervisor' , 'jobtitle',
         'salary', 'start_Date', 'end_Date', 'emergency_Name',
         'emergency_Contact_Number', 'document', 'status',
         'employment_ID', 'marital_Status', 'salary_structure', 'leave_grade',
@@ -37,5 +37,45 @@ class Employee extends Model
     public function vaccinationInfo()
     {
         return $this->hasMany('App\Models\VaccinationInfo');
+    }
+
+    public function bankName()
+    {
+        return $this->belongsTo('App\Models\Bankname');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo('App\Models\City');
+    }
+
+    public function country()
+    {
+        return $this->belongsTo('App\Models\Country');
+    }
+
+    public function employement()
+    {
+        return $this->belongsTo('App\Models\Employment');
+    }
+
+    public function jobtitle()
+    {
+        return $this->belongsTo('App\Models\Jobtitle');
+    }
+
+    public function nationality()
+    {
+        return $this->belongsTo('App\Models\Nationality');
+    }
+
+    public function state()
+    {
+        return $this->belongsTo('App\Models\State');
+    }
+
+    public function workingTime()
+    {
+        return $this->belongsTo('App\Models\Workingtime');
     }
 }

@@ -13,9 +13,9 @@
     <div class="row">
         <div class="col-md-12">
             <h5 class="page-title" style=" padding: 0 0 20px 0; ">{{ __('Career Path Development Information') }}
-                <a href="{{ route('viewCPD') }}" class="float-right btn btn-info col-sm-3 col-xs-5 btn-margin" style="font-size: initial; width: 110px;">
-                    <i></i>{{ __('Back') }}
-                </a>
+                <div style="text-align: -webkit-right;">
+                    <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewCPD') }}">Back</a>
+                </div>
             </h5>
         </div>
     </div>

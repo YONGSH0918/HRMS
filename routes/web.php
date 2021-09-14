@@ -144,6 +144,15 @@ Route::post('/updatecountry',[CountryController::class,'update'])->name('updateC
 Route::get('/deletecountry/{id}',[CountryController::class,'delete'])->name('deleteCountry');
 Route::post('/searchcountry',[CountryController::class,'search'])->name('searchCountry');
 
+// national setting route
+Route::get('/national',[NationalityController::class,'show'])->name('showNational');
+Route::get('/national/addnational',[NationalityController::class,'create'])->name('showAddCNational');
+Route::post('/national/store',[NationalityController::class,'store'])->name('addNational');
+Route::get('/editnational/{id}',[NationalityController::class,'edit'])->name('editNational');
+Route::post('/updatenational',[NationalityController::class,'update'])->name('updateNational');
+Route::get('/deletenational/{id}',[NationalityController::class,'delete'])->name('deleteNational');
+Route::post('/searchnational',[NationalityController::class,'search'])->name('searchNational');
+
 // bankname setting route
 Route::get('/bankname',[BanknameController::class,'show'])->name('showBankname');
 Route::get('/bankname/addbankname',[BanknameController::class,'create'])->name('showAddBankname');

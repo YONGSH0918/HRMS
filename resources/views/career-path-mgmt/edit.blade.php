@@ -7,9 +7,9 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading" style="font-size: larger; color: mediumblue; font-weight: 500;">Edit Career Path Development Information
-                    <a href="{{ route('viewCPD') }}" class="float-right btn btn-info col-sm-3 col-xs-5 btn-margin" style="font-size: initial; width: 110px;">
-                        <i></i>{{ __('Back') }}
-                    </a>
+                    <div style="text-align: -webkit-right;">
+                        <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewCPD') }}">Back</a>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <form name="formEditCPD" class="form-horizontal" role="form" method="POST" action="{{ route('updateCPD') }}" enctype="multipart/form-data">

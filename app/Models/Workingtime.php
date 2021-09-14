@@ -12,4 +12,9 @@ class Workingtime extends Model
     public function employment(){
         return $this->belongsTo('App\Models\Employment');
     }
+
+    public function employee()
+    {
+        return $this->hasMany('App\Models\Employee');
+    }
 }

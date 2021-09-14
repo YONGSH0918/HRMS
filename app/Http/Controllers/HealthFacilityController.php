@@ -34,7 +34,7 @@ class HealthFacilityController extends Controller
     public function show()
     {
 
-        $hfs = HealthFacility::paginate(5);
+        $hfs = HealthFacility::all();
 
         return view('healthFacility-mgmt/index')->with('hfs', $hfs);
     }
@@ -78,7 +78,7 @@ class HealthFacilityController extends Controller
         $hfs = DB::table('health_facilities')
             ->where('id', 'like', '%' . $keyword . '%')
             ->orWhere('name', 'like', '%' . $keyword . '%')
-            ->paginate(5);
+            ->get();
 
         return view('healthFacility-mgmt/search')->with('hfs', $hfs);
     }
