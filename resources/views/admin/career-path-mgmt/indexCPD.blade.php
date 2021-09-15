@@ -29,7 +29,7 @@
         <div style="margin-bottom: 10px;">
           <form method="POST" action="{{ route('searchCPD') }}">
             @csrf
-            <input type="text" id="search" name="search" placeholder="Search CPD ID or Employee ID" style="width: 210px;">
+            <input type="text" id="search" name="search" placeholder="Search CPD ID or Employee ID Number or Status" style="width: 330px;">
             <button type="submit" class="btn btn-primary">
               <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
               Search
@@ -52,9 +52,10 @@
                 <tr role="row">
                   <th width="12%">CPD ID</th>
                   <th width="12%">Employee ID</th>
-                  <th width="25%">Program Title</th>
-                  <th width="15%">Supervisor Name</th>
-                  <th width="15%">Date Completed</th>
+                  <th width="23%">Program Title</th>
+                  <th width="12%">Supervisor Name</th>
+                  <th width="12%">Status</th>
+                  <th width="10%">Date Completed</th>
                   <th tabindex="0">Action</th>
                 </tr>
               </thead>
@@ -62,9 +63,16 @@
                 @foreach ($cpds as $cpd)
                 <tr role="row" class="odd">
                   <td class="sorting_1">{{ $cpd->employee_CareerPath_Info_ID }}</td>
-                  <td class="hidden-xs">{{ $cpd->employee_ID }}</td>
+                  <td class="hidden-xs">EMP-{{ $cpd->employee_ID }}</td>
                   <td class="hidden-xs">{{ $cpd->program_Title }}</td>
                   <td class="hidden-xs">{{ $cpd->supervisor_Name }}</td>
+                  @if($cpd->status == "Not Started")
+                  <td class="hidden-xs" style="color: #E00909;">{{ $cpd->status }}</td>
+                  @elseif($cpd->status == "In Progress")
+                  <td class="hidden-xs" style="color: #DC9E20;">{{ $cpd->status }}</td>
+                  @else
+                  <td class="hidden-xs" style="color: #2515D9;">{{ $cpd->status }}</td>
+                  @endif
                   <td class="hidden-xs">{{ $cpd->scheduled_Date_Completed}}</td>
                   <td>
                     <a href="{{ route('cpd.detail', ['id' => $cpd->id]) }}" class="btn btn-info col-sm-3 col-xs-5 btn-margin">

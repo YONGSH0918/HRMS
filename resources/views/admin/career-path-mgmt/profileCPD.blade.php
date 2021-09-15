@@ -25,9 +25,7 @@
             <div class="box box-success" style="padding: 20px; background-color: whitesmoke; border-radius: 10px;">
                 <div class="box-body employee-info">
                     <div class="author" style="text-align: center;">
-
                         <img class="border-white" src="{{ asset('images/careerpath.png') }}" width="300px" height="250px" style="border-radius: 5px;" alt="profile photo" />
-
                     </div>
                     <p class="description text-center">
                     <h4 class="title">{{$cpd->employee_Name}}</h4>
@@ -38,7 +36,7 @@
                                     <div>{{ __('Employee ID') }}</div>
                                 </td>
                                 <td>
-                                    <div>{{$cpd->employee_ID}}</div>
+                                    <div>EMP-{{$cpd->employee_ID}}</div>
                                 </td>
                             </tr>
                             <tr>
@@ -59,6 +57,7 @@
         <div class="col-md-8 float-left" style="border-radius: 10px; background-color: whitesmoke;">
             <div class="box box-success" style="padding: 10px;">
                 <div class="box-header with-border" style="padding: 10px 0;">{{ __('Career Path Development Information') }}</div>
+                <br>
                 <div class="box-body employee-info">
                     <table class="tablelist">
                         <tbody>
@@ -116,6 +115,14 @@
                                 </td>
                                 <td>
                                     <p>{{$cpd->tranningOrCourse_Name}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>{{ __('Status') }}</p>
+                                </td>
+                                <td>
+                                    <p>{{$cpd->status}}</p>
                                 </td>
                             </tr>
                             <tr>

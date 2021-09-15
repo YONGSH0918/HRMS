@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <label for="employee_ID" class="col-md-4 control-label">Employee ID<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <input type="text" name="employee_ID" id="employee_ID" style="width: -webkit-fill-available;" required>
+                               <input type="text" name="employee_ID" id="employee_ID" style="width: -webkit-fill-available;" required>
                             </div>
                         </div>
                         <!--Employee IC -->
@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label for="employee_Name" class="col-md-4 control-label">Employee Name<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                    
+
                                 <input type="text" name="employee_Name" id="employee_Name" style="width: -webkit-fill-available;" required>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                                     <option value="0" disabled="true" selected="true">Please Select</option>
                                     <option value="Boss">Boss</option>
                                     @foreach($supervisors as $supervisor)
-                                    <option value="{{ $supervisor->id }}">{{ $supervisor->employee_ID }} - {{ $supervisor->department }}</option>
+                                    <option value="{{ $supervisor->employee_ID }}">EMP-{{ $supervisor->employee_ID }} {{ $supervisor->department }}</option>
                                     @endforeach
                                     <option value="N/A">---</option>
                                 </select>
@@ -246,7 +246,7 @@
                         <div class="form-group">
                             <label for="workingSchedule" class="col-md-4 control-label">Working Schedule<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                            <input type="text" id="workingSchedule" name="workingSchedule" class="workingScheduleTb"  style="width: -webkit-fill-available;" readonly>
+                                <input type="text" id="workingSchedule" name="workingSchedule" class="workingScheduleTb" style="width: -webkit-fill-available;" readonly>
                             </div>
                         </div>
                         <!--Employee Marital Status-->

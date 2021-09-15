@@ -67,9 +67,6 @@
                   <td class="hidden-xs">{{ $va->vaccination_Date}}</td>
                   <td class="hidden-xs">{{ $va->vaccination_Status}}</td>
                   <td>
-                    <a href="{{ route('va.detail', ['id' => $va->id]) }}" class="btn btn-info col-sm-3 col-xs-5 btn-margin">
-                      <i class="fa fa-search"></i>
-                    </a>
                     <a href="{{ route('editVA', ['id' => $va->id]) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
                       <i class="fa fa-edit"></i>
                     </a>

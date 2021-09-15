@@ -18,15 +18,10 @@ class CreateAttendancesTable extends Migration
             $table->id();
             $table->string('attendance_ID');
             $table->string('employee_ID');
-            $table->string('employee_Name');
-            $table->string('department');
             $table->Date('date');
             $table->time('time_In');
             $table->time('time_Out');
-            $table->string('attendance_Status');
-            $table->string('signature');
-            $table->string('calendar_ID')->nullable();
-            $table->double('total_Hours_Per_Day', 2, 2);
+            $table->double('duration', 2, 2);
             $table->timestamps();
         });
     }

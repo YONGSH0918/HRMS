@@ -15,7 +15,7 @@
         <div style="margin-bottom: 10px;">
           <form method="POST" action="{{ route('searchEmployeeCPD') }}">
             @csrf
-            <input type="text" id="search" name="search" placeholder="Search Employee ID or Department" style="width: 250px;">
+            <input type="text" id="search" name="search" placeholder="Search Employee ID Number or Department" style="width: 320px;">
             <button type="submit" class="btn btn-primary">
               <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
               Search
@@ -46,7 +46,7 @@
               <tbody>
                 @foreach ($employees as $employee)
                 <tr role="row" class="odd">
-                  <td class="sorting_1">{{ $employee->employee_ID }}</td>
+                  <td class="sorting_1">EMP-{{ $employee->employee_ID }}</td>
                   <td class="hidden-xs">{{ $employee->employee_Name }}</td>
                   <td class="hidden-xs">{{ $employee->department }}</td>
                   <td class="hidden-xs">{{ $employee->jobtitle }}</td>

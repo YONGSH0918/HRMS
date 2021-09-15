@@ -38,7 +38,7 @@
                                     <div>{{ __('Employee ID') }}</div>
                                 </td>
                                 <td>
-                                    <div>{{$va->employee_ID}}</div>
+                                    <div>EMP-{{$va->employee_ID}}</div>
                                 </td>
                             </tr>
                             <tr>
@@ -59,6 +59,7 @@
         <div class="col-md-8 float-left" style="border-radius: 10px; background-color: whitesmoke;">
             <div class="box box-success" style="padding: 10px;">
                 <div class="box-header with-border" style="padding: 10px 0;">{{ __('Vaccination Appointment Information') }}</div>
+                <br>
                 <div class="box-body employee-info">
                     <table class="tablelist">
                         <tbody>

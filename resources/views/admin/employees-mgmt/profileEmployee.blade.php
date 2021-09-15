@@ -64,7 +64,7 @@
                                     <div>{{ __('Employee ID') }}</div>
                                 </td>
                                 <td>
-                                    <div>{{$employee->employee_ID}}</div>
+                                    <div>EMP-{{$employee->employee_ID}}</div>
                                 </td>
                             </tr>
                         </tbody>
@@ -77,6 +77,7 @@
         <div class="col-md-8 float-left" style="border-radius: 10px; background-color: whitesmoke;">
             <div class="box box-success" style="padding: 10px;">
                 <div class="box-header with-border" style="padding: 10px 0;">{{ __('Personal Information') }}</div>
+                
                 <div class="box-body employee-info">
                     <table class="tablelist">
                         <tbody>
@@ -210,7 +211,11 @@
                                     <p>{{ __('Employment ID') }}</p>
                                 </td>
                                 <td>
-                                    <p>{{$employee->employment_ID}}</p>
+                                    @foreach($employments as $employment)
+                                    @if($employee->employment_ID ==$employment->id)
+                                    <p>{{ $employment->employment_name }}</p>
+                                    @endif
+                                    @endforeach   
                                 </td>
                             </tr>
                             <tr>

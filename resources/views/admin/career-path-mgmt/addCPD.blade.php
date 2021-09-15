@@ -44,9 +44,16 @@
                         </div>
                         <!--Supervisor Name-->
                         <div class="form-group">
-                            <label for="supervisor_Name" class="col-md-4 control-label">Supervisor Name<span style="color:red">*</span></label>
+                            <label for="supervisor_Name" class="col-md-4 control-label">Supervisor<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <input type="text" id="supervisor_Name" name="supervisor_Name" style="width: -webkit-fill-available;" required>
+                                <select name="supervisor_Name" id="supervisor_Name" class="form-control" style="width: -webkit-fill-available;" required>
+                                    <option value="0" disabled="true" selected="true">Please Select</option>
+                                    <option value="Boss">Boss</option>
+                                    @foreach($supervisors as $supervisor)
+                                    <option value="{{ $supervisor->employee_ID }}">EMP-{{ $supervisor->employee_ID }}, {{ $supervisor->department }}</option>
+                                    @endforeach
+                                </select>
+                              <!--  <input type="text" id="supervisor_Name" name="supervisor_Name" style="width: -webkit-fill-available;" required>-->
                             </div>
                         </div>
                         <!--Current Job Title-->
@@ -92,6 +99,15 @@
                             <label for="tranningOrCourse_Name" class="col-md-4 control-label">Tranning Name or Course Name<span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <input type="text" id="tranningOrCourse_Name" name="tranningOrCourse_Name" style="width: -webkit-fill-available;" required>
+                            </div>
+                        </div>
+                        <!--Status-->
+                        <div class="form-group">
+                            <label for="status" class="col-md-4 control-label">Status<span style="color:red">*</span></label>
+                            <div class="col-md-6">
+                                <input type="radio" id="status" name="status" value="Not Started" checked>Not Started
+                                <input type="radio" id="status" name="status" value="In Progress">In Progress
+                                <input type="radio" id="status" name="status" value="Completed">Completed
                             </div>
                         </div>
                         <!--Date Completed-->

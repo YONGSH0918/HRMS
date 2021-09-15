@@ -38,7 +38,7 @@
             <tbody>
               @foreach ($employees as $employee)
               <tr role="row" class="odd">
-                <td class="sorting_1">{{ $employee->employee_ID }}</td>
+                <td class="sorting_1">EMP-{{ $employee->employee_ID }}</td>
                 <td class="hidden-xs">{{ $employee->employee_Name }}</td>
                 <td class="hidden-xs">{{ $employee->department }}</td>
                 <td class="hidden-xs">{{ $employee->jobtitle }}</td>

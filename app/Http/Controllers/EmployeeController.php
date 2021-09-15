@@ -233,8 +233,11 @@ class EmployeeController extends Controller
     {
 
         $employees = Employee::all()->where('id', $id);
+        $employments = Employment::all();
         //select * from products where id='$id'
 
-        return view('admin.employees-mgmt.profileEmployee')->with('employees', $employees);
+        return view('admin.employees-mgmt.profileEmployee')
+        ->with('employments', $employments)
+        ->with('employees', $employees);
     }
 }

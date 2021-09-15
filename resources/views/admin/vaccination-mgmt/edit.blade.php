@@ -96,14 +96,12 @@
                         <div class="form-group">
                             <label for="vaccination_Status" class="col-md-4 control-label">Status<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <select id="vaccination_Status" name="vaccination_Status" style="width: -webkit-fill-available;" onchange="if (this.value=='others'){this.form['others'].style.visibility='visible'}else {this.form['others'].style.visibility='hidden'};">
+                                <select id="vaccination_Status" name="vaccination_Status" style="width: -webkit-fill-available;">
                                     <option value="0" disabled="true" selected="true">Please Select</option>
                                     <option value="N/A" @if($va->vaccination_Status == "N/A") selected @endif>---</option>
                                     <option value="Unvaccinated" @if($va->vaccination_Status == "Unvaccinated") selected @endif>Unvaccinated</option>
                                     <option value="Vaccinated" @if($va->vaccination_Status == "Vaccinated") selected @endif>Vaccinated</option>
-                                    <option value="others" @if($va->vaccination_Status == "others") selected @endif>Others</option>
                                 </select>
-                                <input type="text" name="others" id="vaccination_Status" style="visibility:hidden; width: -webkit-fill-available;" />
                             </div>
                         </div>
                         @endforeach

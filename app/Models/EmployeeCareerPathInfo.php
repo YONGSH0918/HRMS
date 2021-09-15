@@ -11,7 +11,7 @@ class EmployeeCareerPathInfo extends Model
 
     protected $fillable = [
         'employee_CareerPath_Info_ID', 'employee_ID', 'employee_Name', 'supervisor_Name', 'current_JobTitle',
-        'program_Title', 'program_Desc', 'periodPlan_From', 'periodPlan_To', 'tranningOrCourse_Name', 'scheduled_Date_Completed'
+        'program_Title', 'program_Desc', 'periodPlan_From', 'periodPlan_To', 'tranningOrCourse_Name', 'status', 'scheduled_Date_Completed'
     ];
 
     public function employee()

@@ -13,16 +13,20 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class CPDController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
-   }
+    }
 
     //turn page
     public function addCPD($id)
     {
         $employees = Employee::all()->where('id', $id);
+        $supervisors = Employee::all();
 
-        return view('admin.career-path-mgmt.addCPD')->with('employees', $employees);
+        return view('admin.career-path-mgmt.addCPD')
+            ->with('supervisors', $supervisors)
+            ->with('employees', $employees);
     }
 
 
@@ -42,6 +46,7 @@ class CPDController extends Controller
             'periodPlan_From' => $r->periodPlan_From,
             'periodPlan_To' => $r->periodPlan_To,
             'tranningOrCourse_Name' => $r->tranningOrCourse_Name,
+            'status' => $r->status,
             'scheduled_Date_Completed' => $r->scheduled_Date_Completed,
 
         ]);
@@ -74,8 +79,10 @@ class CPDController extends Controller
     {
 
         $cpds = EmployeeCareerPathInfo::all()->where('id', $id);
+        $supervisors = Employee::all();
 
-        return view('career-path-mgmt/edit')->with('cpds', $cpds)
+        return view('admin.career-path-mgmt/edit')->with('cpds', $cpds)
+            ->with('supervisors', $supervisors)
             ->with('employees', Employee::all());
     }
 
@@ -103,6 +110,7 @@ class CPDController extends Controller
         $cpds->periodPlan_From = $r->periodPlan_From;
         $cpds->periodPlan_To = $r->periodPlan_To;
         $cpds->tranningOrCourse_Name = $r->tranningOrCourse_Name;
+        $cpds->status = $r->status;
         $cpds->scheduled_Date_Completed = $r->scheduled_Date_Completed;
         $cpds->save(); //run the SQL update statment
         Session::flash('update', "Updated Succesful!");
@@ -117,6 +125,7 @@ class CPDController extends Controller
         $cpds = DB::table('employee_career_path_infos')
             ->where('employee_CareerPath_Info_ID', 'like', '%' . $keyword . '%')
             ->orWhere('employee_ID', 'like', '%' . $keyword . '%')
+            ->orWhere('status', 'like', '%' . $keyword . '%')
             ->get();
 
         return view('admin.career-path-mgmt.searchCPD')->with('cpds', $cpds);

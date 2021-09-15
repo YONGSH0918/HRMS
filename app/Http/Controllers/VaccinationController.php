@@ -15,16 +15,18 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class VaccinationController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
-   }
+    }
     //
     public function addVA($id)
     {
         $employees = Employee::all()->where('id', $id);
         $hfs = HealthFacility::all();
 
-        return view('admin.vaccination-mgmt.addVA')->with('employees', $employees)
+        return view('admin.vaccination-mgmt.addVA')
+            ->with('employees', $employees)
             ->with('hfs', $hfs);
     }
 
@@ -84,7 +86,8 @@ class VaccinationController extends Controller
 
         $vas = VaccinationInfo::all()->where('id', $id);
 
-        return view('admin.vaccination-mgmt.edit')->with('vas', $vas)
+        return view('admin.vaccination-mgmt.edit')
+            ->with('vas', $vas)
             ->with('hfs', HealthFacility::all());
     }
 

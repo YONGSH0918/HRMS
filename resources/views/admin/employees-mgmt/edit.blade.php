@@ -182,7 +182,7 @@
                                     <option value="0" disabled="true" selected="true">Please Select</option>
                                     <option value="Boss"  @if($employee->supervisor == "Boss") selected @endif>Boss</option>
                                     @foreach($supervisors as $supervisor)
-                                    <option value="{{ $supervisor->id }}" @if($employee->supervisor ==$supervisor->id) selected @endif>{{ $supervisor->employee_ID }} - {{ $supervisor->department }}</option>
+                                    <option value="{{ $supervisor->employee_ID }}" @if($employee->supervisor ==$supervisor->employee_ID) selected @endif>EMP-{{ $supervisor->employee_ID }}, {{ $supervisor->department }}</option>
                                     @endforeach
                                     <option value="N/A" @if($employee->supervisor == "N/A") selected @endif>---</option>
                                 </select>

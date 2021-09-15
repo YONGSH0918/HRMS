@@ -24,7 +24,7 @@
         <div style="margin-bottom: 10px;">
           <form method="POST" action="{{ route('searchEmployee') }}">
             @csrf
-            <input type="text" id="search" name="search" placeholder="Search Employee ID or Department" style="width: 250px;">
+            <input type="text" id="search" name="search" placeholder="Search Employee ID Number or Department" style="width: 320px;">
             <button type="submit" class="btn btn-primary">
               <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
               Search
@@ -61,14 +61,20 @@
                 @foreach ($employees as $employee)
                 <tr role="row" class="odd">
                   <td><img src="{{ asset('images/employeesImages') }}/{{ $employee->image }}" width="50px" height="50px" /></td>
-                  <td class="sorting_1">{{ $employee->employee_ID }}</td>
+                  <td class="sorting_1">EMP-{{ $employee->employee_ID }}</td>
                   <td class="hidden-xs">{{ $employee->employee_Name }}</td>
                   <td class="hidden-xs">{{ $employee->date_of_birth }}</td>
                   <td class="hidden-xs">{{ $employee->department }}</td>
                   <td class="hidden-xs">{{ $employee->supervisor }}</td>
                   <td class="hidden-xs">{{ $employee->jobtitle }}</td>
                   <td class="hidden-xs">{{ $employee->start_Date }}</td>
-                  <td class="hidden-xs">{{ $employee->status }}</td>
+                  @if($employee->status == "Active")
+                  <td class="hidden-xs" style="color: #0DD304;">{{ $employee->status }}</td>
+                  @elseif($employee->status == "Inactive")
+                  <td class="hidden-xs" style="color: #D8081C;">{{ $employee->status }}</td>
+                  @else
+                  <td class="hidden-xs" style="color: #1D0EC1;">{{ $employee->status }}</td>
+                  @endif
                   <td>
                     <a href="{{ route('employee.detail', ['id' => $employee->id]) }}" class="btn btn-info col-sm-3 col-xs-5 btn-margin">
                       <i class="fa fa-search"></i>
