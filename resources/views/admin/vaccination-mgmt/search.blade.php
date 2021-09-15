@@ -31,7 +31,7 @@
                 <th width="9%" class="sorting_asc">Employee ID</th>
                 <th width="20%" class="sorting hidden-xs">Employee Name</th>
                 <th width="12%" class="sorting hidden-xs">Identification Number</th>
-                <th width="12%" class="sorting hidden-xs">Department</th>
+                <th width="20%" class="sorting hidden-xs">Department</th>
                 <th tabindex="0">Action</th>
               </tr>
             </thead>

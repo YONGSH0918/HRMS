@@ -6,58 +6,57 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading" style="font-size: larger; color: mediumblue; font-weight: 500;">Edit Attendance
+                <div class="panel-heading" style="font-size: larger; color: mediumblue; font-weight: 500;">Add Employee Attendance
                     <div style="text-align: -webkit-right;">
-                        <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewA') }}">Back</a>
+                        <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewEmployeeA') }}">Back</a>
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form name="formAddA" class="form-horizontal" role="form" method="POST" action="{{ route('updateA') }}" enctype="multipart/form-data">
-                        @csrf
-                        @foreach($attendances as $attendance)
-                        <input type="hidden" name="ID" id="ID" value="{{$attendance->id}}" style="width: -webkit-fill-available;">
-                        
+                    <form name="formAddA" class="form-horizontal" role="form" method="POST" action="{{ route('addA') }}" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+
                         <!--A ID -->
                         <div class="form-group">
                             <label for="attendance_ID" class="col-md-4 control-label">Attendance ID<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <input type="text" name="attendance_ID" id="attendance_ID" value="{{$attendance->attendance_ID }}" style="width: -webkit-fill-available;" readonly>
+                                <input type="text" name="attendance_ID" id="attendance_ID" style="width: -webkit-fill-available;" required>
                             </div>
                         </div>
                         <!--Employee ID -->
                         <div class="form-group">
                             <label for="employee_ID" class="col-md-4 control-label">Employee ID<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <input type="text" name="employee_ID" id="employee_ID" value="{{$attendance->employee_ID}}" style="width: -webkit-fill-available;" readonly>
-
+                                @foreach($employees as $employee)
+                                <input type="hidden" name="ID" id="ID" value="{{$employee->id}}" style="width: -webkit-fill-available;">
+                                <input type="text" name="employee_ID" id="employee_ID" value="{{$employee->employee_ID}}" style="width: -webkit-fill-available;" readonly>
+                                @endforeach
                             </div>
                         </div>
                         <!--Date-->
                         <div class="form-group">
                             <label for="date" class="col-md-4 control-label">Date<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <input type="date" id="date" name="date" value="{{$attendance->date}}" style="width: -webkit-fill-available;" required>
+                                <input type="date" id="date" name="date" style="width: -webkit-fill-available;" required>
                             </div>
                         </div>
                         <!--Time in-->
                         <div class="form-group">
                             <label for="time_In" class="col-md-4 control-label">Time In<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <input type="time" id="time_In" name="time_In" value="{{$attendance->time_In}}"  style="width: -webkit-fill-available;" required>
+                                <input type="time" id="time_In" name="time_In" style="width: -webkit-fill-available;" required>
                             </div>
                         </div>
                         <!--Time out-->
                         <div class="form-group">
                             <label for="time_Out" class="col-md-4 control-label">Time Out<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <input type="time" id="time_Out" name="time_Out" value="{{$attendance->time_Out}}" style="width: -webkit-fill-available;" required>
+                                <input type="time" id="time_Out" name="time_Out" style="width: -webkit-fill-available;" required>
                             </div>
                         </div>
-                        @endforeach
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" name="edit" class="btn btn-primary" onclick="return confirm('Are you sure you want to edit this item?')">
-                                    Update
+                                <button type="submit" class="btn btn-primary">
+                                    Create
                                 </button>
                             </div>
                         </div>

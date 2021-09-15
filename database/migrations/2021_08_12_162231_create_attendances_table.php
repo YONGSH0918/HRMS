@@ -21,7 +21,7 @@ class CreateAttendancesTable extends Migration
             $table->Date('date');
             $table->time('time_In');
             $table->time('time_Out');
-            $table->double('duration', 2, 2);
+            $table->double('duration', 2, 2)->nullable();
             $table->timestamps();
         });
     }

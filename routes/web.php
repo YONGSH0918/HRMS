@@ -17,7 +17,7 @@ use App\Http\Controllers\StateController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\LeavetypeController;
 use App\Http\Controllers\OnlineApplicantController;
-use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\PositionController;
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +74,17 @@ Route::post('/updateVA', [App\Http\Controllers\VaccinationController::class, 'up
 Route::get('/deleteVA/{id}', [App\Http\Controllers\VaccinationController::class, 'delete'])->name('deleteVA');
 Route::get('/va_detail/{id}', [App\Http\Controllers\VaccinationController::class, 'showVADetail'])->name('va.detail');
 Route::get('/findAddress', [App\Http\Controllers\VaccinationController::class, 'findAddress'])->name('findAddress');
+
+//Attendance Route
+Route::get('/addAttendance/{id}', [App\Http\Controllers\AttendanceController::class, 'addA'])->name('insertA');
+Route::post('/addAttendance/store', [App\Http\Controllers\AttendanceController::class, 'storeA'])->name('addA');
+Route::get('/viewEmployeeA', [App\Http\Controllers\AttendanceController::class, 'show'])->name('viewEmployeeA');
+Route::post('/searchEmployeeA', [App\Http\Controllers\AttendanceController::class, 'search'])->name('searchEmployeeA');
+Route::get('/viewAttendance', [App\Http\Controllers\AttendanceController::class, 'showA'])->name('viewA');
+Route::post('/searchAttendance', [App\Http\Controllers\AttendanceController::class, 'searchA'])->name('searchA');
+Route::get('/editAttendance/{id}', [App\Http\Controllers\AttendanceController::class, 'editA'])->name('editA');
+Route::post('/updateAttendance', [App\Http\Controllers\AttendanceController::class, 'updateA'])->name('updateA');
+Route::get('/deleteAttendance/{id}', [App\Http\Controllers\AttendanceController::class, 'delete'])->name('deleteA');
 
 //Health Facility Route
 Route::get('/addHealthFacility', [App\Http\Controllers\HealthFacilityController::class, 'add'])->name('insertHealthFacility');

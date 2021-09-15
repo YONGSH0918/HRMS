@@ -38,7 +38,7 @@
                 <tr role="row">
                   <th width="9%">Employee ID</th>
                   <th width="20%">Employee Name</th>
-                  <th width="12%">Department</th>
+                  <th width="20%">Department</th>
                   <th width="12%">Job Title</th>
                   <th tabindex="0">Action</th>
                 </tr>

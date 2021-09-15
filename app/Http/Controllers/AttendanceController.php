@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DateTime;
+use App\Models\User;
 use App\Models\Employee;
 use App\Models\Attendance;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class AttendanceController extends Controller
 {
@@ -14,36 +18,32 @@ class AttendanceController extends Controller
    }
 
     //
-    public function add($id)
+    public function addA($id)
     {
         $employees = Employee::all()->where('id', $id);
 
-        return view('admin.attendance-mgmt.add')
+        return view('admin.attendance-mgmt.addAttendance')
             ->with('employees', $employees);
     }
 
-    public function store()
+    public function storeA()
     {    //step 2 
         $r = request(); //step 3 get data from HTML
 
+
         $addAttendance = Attendance::create([    //step 3 bind data
-            'employee_Vaccination_ID' => $r->employee_Vaccination_ID, //add on 
+            'attendance_ID' => $r->attendance_ID, //add on 
             'employee_ID' => $r->employee_ID, //id
-            'employee_IC' => $r->employee_IC, //id
-            'employee_Name' => $r->employee_Name,
-            'vaccine_Type' => $r->vaccine_Type,
-            'health_Facility' => $r->health_Facility,
-            'vaccination_Location' => $r->vaccination_Location,
-            'vaccination_Date' => $r->vaccination_Date,
-            'vaccination_Time' => $r->vaccination_Time,
-            'vaccination_Status' => $r->vaccination_Status,
+            'date' => $r->date, //id
+            'time_In' => $r->time_In,
+            'time_Out' => $r->time_Out,
 
         ]);
 
 
-        Session::flash('success', "Add New Vaccination Appointment Succesful!");
+        Session::flash('success', "Add Attendance Succesful!");
 
-        return redirect()->route('viewVA');
+        return redirect()->route('viewA');
     }
 
     //show employee
@@ -52,69 +52,65 @@ class AttendanceController extends Controller
 
         $employees = Employee::all();
 
-        return view('admin.vaccination-mgmt.index')->with('employees', $employees);
+        return view('admin.attendance-mgmt.index')->with('employees', $employees);
     }
 
-    public function showVA()
+    public function showA()
     {
 
-        $vas = VaccinationInfo::all();
+        $attendances = Attendance::all();
 
-        return view('admin.vaccination-mgmt.indexVA')->with('vas', $vas);
+        return view('admin.attendance-mgmt.indexA')->with('attendances', $attendances);
     }
 
     //find employee to edit
-    public function editVA($id)
+    public function editA($id)
     {
 
-        $vas = VaccinationInfo::all()->where('id', $id);
+        $attendances = Attendance::all()->where('id', $id);
 
-        return view('admin.vaccination-mgmt.edit')
-            ->with('vas', $vas)
-            ->with('hfs', HealthFacility::all());
+        return view('admin.attendance-mgmt.edit')
+            ->with('attendances', $attendances);
+
     }
 
     public function delete($id)
     {
-        $vas = VaccinationInfo::find($id);
-        $vas->delete();
+        $attendances = Attendance::find($id);
+        $attendances->delete();
 
-        Session::flash('delete', "Vaccination Appointment Deleted Succesful!");
-        return redirect()->route('viewVA');
+        Session::flash('delete', "Attendance Deleted Succesful!");
+        return redirect()->route('viewA');
     }
 
     //edit
-    public function updateVA()
+    public function updateA()
     {
         $r = request(); //retrive submited form data
-        $vas = VaccinationInfo::find($r->ID);  //get the record based on product ID      
+        $attendances = Attendance::find($r->ID);  //get the record based on product ID      
 
-        $vas->employee_Vaccination_ID = $r->employee_Vaccination_ID;
-        $vas->employee_ID = $r->employee_ID;
-        $vas->employee_IC = $r->employee_IC;
-        $vas->employee_Name = $r->employee_Name;
-        $vas->vaccine_Type = $r->vaccine_Type;
-        $vas->health_Facility = $r->health_Facility;
-        $vas->vaccination_Location = $r->vaccination_Location;
-        $vas->vaccination_Date = $r->vaccination_Date;
-        $vas->vaccination_Time = $r->vaccination_Time;
-        $vas->vaccination_Status = $r->vaccination_Status;
-        $vas->save(); //run the SQL update statment
-        Session::flash('update', "Vaccination Appointment Updated Succesful!");
-        return redirect()->route('viewVA');
+        $attendances->attendance_ID = $r->attendance_ID;
+        $attendances->employee_ID = $r->employee_ID;
+        $attendances->date = $r->date;
+        $attendances->time_In = $r->time_In;
+        $attendances->time_Out = $r->time_Out;
+        $attendances->save(); //run the SQL update statment
+        Session::flash('update', "Attendance Updated Succesful!");
+        return redirect()->route('viewA');
     }
 
     //search employee
-    function searchVA()
+    function searchA()
     {
         $request = request();
         $keyword = $request->search;
-        $vas = DB::table('vaccination_infos')
-            ->where('employee_Vaccination_ID', 'like', '%' . $keyword . '%')
+        $attendances = DB::table('attendances')
+            ->where('attendance_ID', 'like', '%' . $keyword . '%')
             ->orWhere('employee_ID', 'like', '%' . $keyword . '%')
+            ->orWhere('date', 'like', '%' . $keyword . '%')
             ->get();
 
-        return view('admin.vaccination-mgmt.searchVA')->with('vas', $vas);
+        return view('admin.attendance-mgmt.searchA')->with('attendances', $attendances);
     }
 
     function search()
@@ -126,16 +122,7 @@ class AttendanceController extends Controller
             ->orWhere('department', 'like', '%' . $keyword . '%')
             ->get();
 
-        return view('admin.vaccination-mgmt.search')->with('employees', $employees);
+        return view('admin.attendance-mgmt.search')->with('employees', $employees);
     }
 
-
-    public function showVADetail($id)
-    {
-
-        $vas = VaccinationInfo::all()->where('id', $id);
-        //select * from products where id='$id'
-
-        return view('admin.vaccination-mgmt.profileVA')->with('vas', $vas);
-    }
 }

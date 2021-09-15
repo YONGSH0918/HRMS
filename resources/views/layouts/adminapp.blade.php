@@ -53,7 +53,7 @@
                     <a href="{{ route('viewVA') }}">Vaccination Management</a>
                 </li>
                 <li>
-                    <a href="#">Attendance</a>
+                    <a href="{{ route('viewA')}}">Attendance</a>
                 </li>
                 <li>
                     <a href="#">Leave</a>
