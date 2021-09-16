@@ -34,11 +34,12 @@ class OnlineApplicantController extends Controller
 
     function store(Request $request)
     {
-        $image=$request->file('employees-image');   
-        $image->move('images/employeesImages',$image->getClientOriginalName());                
+
+        $image=$request->file('profile-image');   
+        $image->move('images',$image->getClientOriginalName());                
         $imageName=$image->getClientOriginalName();
 
-        $document=$request->file('employees-document');   
+        $document=$request->file('resume-file');   
         $document->move('documents',$document->getClientOriginalName());   
         $documentName=$document->getClientOriginalName();
 
