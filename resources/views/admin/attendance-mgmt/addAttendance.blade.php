@@ -15,13 +15,6 @@
                     <form name="formAddA" class="form-horizontal" role="form" method="POST" action="{{ route('addA') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
-                        <!--A ID -->
-                        <div class="form-group">
-                            <label for="attendance_ID" class="col-md-4 control-label">Attendance ID<span style="color:red">*</span></label>
-                            <div class="col-md-6">
-                                <input type="text" name="attendance_ID" id="attendance_ID" style="width: -webkit-fill-available;" required>
-                            </div>
-                        </div>
                         <!--Employee ID -->
                         <div class="form-group">
                             <label for="employee_ID" class="col-md-4 control-label">Employee ID<span style="color:red">*</span></label>

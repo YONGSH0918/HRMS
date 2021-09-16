@@ -69,7 +69,7 @@
                         <div class="form-group">
                             <label for="program_Desc" class="col-md-4 control-label">Program Description<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <textarea id="program_Desc" name="program_Desc" style="width: -webkit-fill-available;" required>{{$cpd->program_Desc}}"</textarea>
+                                <textarea id="program_Desc" name="program_Desc" style="width: -webkit-fill-available;" required>{{$cpd->program_Desc}}</textarea>
                             </div>
                         </div>
                         <!--Plan From-->
@@ -99,14 +99,16 @@
                             <div class="col-md-6">
                                 <input type="radio" id="status" name="status" value="Not Started" @if($cpd->status == "Not Started") checked @endif>Not Started
                                 <input type="radio" id="status" name="status" value="In Progress" @if($cpd->status == "In Progress") checked @endif>In Progress
+                                <br>
                                 <input type="radio" id="status" name="status" value="Completed" @if($cpd->status == "Completed") checked @endif>Completed
+                                <input type="radio" id="status" name="status" value="Incompleted" @if($cpd->status == "Incompleted") checked @endif>Incompleted
                             </div>
                         </div>
                         <!--Date Completed-->
                         <div class="form-group">
                             <label for="scheduled_Date_Completed" class="col-md-4 control-label">Date Completed</label>
                             <div class="col-md-6">
-                                <input type="datetime-local" id="scheduled_Date_Completed" name="scheduled_Date_Completed" value="{{$cpd->scheduled_Date_Completed}}" style="width: -webkit-fill-available;">
+                                <input type="date" id="scheduled_Date_Completed" name="scheduled_Date_Completed" value="{{$cpd->scheduled_Date_Completed}}" style="width: -webkit-fill-available;">
                             </div>
                         </div>
                         @endforeach

@@ -16,11 +16,10 @@ class CreateAttendancesTable extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->string('attendance_ID');
             $table->string('employee_ID');
             $table->Date('date');
-            $table->time('time_In');
-            $table->time('time_Out');
+            $table->time('time_In')->nullable();
+            $table->time('time_Out')->nullable();
             $table->double('duration', 2, 2)->nullable();
             $table->timestamps();
         });

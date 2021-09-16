@@ -107,14 +107,16 @@
                             <div class="col-md-6">
                                 <input type="radio" id="status" name="status" value="Not Started" checked>Not Started
                                 <input type="radio" id="status" name="status" value="In Progress">In Progress
+                                <br>
                                 <input type="radio" id="status" name="status" value="Completed">Completed
+                                <input type="radio" id="status" name="status" value="Incompleted">Incompleted
                             </div>
                         </div>
                         <!--Date Completed-->
                         <div class="form-group">
                             <label for="scheduled_Date_Completed" class="col-md-4 control-label">Date Completed</label>
                             <div class="col-md-6">
-                                <input type="datetime-local" id="scheduled_Date_Completed" name="scheduled_Date_Completed" style="width: -webkit-fill-available;">
+                                <input type="date" id="scheduled_Date_Completed" name="scheduled_Date_Completed" style="width: -webkit-fill-available;">
                             </div>
                         </div>
                         <div class="form-group">

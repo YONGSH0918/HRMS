@@ -240,4 +240,110 @@ class EmployeeController extends Controller
         ->with('employments', $employments)
         ->with('employees', $employees);
     }
+
+    //----------------------------------------------------------------------------//
+
+    public function showMe()
+    {
+
+        $employees = Employee::all()->where('employee_ID', Auth::id() );
+
+        return view('employee.employees-mgmt.index')->with('employees', $employees);
+    }
+
+    public function showMeDetail($id)
+    {
+
+        $employees = Employee::all()->where('id', $id);
+        $employments = Employment::all();
+        //select * from products where id='$id'
+
+        return view('employee.employees-mgmt.profileEmployee')
+        ->with('employments', $employments)
+        ->with('employees', $employees);
+    }
+
+    public function editMe($id)
+    {
+
+        $employees = Employee::all()->where('id', $id); 
+        $banknames = Bankname::all();
+        $cities = City::all();
+        $countries = Country::all();
+        $departments = Department::all();
+        $employments = Employment::all();
+        $positions = Position ::all();
+        $nationalities = Nationality::all();
+        $states = State::all();
+        $workingtimes = Workingtime::all();
+        $supervisors = Employee::all();
+        
+
+        return view('employee.employees-mgmt.edit')->with('employees', $employees)
+        ->with('banknames', $banknames)
+        ->with('cities', $cities)
+        ->with('countries', $countries)
+        ->with('departments', $departments)
+        ->with('employments', $employments)
+        ->with('positions', $positions)
+        ->with('nationalities', $nationalities)
+        ->with('states', $states)
+        ->with('supervisors', $supervisors)
+        ->with('workingtimes', $workingtimes)
+        ->with('supervisors', $supervisors);
+    }
+
+    //edit
+    public function updateMe()
+    {
+        $r = request(); //retrive submited form data
+        $employees = Employee::find($r->ID);  //get the record based on product ID      
+        if ($r->file('employees-image') != '') {
+            $image = $r->file('employees-image');
+            $image->move('images/employeesImages', $image->getClientOriginalName());
+            $imageName = $image->getClientOriginalName();
+            $employees->image = $imageName;
+        }
+        if ($r->file('employees-document') != '') {
+            $document = $r->file('employees-document');
+            $document->move('documents', $document->getClientOriginalName());
+            $documentName = $document->getClientOriginalName();
+            $employees->document = $documentName;
+        }
+
+        $employees->employee_ID = $r->employee_ID;
+        $employees->ic = $r->ic;
+        $employees->employee_Name = $r->employee_Name;
+        $employees->gender = $r->gender;
+        $employees->date_of_birth = $r->date_of_birth;
+        $employees->race = $r->race;
+        $employees->national = $r->national;
+        $employees->country = $r->country;
+        $employees->state = $r->state;
+        $employees->city = $r->city;
+        $employees->address = $r->address;
+        $employees->contact_Number = $r->contact_Number;
+        $employees->email = $r->email;
+        $employees->department = $r->department;
+        $employees->supervisor = $r->supervisor;
+        $employees->jobtitle = $r->jobtitle;
+        $employees->salary = $r->salary;
+        $employees->start_Date = $r->start_Date;
+        $employees->end_Date = $r->end_Date;
+        $employees->emergency_Name = $r->emergency_Name;
+        $employees->emergency_Contact_Number = $r->emergency_Contact_Number;
+        $employees->status = $r->status;
+        $employees->employment_ID = $r->employment_ID;
+        $employees->marital_Status = $r->marital_Status;
+        $employees->salary_structure = $r->salary_structure;
+        $employees->leave_grade = $r->leave_grade;
+        $employees->employee_grade = $r->employee_grade;
+        $employees->epf_number = $r->epf_number;
+        $employees->bank_Name = $r->bank_Name;
+        $employees->bank_account_number = $r->bank_account_number;
+        $employees->workingSchedule = $r->workingSchedule;
+        $employees->save(); //run the SQL update statment
+        Session::flash('update', "Updated Succesful!");
+        return redirect()->route('viewMe');
+    }
 }

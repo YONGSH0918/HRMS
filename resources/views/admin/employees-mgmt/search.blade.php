@@ -52,11 +52,11 @@
                 <td class="hidden-xs">{{ $employee->jobtitle }}</td>
                 <td class="hidden-xs">{{ $employee->start_Date }}</td>
                 @if($employee->status == "Active")
-                  <td class="hidden-xs" style="color: #0DD304;">{{ $employee->status }}</td>
+                  <td class="hidden-xs" style="color: #00CB14;">{{ $employee->status }}</td>
                   @elseif($employee->status == "Inactive")
-                  <td class="hidden-xs" style="color: #D8081C;">{{ $employee->status }}</td>
+                  <td class="hidden-xs" style="color: #FC0000;">{{ $employee->status }}</td>
                   @else
-                  <td class="hidden-xs" style="color: #1D0EC1;">{{ $employee->status }}</td>
+                  <td class="hidden-xs" style="color: #2515D9;">{{ $employee->status }}</td>
                   @endif
                 <td>
                   <a href="{{ route('employee.detail', ['id' => $employee->id]) }}" class="btn btn-info col-sm-3 col-xs-5 btn-margin">

@@ -26,7 +26,7 @@ class CreateEmployeeCareerPathInfosTable extends Migration
             $table->date('periodPlan_To');
             $table->string('tranningOrCourse_Name');
             $table->string('status');
-            $table->dateTime('scheduled_Date_Completed')->nullable();
+            $table->date('scheduled_Date_Completed')->nullable();
             $table->timestamps();
         });
     }

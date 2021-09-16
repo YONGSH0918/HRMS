@@ -1,18 +1,9 @@
-@extends('admin.attendance-mgmt.base')
+@extends('employee.attendance-mgmt.base')
 @section('action-content')
+@include('employee.attendance-mgmt.addAttendance')
 @if(Session::has('success'))
 <div class="alert alert-success" role="alert">
   {{ Session::get('success')}}
-</div>
-@endif
-@if(Session::has('update'))
-<div class="alert alert-success" role="alert">
-  {{ Session::get('update')}}
-</div>
-@endif
-@if(Session::has('delete'))
-<div class="alert alert-success" role="alert">
-  {{ Session::get('delete')}}
 </div>
 @endif
 <!-- Main content -->
@@ -21,15 +12,17 @@
     <div class="box-header">
       <div class="row">
         <div class="col-sm-8">
-          <h5 class="box-title">List of Employee Attendance</h5>
+          <h5 class="box-title">List of Attendance</h5>
         </div>
         <div class="col-sm-4" style="text-align: -webkit-right;">
-          <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewEmployeeA') }}">Add Employee Attendance</a>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#takeAttendance">
+            Take Attendance
+          </button>
         </div>
         <div style="margin-bottom: 10px;">
-          <form method="POST" action="{{ route('searchA') }}">
+          <form method="POST" action="{{ route('searchMeA') }}">
             @csrf
-            <input type="text" id="search" name="search" placeholder="Search Employee ID Number or Date" style="width: 300px;">
+            <input type="text" id="search" name="search" placeholder="Search Date" style="width: 150px;">
             <button type="submit" class="btn btn-primary">
               <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
               Search
@@ -65,14 +58,15 @@
                   <td class="hidden-xs">{{ $attendance->date }}</td>
                   <td class="hidden-xs">{{ $attendance->time_In}}</td>
                   <td class="hidden-xs">{{ $attendance->time_Out}}</td>
-
                   <td>
-                    <a href="{{ route('editA', ['id' => $attendance->id]) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
-                      <i class="fa fa-edit"></i>
-                    </a>
-                    <a href="{{ route('deleteA', ['id' => $attendance->id]) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">
-                      <i class="fa fa-trash"></i>
-                    </a>
+                    @if( $attendance->time_Out == '00:00:00')
+                    <form name="formEditMeA" class="form-horizontal" role="form" method="POST" action="{{ route('updateMeA', ['id' => $attendance->id]) }}" enctype="multipart/form-data">
+                      @csrf
+                      <button type="submit" name="editMeA" class="btn btn-success col-sm-3 col-xs-5 btn-margin">
+                        Time Out
+                      </button>
+                    </form>
+                    @endif
                   </td>
                 </tr>
                 @endforeach

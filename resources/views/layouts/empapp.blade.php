@@ -37,10 +37,23 @@
                     <a href="{{ route('home') }}">Dashboard</a>
                 </li>
                 <li>
-                    <a href="#">Employee</a>
+                <a href="#pageSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Personal Profile
+                    <i class="fas fa-sort-down" style="margin-left:34%;"></i>
+                    </a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="{{ route('viewMe') }}">Profile</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('viewMeCPD') }}">Career Path Development</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">Attendance</a>
+                    <a href="{{ route('viewMeVA') }}">Vaccination Appointment</a>
+                </li>
+                <li>
+                    <a href="{{ route('viewMeA') }}">Attendance</a>
                 </li>
                 <li>
                     <a href="#pageSubmenu" class="dropdown-toggle" data-bs-toggle="collapse" aria-expanded="false">

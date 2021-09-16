@@ -26,7 +26,6 @@
             <table id="aTableid" class="table table-bordered table-hover dataTable">
               <thead>
                 <tr role="row">
-                  <th width="12%" class="sorting_asc">Attendance ID</th>
                   <th width="12%" class="sorting_asc">Employee ID</th>
                   <th width="15%" class="sorting_asc">Date</th>
                   <th width="15%" class="sorting hidden-xs">Time In</th>
@@ -38,7 +37,6 @@
               <tbody>
                 @foreach ($attendances as $attendance)
                 <tr role="row" class="odd">
-                  <td class="sorting_1">{{ $attendance->attendance_ID }}</td>
                   <td class="hidden-xs">EMP-{{ $attendance->employee_ID }}</td>
                   <td class="hidden-xs">{{ $attendance->date }}</td>
                   <td class="hidden-xs">{{ $attendance->time_In}}</td>

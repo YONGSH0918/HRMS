@@ -1,20 +1,6 @@
-@extends('admin.vaccination-mgmt.base')
+@extends('employee.vaccination-mgmt.base')
 @section('action-content')
-@if(Session::has('success'))
-<div class="alert alert-success" role="alert">
-  {{ Session::get('success')}}
-</div>
-@endif
-@if(Session::has('update'))
-<div class="alert alert-success" role="alert">
-  {{ Session::get('update')}}
-</div>
-@endif
-@if(Session::has('delete'))
-<div class="alert alert-success" role="alert">
-  {{ Session::get('delete')}}
-</div>
-@endif
+
 <!-- Main content -->
 <section class="content" style="font-size: small;">
   <div class="box">
@@ -24,17 +10,7 @@
           <h5 class="box-title">List of Vaccination Appointment</h5>
         </div>
         <div class="col-sm-4" style="text-align: -webkit-right;">
-          <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewEmployeeVA') }}">Add Employee Vaccination Appointment</a>
-        </div>
-        <div style="margin-bottom: 10px;">
-          <form method="POST" action="{{ route('searchVA') }}">
-            @csrf
-            <input type="text" id="search" name="search" placeholder="Search Vaccination Appointment ID or Employee ID Number" style="width: 450px;">
-            <button type="submit" class="btn btn-primary">
-              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-              Search
-            </button>
-          </form>
+          <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewMeVA') }}">Back</a>
         </div>
       </div>
     </div>
@@ -73,14 +49,8 @@
                   <td class="hidden-xs" style="color: #2515D9;">{{$va->vaccination_Status }}</td>
                   @endif
                   <td>
-                    <a href="{{ route('va.detail', ['id' => $va->id]) }}" class="btn btn-info col-sm-3 col-xs-5 btn-margin">
+                    <a href="{{ route('vaMe.detail', ['id' => $va->id]) }}" class="btn btn-info col-sm-3 col-xs-5 btn-margin">
                       <i class="fa fa-search"></i>
-                    </a>
-                    <a href="{{ route('editVA', ['id' => $va->id]) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
-                      <i class="fa fa-edit"></i>
-                    </a>
-                    <a href="{{ route('deleteVA', ['id' => $va->id]) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">
-                      <i class="fa fa-trash"></i>
                     </a>
                   </td>
                 </tr>
@@ -89,7 +59,6 @@
             </table>
           </div>
         </div>
-
       </div>
     </div>
   </div>

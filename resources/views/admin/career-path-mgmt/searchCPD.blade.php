@@ -43,11 +43,13 @@
                   <td class="hidden-xs">{{ $cpd->program_Title }}</td>
                   <td class="hidden-xs">{{ $cpd->supervisor_Name }}</td>
                   @if($cpd->status == "Not Started")
-                  <td class="hidden-xs" style="color: #E00909;">{{ $cpd->status }}</td>
+                  <td class="hidden-xs" style="color: #F7A400;">{{ $cpd->status }}</td>
                   @elseif($cpd->status == "In Progress")
-                  <td class="hidden-xs" style="color: #DC9E20;">{{ $cpd->status }}</td>
-                  @else
+                  <td class="hidden-xs" style="color: #00CB14;">{{ $cpd->status }}</td>
+                  @elseif($cpd->status == "Completed")
                   <td class="hidden-xs" style="color: #2515D9;">{{ $cpd->status }}</td>
+                  @else
+                  <td class="hidden-xs" style="color: #FC0000;">{{ $cpd->status }}</td>
                   @endif
                   <td class="hidden-xs">{{ $cpd->scheduled_Date_Completed}}</td>
                   <td>

@@ -1,4 +1,4 @@
-@extends('admin.employees-mgmt.base')
+@extends('employee.employees-mgmt.base')
 @section('action-content')
 @if(Session::has('success'))
 <div class="alert alert-success" role="alert">
@@ -16,20 +16,7 @@
     <div class="box-header">
       <div class="row">
         <div class="col-sm-8">
-          <h5 class="box-title">List of employees</h5>
-        </div>
-        <div class="col-sm-4" style="text-align: -webkit-right;">
-          <a class="btn btn-primary" style="font-size: small;" href="{{ route('insertEmployee') }}">Add new employee</a>
-        </div>
-        <div style="margin-bottom: 10px;">
-          <form method="POST" action="{{ route('searchEmployee') }}">
-            @csrf
-            <input type="text" id="search" name="search" placeholder="Search Employee ID Number or Department" style="width: 320px;">
-            <button type="submit" class="btn btn-primary">
-              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-              Search
-            </button>
-          </form>
+          <h5 class="box-title">Personal List</h5>
         </div>
       </div>
     </div>
@@ -76,11 +63,11 @@
                   <td class="hidden-xs" style="color: #2515D9;">{{ $employee->status }}</td>
                   @endif
                   <td>
-                    <a href="{{ route('employee.detail', ['id' => $employee->id]) }}" class="btn btn-info col-sm-3 col-xs-5 btn-margin">
+                    <a href="{{ route('me.detail', ['id' => $employee->id]) }}" class="btn btn-info col-sm-3 col-xs-5 btn-margin">
                       <i class="fa fa-search"></i>
                     </a>
                     <!--('editEmployee', ['employee_ID' => $employee->employee_ID])-->
-                    <a href="{{ route('editEmployee', ['id' => $employee->id]) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
+                    <a href="{{ route('editMe', ['id' => $employee->id]) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
                       <i class="fa fa-edit"></i>
                     </a>
                   </td>

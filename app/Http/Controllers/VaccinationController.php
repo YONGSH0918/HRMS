@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\HealthFacility;
@@ -10,6 +11,7 @@ use App\Models\VaccinationInfo;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Carbon\Carbon;
 
 
 class VaccinationController extends Controller
@@ -154,5 +156,62 @@ class VaccinationController extends Controller
         //select * from products where id='$id'
 
         return view('admin.vaccination-mgmt.profileVA')->with('vas', $vas);
+    }
+
+    //--------------------------------------------------------------------//
+
+    public function showMeVA()
+    {
+
+        $vas = VaccinationInfo::all()->where('employee_ID', Auth::id());
+        $vaS = DB::table('vaccination_infos')
+            ->get();
+
+        foreach ($vaS as $va) {
+            $va = VaccinationInfo::find($va->id);
+            $today = Carbon::now();
+            $date = $va->vaccination_Date;
+            $time = $va->vaccination_Time;
+            if ($today->gt($date) && $today->gt($time)) {
+
+                $va->vaccination_Status = 'Unvaccinated';
+                $va->save();
+
+            }
+        }
+
+        return view('employee.vaccination-mgmt.indexVA')->with('vas', $vas);
+    }
+
+    public function updateMeVA($id)
+    {
+        //retrive submited form data
+
+        $cpds = VaccinationInfo::find($id);  //get the record based on product ID      
+
+        $cpds->vaccination_Status = 'Vaccinated';
+        $cpds->save(); //run the SQL update statment
+        Session::flash('update', "Congratulations! You're vaccinated");
+        return redirect()->route('viewMeVA');
+    }
+    
+    function searchMeVA()
+    {
+        $request = request();
+        $keyword = $request->search;
+        $vas = DB::table('vaccination_infos')
+            ->where('employee_Vaccination_ID', 'like', '%' . $keyword . '%')
+            ->get();
+
+        return view('employee.vaccination-mgmt.searchVA')->with('vas', $vas);
+    }
+
+    public function showMeVADetail($id)
+    {
+
+        $vas = VaccinationInfo::all()->where('id', $id);
+        //select * from products where id='$id'
+
+        return view('employee.vaccination-mgmt.profileVA')->with('vas', $vas);
     }
 }

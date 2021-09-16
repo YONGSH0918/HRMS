@@ -7,7 +7,7 @@
     <div class="box-header">
       <div class="row">
         <div class="col-sm-8">
-          <h5 class="box-title">List of Career Path Development</h5>
+          <h5 class="box-title">List of Vaccination Appointment</h5>
         </div>
         <div class="col-sm-4" style="text-align: -webkit-right;">
           <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewVA') }}">Back</a>
@@ -41,7 +41,13 @@
                   <td class="hidden-xs">EMP-{{ $va->employee_ID }}</td>
                   <td class="hidden-xs">{{ $va->employee_Name }}</td>
                   <td class="hidden-xs">{{ $va->vaccination_Date}}</td>
-                  <td class="hidden-xs">{{ $va->vaccination_Status}}</td>
+                  @if($va->vaccination_Status == "Vaccinated")
+                  <td class="hidden-xs" style="color: #00CB14;">{{ $va->vaccination_Status}}</td>
+                  @elseif($va->vaccination_Status == "Unvaccinated")
+                  <td class="hidden-xs" style="color: #FC0000;">{{ $va->vaccination_Status }}</td>
+                  @else
+                  <td class="hidden-xs" style="color: #2515D9;">{{$va->vaccination_Status }}</td>
+                  @endif
                   <td>
                     <a href="{{ route('va.detail', ['id' => $va->id]) }}" class="btn btn-info col-sm-3 col-xs-5 btn-margin">
                       <i class="fa fa-search"></i>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
 use App\Models\EmployeeCareerPathInfo;
 use Illuminate\Support\Facades\Session;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Carbon\Carbon;
 
 class CPDController extends Controller
 {
@@ -70,6 +72,18 @@ class CPDController extends Controller
     {
 
         $cpds = EmployeeCareerPathInfo::all();
+        $cpdS = DB::table('employee_career_path_infos')
+            ->get();
+
+        foreach ($cpdS as $cpd) {
+            $cpd = EmployeeCareerPathInfo::find($cpd->id);
+            $today = Carbon::now();
+            $toDate = $cpd->periodPlan_To;
+            if ($today->gt($toDate)) {
+                $cpd->status = 'Incompleted';
+                $cpd->save();
+            }
+        }
 
         return view('admin.career-path-mgmt.indexCPD')->with('cpds', $cpds);
     }
@@ -151,5 +165,74 @@ class CPDController extends Controller
         //select * from products where id='$id'
 
         return view('admin.career-path-mgmt.profileCPD')->with('cpds', $cpds);
+    }
+
+    //-----------------------------------------------------------------//
+
+
+    public function showMeCPD()
+    {
+
+        $cpds = EmployeeCareerPathInfo::all()->where('employee_ID', Auth::id());
+        $cpdS = DB::table('employee_career_path_infos')
+            ->get();
+
+        foreach ($cpdS as $cpd) {
+            $cpd = EmployeeCareerPathInfo::find($cpd->id);
+            $today = Carbon::now();
+            $toDate = $cpd->periodPlan_To;
+            if ($today->gt($toDate)) {
+                $cpd->status = 'Incompleted';
+                $cpd->save();
+            }
+        }
+
+        return view('employee.career-path-mgmt.indexCPD')->with('cpds', $cpds);
+    }
+
+    public function showMeCPDDetail($id)
+    {
+
+        $cpds = EmployeeCareerPathInfo::all()->where('id', $id);
+        //select * from products where id='$id'
+
+        return view('employee.career-path-mgmt.profileCPD')->with('cpds', $cpds);
+    }
+
+    function searchMeCPD()
+    {
+        $request = request();
+        $keyword = $request->search;
+        $cpds = DB::table('employee_career_path_infos')
+            ->where('employee_CareerPath_Info_ID', 'like', '%' . $keyword . '%')
+            ->orWhere('status', 'like', '%' . $keyword . '%')
+            ->get();
+
+        return view('employee.career-path-mgmt.searchCPD')->with('cpds', $cpds);
+    }
+
+    public function updateMeCPD($id)
+    {
+        //retrive submited form data
+
+        $cpds = EmployeeCareerPathInfo::find($id);  //get the record based on product ID      
+
+        $cpds->status = 'In Progress';
+        $cpds->save(); //run the SQL update statment
+        Session::flash('update', "Start the program successfull!");
+        return redirect()->route('viewMeCPD');
+    }
+
+    public function updateMeCPDC($id)
+    {
+        //retrive submited form data
+        $cpds = EmployeeCareerPathInfo::find($id);  //get the record based on product ID      
+
+        $datenow = Carbon::now()->format('Y-m-d');
+        $cpds->status = 'Completed';
+        $cpds->scheduled_Date_Completed = $datenow;
+        $cpds->save(); //run the SQL update statment
+        Session::flash('update', "Congratulations! You've completed the program.");
+        return redirect()->route('viewMeCPD');
     }
 }

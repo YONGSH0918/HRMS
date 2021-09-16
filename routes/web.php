@@ -49,6 +49,11 @@ Route::post('/updateEmployee', [App\Http\Controllers\EmployeeController::class, 
 Route::get('/employee_detail/{id}', [App\Http\Controllers\EmployeeController::class, 'showEmployeeDetail'])->name('employee.detail');
 Route::get('/findWorkingSchedule', [App\Http\Controllers\EmployeeController::class, 'findWorkingSchedule'])->name('findWorkingSchedule');
 Route::get('/findJobtitle', [App\Http\Controllers\EmployeeController::class, 'findJobtitle'])->name('findJobtitle');
+//Personal
+Route::get('/viewMe', [App\Http\Controllers\EmployeeController::class, 'showMe'])->name('viewMe');
+Route::get('/editMe/{id}', [App\Http\Controllers\EmployeeController::class, 'editMe'])->name('editMe');
+Route::post('/updateMe', [App\Http\Controllers\EmployeeController::class, 'updateMe'])->name('updateMe');
+Route::get('/me_detail/{id}', [App\Http\Controllers\EmployeeController::class, 'showMeDetail'])->name('me.detail');
 
 //Career Path Development Route
 Route::get('/addCPD/{id}', [App\Http\Controllers\CPDController::class, 'addCPD'])->name('insertCPD');
@@ -61,6 +66,12 @@ Route::get('/editCPD/{id}', [App\Http\Controllers\CPDController::class, 'editCPD
 Route::post('/updateCPD', [App\Http\Controllers\CPDController::class, 'updateCPD'])->name('updateCPD');
 Route::get('/deleteCPD/{id}', [App\Http\Controllers\CPDController::class, 'delete'])->name('deleteCPD');
 Route::get('/cpd_detail/{id}', [App\Http\Controllers\CPDController::class, 'showCPDDetail'])->name('cpd.detail');
+//Personal
+Route::get('/viewMeCPD', [App\Http\Controllers\CPDController::class, 'showMeCPD'])->name('viewMeCPD');
+Route::post('/searchMeCPD', [App\Http\Controllers\CPDController::class, 'searchMeCPD'])->name('searchMeCPD');
+Route::post('/updateMeCPD/{id}', [App\Http\Controllers\CPDController::class, 'updateMeCPD'])->name('updateMeCPD');
+Route::post('/updateMeCPDC/{id}', [App\Http\Controllers\CPDController::class, 'updateMeCPDC'])->name('updateMeCPDC');
+Route::get('/cpdMe_detail/{id}', [App\Http\Controllers\CPDController::class, 'showMeCPDDetail'])->name('cpdMe.detail');
 
 //Vaccination Appointment Route
 Route::get('/addVA/{id}', [App\Http\Controllers\VaccinationController::class, 'addVA'])->name('insertVA');
@@ -74,6 +85,12 @@ Route::post('/updateVA', [App\Http\Controllers\VaccinationController::class, 'up
 Route::get('/deleteVA/{id}', [App\Http\Controllers\VaccinationController::class, 'delete'])->name('deleteVA');
 Route::get('/va_detail/{id}', [App\Http\Controllers\VaccinationController::class, 'showVADetail'])->name('va.detail');
 Route::get('/findAddress', [App\Http\Controllers\VaccinationController::class, 'findAddress'])->name('findAddress');
+//Personal
+Route::get('/viewMeVA', [App\Http\Controllers\VaccinationController::class, 'showMeVA'])->name('viewMeVA');
+Route::post('/searchMeVA', [App\Http\Controllers\VaccinationController::class, 'searchMeVA'])->name('searchMeVA');
+Route::post('/updateMeVA/{id}', [App\Http\Controllers\VaccinationController::class, 'updateMeVA'])->name('updateMeVA');
+Route::get('/vaMe_detail/{id}', [App\Http\Controllers\VaccinationController::class, 'showMeVADetail'])->name('vaMe.detail');
+
 
 //Attendance Route
 Route::get('/addAttendance/{id}', [App\Http\Controllers\AttendanceController::class, 'addA'])->name('insertA');
@@ -85,6 +102,11 @@ Route::post('/searchAttendance', [App\Http\Controllers\AttendanceController::cla
 Route::get('/editAttendance/{id}', [App\Http\Controllers\AttendanceController::class, 'editA'])->name('editA');
 Route::post('/updateAttendance', [App\Http\Controllers\AttendanceController::class, 'updateA'])->name('updateA');
 Route::get('/deleteAttendance/{id}', [App\Http\Controllers\AttendanceController::class, 'delete'])->name('deleteA');
+//Personal
+Route::post('/addMeAttendance/store', [App\Http\Controllers\AttendanceController::class, 'storeMeA'])->name('addMeA');
+Route::get('/viewMeAttendance', [App\Http\Controllers\AttendanceController::class, 'showMeA'])->name('viewMeA');
+Route::post('/searchMeAttendance', [App\Http\Controllers\AttendanceController::class, 'searchMeA'])->name('searchMeA');
+Route::post('/updateMeAttendance/{id}', [App\Http\Controllers\AttendanceController::class, 'updateMeA'])->name('updateMeA');
 
 //Health Facility Route
 Route::get('/addHealthFacility', [App\Http\Controllers\HealthFacilityController::class, 'add'])->name('insertHealthFacility');
