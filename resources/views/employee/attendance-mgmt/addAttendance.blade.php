@@ -17,7 +17,7 @@
                 <input type="time" class="form-control" name="time_In" value="{{ Carbon\Carbon::now()->format('H:i:s') }}" readonly>      
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Ok</button>
             </div>
         </form>

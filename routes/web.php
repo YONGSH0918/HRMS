@@ -298,3 +298,35 @@ Route::get('employeesLeave',[App\Http\Controllers\EmployeeLeaveController::class
 //leave record
 Route::get('employeesLeave/createLeaveRecord',[App\Http\Controllers\EmployeeLeaveController::class, 'createLeaveRecord'])->name('createLeaveRecord');
 
+//payroll
+Route::get('categoryOfSalaryComponent',[App\Http\Controllers\CategoryOfSalaryComponentController::class, 'show'])->name('showCategoryOfSalaryComponent');
+
+Route::get('createSalaryComponent',[App\Http\Controllers\SalaryComponentController::class, 'showCreateSalaryComponent'])->name('showCreateSalaryComponent');
+
+Route::post('createSalaryComponent/store', [App\Http\Controllers\SalaryComponentController::class, 'createSalaryComponent'])->name('addSalaryComponent');
+
+Route::get('salaryComponent',[App\Http\Controllers\SalaryComponentController::class, 'showSalaryComponent'])->name('showSalaryComponent');
+
+Route::get('editSalaryComponent/{id}',[App\Http\Controllers\SalaryComponentController::class, 'edit'])->name('editSalaryComponent');
+
+Route::post('editSalaryComponent/update', [App\Http\Controllers\SalaryComponentController::class, 'update'])->name('updateSalaryComponent');
+
+Route::get('salaryComponent/delete/{id}', [App\Http\Controllers\SalaryComponentController::class, 'delete'])->name('deleteSalaryComponent');
+
+Route::get('salaryComponentForAllJobTitle',[App\Http\Controllers\TitleComponentController::class, 'showSalaryComponentForAllJobTitle'])->name('showSalaryComponentForAllJobTitle');
+
+Route::get('salaryComponentForAJobTitle/{id}',[App\Http\Controllers\TitleComponentController::class, 'showSalaryComponentForAJobTitle'])->name('showSalaryComponentForAJobTitle');
+
+Route::post('addSalaryComponentForJobTitle', [App\Http\Controllers\TitleComponentController::class, 'addTitleComponent'])->name('addSalaryComponentForJobTitle');
+
+Route::get('editSalaryComponentForJobTitle/{id}',[App\Http\Controllers\TitleComponentController::class, 'showEdit'])->name('showEditSalaryComponentForJobTitle');
+
+Route::post('editSalaryComponentForJobTitle/update', [App\Http\Controllers\TitleComponentController::class, 'editTitleComponent'])->name('editSalaryComponentForJobTitle');
+
+Route::get('deleteSalaryComponentForJobTitle/{id}', [App\Http\Controllers\TitleComponentController::class, 'deleteTitleComponent'])->name('deleteSalaryComponentForJobTitle');
+
+Route::get('payroll',[App\Http\Controllers\PayrollController::class, 'showPayrollPage'])->name('showPayrollPage');
+
+Route::get('payroll/{id}',[App\Http\Controllers\PayrollController::class, 'showPayrollItemPage'])->name('showPayrollItemPage');
+
+Route::get('payroll/addPayrollItem',[App\Http\Controllers\PayrollController::class, 'addPayrollItem'])->name('addPayrollItem');

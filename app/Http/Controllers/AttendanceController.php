@@ -152,7 +152,7 @@ class AttendanceController extends Controller
     public function showMeA()
     {
 
-        $attendances = Attendance::all();
+        $attendances = Attendance::all()->where('employee_ID', Auth::id());;
         $employees = Employee::all();
         $employments = Employment::all();
 

@@ -43,7 +43,7 @@
                   <td class="hidden-xs">{{ $attendance->time_Out}}</td>
 
                   <td>
-                    @if( $attendance->time_In ! == ' ')
+                    @if( $attendance->time_Out == '00:00:00')
                     <form name="formEditMeA" class="form-horizontal" role="form" method="POST" action="{{ route('updateMeA', ['id' => $attendances->id]) }}" enctype="multipart/form-data">
                       @csrf
                       <button type="submit" name="editMeA" class="btn btn-success col-sm-3 col-xs-5 btn-margin">

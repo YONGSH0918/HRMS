@@ -23,9 +23,6 @@
         <div class="col-sm-8">
           <h5 class="box-title">List of Vaccination Appointment</h5>
         </div>
-        <div class="col-sm-4" style="text-align: -webkit-right;">
-          <a class="btn btn-primary" style="font-size: small;" href="{{ route('viewMeVA') }}">Add Employee Vaccination Appointment</a>
-        </div>
         <div style="margin-bottom: 10px;">
           <form method="POST" action="{{ route('searchMeVA') }}">
             @csrf
