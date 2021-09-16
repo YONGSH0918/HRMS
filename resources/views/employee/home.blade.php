@@ -80,14 +80,24 @@
 
 @section('content')
     <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="card">
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="card">
                     <div class="card-body bg-info">
                         <div class="inner">
-                            <h3>150</h3>
+
+                            <?php
+                            $connection = mysqli_connect("localhost", "root", "", "hrms");
+
+                            $query = "SELECT id FROM employees ORDER BY id";
+                            $query_run = mysqli_query($connection, $query);
+
+                            $row = mysqli_num_rows($query_run);
+
+                            echo '<h3> ' . $row . ' </h3>';
+                            ?>
 
                             <p>Employees</p>
                         </div>
@@ -95,33 +105,54 @@
                             <i class="bi bi-people-fill"></i>
                         </div>
                     </div>
-                    <a href="#" class="card-footer text-muted" data-bs-toggle="tooltip" data-bs-placement="bottom" title="more info"> 
-                        <span>More info</span>  <i class="bi bi-arrow-right-circle-fill"></i>
+                    <a href="#" class="card-footer text-muted" data-bs-toggle="tooltip" data-bs-placement="bottom" title="more info">
+                        <span>More info</span> <i class="bi bi-arrow-right-circle-fill"></i>
                     </a>
-                    </div>
                 </div>
-                <div class="col-sm-3">
-                    <div class="card">
-                        <div class="card-body bg-success">
-                            <div class="inner">
-                                <h3>150</h3>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body bg-success">
+                        <div class="inner">
 
-                                <p>Online Applicants</p>
-                            </div>
-                            <div class="icon">
-                                <i class="bi bi-person-plus-fill"></i>
-                            </div>
+                            <?php
+                                    $connection = mysqli_connect("localhost","root","","hrms");
+                            
+                                    $query = "SELECT id FROM online_applicants ORDER BY id";
+                                    $query_run = mysqli_query($connection, $query);
+
+                                    $row = mysqli_num_rows($query_run);
+
+                                    echo '<h3> '.$row.' </h3>';
+                                ?>
+
+                            <p>Online Applicants</p>
                         </div>
-                        <a href="#" class="card-footer text-muted" data-bs-toggle="tooltip" data-bs-placement="bottom" title="more info"> 
-                            <span>More info</span> <i class="bi bi-arrow-right-circle-fill"></i>
-                        </a>
+                        <div class="icon">
+                            <i class="bi bi-person-plus-fill"></i>
+                        </div>
                     </div>
+                    <a href="{{ route('admin.recruitment') }}" class="card-footer text-muted" data-bs-toggle="tooltip" data-bs-placement="bottom" title="more info">
+                        <span>More info</span> <i class="bi bi-arrow-right-circle-fill"></i>
+                    </a>
                 </div>
-                <div class="col-sm-3">
-                    <div class="card">
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
                     <div class="card-body bg-warning">
                         <div class="inner">
-                            <h3>150</h3>
+
+                            <?php
+                                $connection = mysqli_connect("localhost","root","","hrms");
+                        
+                                $query = "SELECT id FROM leave_types ORDER BY id";
+                                $query_run = mysqli_query($connection, $query);
+
+                                $row = mysqli_num_rows($query_run);
+
+                                echo '<h3> '.$row.' </h3>';
+                            ?>
+
 
                             <p>Leave Types</p>
                         </div>
@@ -129,16 +160,26 @@
                             <i class="bi bi-umbrella-fill"></i>
                         </div>
                     </div>
-                    <a href="#" class="card-footer text-muted" data-bs-toggle="tooltip" data-bs-placement="bottom" title="more info"> 
-                        <span>More info</span>  <i class="bi bi-arrow-right-circle-fill"></i>
+                    <a href="#" class="card-footer text-muted" data-bs-toggle="tooltip" data-bs-placement="bottom" title="more info">
+                        <span>More info</span> <i class="bi bi-arrow-right-circle-fill"></i>
                     </a>
-                    </div>
                 </div>
-                <div class="col-sm-3">
-                    <div class="card">
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
                     <div class="card-body bg-danger">
                         <div class="inner">
-                            <h3>150</h3>
+                            
+                            <?php
+                                $connection = mysqli_connect("localhost","root","","hrms");
+                        
+                                $query = "SELECT id FROM events ORDER BY id";
+                                $query_run = mysqli_query($connection, $query);
+
+                                $row = mysqli_num_rows($query_run);
+
+                                echo '<h3> '.$row.' </h3>';
+                            ?>
 
                             <p>Events</p>
                         </div>
@@ -146,12 +187,12 @@
                             <i class="bi bi-calendar-day-fill"></i>
                         </div>
                     </div>
-                    <a href="{{ route('emp.showEventList')}}" class="card-footer text-muted" data-bs-toggle="tooltip" data-bs-placement="bottom" title="more info"> 
-                        <span>More info</span>  <i class="bi bi-arrow-right-circle-fill"></i>
+                    <a href="{{ route('showEventList') }}" class="card-footer text-muted" data-bs-toggle="tooltip" data-bs-placement="bottom" title="more info">
+                        <span>More info</span> <i class="bi bi-arrow-right-circle-fill"></i>
                     </a>
-                    </div>
                 </div>
             </div>
+        </div>
     </div>
 @endsection
 

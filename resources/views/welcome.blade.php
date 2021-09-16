@@ -408,6 +408,7 @@
             <h1>Human Resource Management System</h1>
             <a href="{{ route('login') }}" id="color1" class="botton">Log in</a>
             <a href="{{ route('register') }}" id="color2" class="botton">Register</a>
+            <a href="{{ route('showOnlineRecruit') }}" id="color3" class="botton">Guest</a>
         </div>
 
 

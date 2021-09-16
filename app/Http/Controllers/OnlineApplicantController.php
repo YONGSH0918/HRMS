@@ -10,8 +10,9 @@ use Response;
 use App\Models\Country;
 use App\Models\City;
 use App\Models\State;
-use App\Models\Jobtitle;
+use App\Models\Position;
 use App\Models\Employee;
+use App\Models\Nationality;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -26,17 +27,18 @@ class OnlineApplicantController extends Controller
     {
         return view('guest.onlinerecruitment')->with("countries", Country::all())
                                               ->with("cities", City::all())
+                                              ->with("nationalities", Nationality::all())
                                               ->with("states", State::all())
-                                              ->with("jobtitles", Jobtitle::all());
+                                              ->with("positions", Position::all());
     }
 
     function store(Request $request)
     {
-        $image=$request->file('profile-image');   
-        $image->move('images',$image->getClientOriginalName());                
+        $image=$request->file('employees-image');   
+        $image->move('images/employeesImages',$image->getClientOriginalName());                
         $imageName=$image->getClientOriginalName();
 
-        $document=$request->file('resume-file');   
+        $document=$request->file('employees-document');   
         $document->move('documents',$document->getClientOriginalName());   
         $documentName=$document->getClientOriginalName();
 
@@ -54,7 +56,6 @@ class OnlineApplicantController extends Controller
             'address' => $request -> address,
             'city' => $request -> city,
             'state' => $request -> state,
-            'zipcode' => $request -> zipcode,
             'country' => $request -> country,
             'position_applied' => $request -> position,
             'expected_salary' => $request -> Esalary,
@@ -62,7 +63,6 @@ class OnlineApplicantController extends Controller
             'image' => $imageName,
             'emergency_contact_name'  => $request -> Ename,
             'emergency_contact_number' => $request -> Ephone,
-            'relation_emergency' => $request -> Erelation,
         ]);
         
         return view('guest.recruitment');
@@ -103,6 +103,8 @@ class OnlineApplicantController extends Controller
         $OAemail = $onlineapplicants -> email;
         $OAphone = $onlineapplicants -> phone_num;
         $OAaddress = $onlineapplicants -> address;
+        $OAstate = $onlineapplicants -> state;
+        $OAcity = $onlineapplicants -> city;
         $OAcountry = $onlineapplicants ->country;
         $OAdocument = $onlineapplicants -> document;
         $OAimage = $onlineapplicants -> image;
@@ -118,18 +120,20 @@ class OnlineApplicantController extends Controller
             'race' => $request = $OArace,
             'country' => $request = $OAcountry,
             'national' => $request = $OAnation,
+            'state' => $request = $OAstate,
+            'city' => $request = $OAcity,
             'address' => $request = $OAaddress,
-            'contact_number' => $request = $OAphone,
+            'contact_Number' => $request = $OAphone,
             'email' => $request = $OAemail,
             'emergency_Name' => $request = $OAemergency_name,
             'emergency_Contact_Number' => $request = $OAemergency_num,
             'document' => $request = $OAdocument,
-            'marital_status' => $request = $OAmarital,
+            'marital_Status' => $request = $OAmarital,
         ]);
 
         $onlineapplicants->delete();
 
-        return view('admin.employeepage')->with("employees", Employee::all());
+        return view('admin.employees-mgmt.index')->with('employees', Employee::all());
     }
     
     function search()

@@ -88,10 +88,6 @@
                         <label for="" class="form-label">State</label>
                         <input type="text" name="state" id="state" class="form-control" value="{{ $onlineapplicant -> state }}" disabled>
                     </div>
-                    <div class="col-md-2">
-                        <label for="" class="form-label">Zip</label>
-                        <input type="text" class="form-control" id="zipcode" name="zipcode" value="{{ $onlineapplicant -> zipcode }}" disabled>
-                    </div>
                     <div class="col-md-4">
                         <label for="" class="form-label">Country</label>
                         <input type="text" name="country" id="country" class="form-control" value="{{ $onlineapplicant -> country }}" disabled>
@@ -143,10 +139,6 @@
                         <label for="" class="form-label">Phone Number</label>
                         <input type="text" class="form-control" id="Ephone" name="Ephone" value="{{ $onlineapplicant -> emergency_contact_number }}" disabled>
                     </div> 
-                    <div class="col-md-12">
-                        <label for="" class="form-label">Relationship</label>
-                        <input type="text" class="form-control" id="Erelation" name="Erelation" value="{{ $onlineapplicant -> relation_emergency }}" disabled>
-                    </div>
                 </div>
             </div>
             <!-- End Emergency Contact -->

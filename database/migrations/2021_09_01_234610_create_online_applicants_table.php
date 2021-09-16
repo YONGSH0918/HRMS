@@ -28,7 +28,6 @@ class CreateOnlineApplicantsTable extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('state');
-            $table->integer('zipcode');
             $table->string('country');
             $table->string('position_applied');
             $table->double('expected_salary',8,2);
@@ -36,7 +35,6 @@ class CreateOnlineApplicantsTable extends Migration
             $table->string('image');
             $table->string('emergency_contact_name');
             $table->string('emergency_contact_number');
-            $table->string('relation_emergency');
             $table->timestamps();
         });
     }

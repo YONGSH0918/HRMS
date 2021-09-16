@@ -16,7 +16,7 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('employee_ID');
+            $table->string('employee_ID')->nullable();
             $table->string('ic');
             $table->string('employee_Name', 60);
             $table->string('image')->nullable();
@@ -30,25 +30,25 @@ class CreateEmployeesTable extends Migration
             $table->text('address');
             $table->string('contact_Number');
             $table->string('email');
-            $table->string('department');
-            $table->string('supervisor');
-            $table->string('jobtitle');
-            $table->double('salary')->unsigned();
-            $table->date('start_Date');
+            $table->string('department')->nullable();
+            $table->string('supervisor')->nullable();
+            $table->string('jobtitle')->nullable();
+            $table->double('salary')->unsigned()->nullable();
+            $table->date('start_Date')->nullable();
             $table->date('end_Date')->nullable();
             $table->string('emergency_Name');
             $table->string('emergency_Contact_Number');
             $table->string('document')->nullable();
-            $table->string('status');
-            $table->string('employment_ID'); // fulltime-parttime
+            $table->string('status')->nullable();
+            $table->string('employment_ID')->nullable(); // fulltime-parttime
             $table->string('marital_Status');
-            $table->string('salary_structure');
-            $table->string('leave_grade');
-            $table->string('employee_grade');
+            $table->string('salary_structure')->nullable();
+            $table->string('leave_grade')->nullable();
+            $table->string('employee_grade')->nullable();
             $table->integer('epf_number')->nullable();
-            $table->string('bank_Name');
-            $table->integer('bank_account_number');
-            $table->string('workingSchedule');
+            $table->string('bank_Name')->nullable();
+            $table->integer('bank_account_number')->nullable();
+            $table->string('workingSchedule')->nullable();
             $table->timestamps();
         });
 

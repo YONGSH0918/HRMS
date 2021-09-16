@@ -13,10 +13,9 @@ class OnlineApplicant extends Authenticatable
     protected $fillable = [
         'name','ic','dob','gender','marital_status',
         'race','religion','nationality','email','phone_num',
-        'address','city','state','zipcode','country',
+        'address','city','state','country',
         'position_applied', 'expected_salary','document',
-        'image','emergency_contact_name','emergency_contact_number',
-        'relation_emergency'];
+        'image','emergency_contact_name','emergency_contact_number'];
 
     public function country() {
         return $this->belongsTo('App\Models\Country');

@@ -19,7 +19,7 @@
                         <div class="form-group">
                             <label for="employee_ID" class="col-md-4 control-label">Employee ID<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                            <input type="text" id="employee_ID" name="employee_ID" value="{{$employee->employee_ID}}" style="width: -webkit-fill-available;" readonly>
+                            <input type="text" id="employee_ID" name="employee_ID" value="{{$employee->employee_ID}}" style="width: -webkit-fill-available;" required>
                             </div>
                         </div>
                         <!--Employee IC -->
@@ -234,10 +234,10 @@
                         <div class="form-group">
                             <label for="employment_ID" class="col-md-4 control-label">Employment ID<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <select name="employment_ID" id="employment_ID" class="form-control" style="width: -webkit-fill-available;" required>
+                                <select name="employment_ID" id="employment_ID" class="form-control employmentTb" style="width: -webkit-fill-available;" required>
                                     <option value="0" disabled="true" selected="true">Please Select</option>
                                     @foreach($employments as $employment)
-                                    <option value="{{ $employment->id }}" @if($employee->employment_ID ==$employment->id) selected @endif>{{ $employment->employment_name }}</option>
+                                    <option value="{{ $employment->id }}" @if($employee->employment_ID == $employment->id) selected @endif>{{ $employment->employment_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -246,7 +246,7 @@
                         <div class="form-group">
                             <label for="workingSchedule" class="col-md-4 control-label">Working Schedule<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                            <input type="text" id="workingSchedule" name="workingSchedule" class="workingScheduleTb" value="{{$employee->workingSchedule}}" style="width: -webkit-fill-available;" readonly>
+                                <input type="text" id="workingSchedule" name="workingSchedule" class="workingScheduleTb" value="{{$employee->workingSchedule}}" style="width: -webkit-fill-available;" readonly>
                             </div>
                         </div>
                         <!--Employee Marital Status-->

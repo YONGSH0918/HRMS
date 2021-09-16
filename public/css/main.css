@@ -54,6 +54,12 @@ a.botton{
   background-color: darksalmon;
 }
 
+
+#color3:hover{
+  background-color: navajowhite;
+}
+
+
 .video-container{
   position: absolute;
   top: 0;
