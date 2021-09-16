@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\Employee;
-use App\Models\EmployeeCareerPathInfo;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use App\Models\Employee;
+use App\Models\EmployeeCareerPathInfo;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -179,7 +180,7 @@ class CPDController extends Controller
 
         foreach ($cpdS as $cpd) {
             $cpd = EmployeeCareerPathInfo::find($cpd->id);
-            $today = Carbon::now();
+            $today = Carbon::today();
             $toDate = $cpd->periodPlan_To;
             if ($today->gt($toDate)) {
                 $cpd->status = 'Incompleted';

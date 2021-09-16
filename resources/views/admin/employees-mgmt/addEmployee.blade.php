@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <label for="employee_ID" class="col-md-4 control-label">Employee ID<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                               <input type="text" name="employee_ID" id="employee_ID" style="width: -webkit-fill-available;" required>
+                                <input type="text" name="employee_ID" id="employee_ID" style="width: -webkit-fill-available;" required>
                             </div>
                         </div>
                         <!--Employee IC -->
@@ -262,25 +262,16 @@
                                 </select>
                             </div>
                         </div>
-                        <!--Employee Salary Structure-->
-                        <div class="form-group">
-                            <label for="salary_structure" class="col-md-4 control-label">Salary Structure<span style="color:red">*</span></label>
-                            <div class="col-md-6">
-                                <input type="text" id="salary_structure" name="salary_structure" style="width: -webkit-fill-available;" required>
-                            </div>
-                        </div>
                         <!--Employee Leave Grade-->
                         <div class="form-group">
                             <label for="leave_grade" class="col-md-4 control-label">Leave Grade<span style="color:red">*</span></label>
                             <div class="col-md-6">
-                                <input type="text" id="leave_grade" name="leave_grade" style="width: -webkit-fill-available;" required>
-                            </div>
-                        </div>
-                        <!--Employee Grade-->
-                        <div class="form-group">
-                            <label for="employee_grade" class="col-md-4 control-label">Employee Grade<span style="color:red">*</span></label>
-                            <div class="col-md-6">
-                                <input type="text" id="employee_grade" name="employee_grade" style="width: -webkit-fill-available;" required>
+                                <select name="leave_grade" id="leave_grade" class="form-control" style="width: -webkit-fill-available;" required>
+                                    <option value="0" disabled="true" selected="true">Please Select</option>
+                                    @foreach($leavegrades as $leavegrade)
+                                    <option value="{{ $leavegrade->id }}">{{ $leavegrade->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <!--Employee EPF Number-->

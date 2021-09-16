@@ -65,7 +65,6 @@ function selectAll() {
                <th>Leave Type</th>
                <th>Start Date</th>
                <th>End Date</th>
-               <th>Leave Approver</th>
                <th>Status</th>
                <th>Reason</th>
                <th>File</th>
@@ -90,7 +89,6 @@ function selectAll() {
                <td>{{ $leaveApplication->leaveTypeName }}</td>
                <td>{{ $leaveApplication->start_date }}</td>
                <td>{{ $leaveApplication->end_date }}</td>
-               <td>{{ $leaveApplication->leaveApproverId }} {{ $leaveApplication->leaveApproverName }}</td>
                <td>{{ $leaveApplication->status }}</td>
                <td>{{ $leaveApplication->reason }}</td>
                <td>

@@ -228,14 +228,6 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <p>{{ __('Employee Grade') }}</p>
-                                </td>
-                                <td>
-                                    <p>{{$employee->employee_grade}}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <p>{{ __('Start Date') }}</p>
                                 </td>
                                 <td>

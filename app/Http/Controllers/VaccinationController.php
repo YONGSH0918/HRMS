@@ -169,14 +169,16 @@ class VaccinationController extends Controller
 
         foreach ($vaS as $va) {
             $va = VaccinationInfo::find($va->id);
-            $today = Carbon::now();
+            $today = Carbon::today();
             $date = $va->vaccination_Date;
             $time = $va->vaccination_Time;
-            if ($today->gt($date) && $today->gt($time)) {
 
-                $va->vaccination_Status = 'Unvaccinated';
-                $va->save();
-
+            $datetime = $date . " " . $time;
+            if ($today->gt($date)) {
+                
+                    $va->vaccination_Status = 'Unvaccinated';
+                    $va->save();
+                
             }
         }
 
@@ -194,7 +196,7 @@ class VaccinationController extends Controller
         Session::flash('update', "Congratulations! You're vaccinated");
         return redirect()->route('viewMeVA');
     }
-    
+
     function searchMeVA()
     {
         $request = request();

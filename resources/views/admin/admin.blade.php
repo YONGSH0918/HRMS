@@ -89,7 +89,7 @@
                         <div class="inner">
 
                             <?php
-                            $connection = mysqli_connect("localhost", "root", "", "hrms");
+                            $connection = mysqli_connect("localhost", "root", "", "hrms2021c");
 
                             $query = "SELECT id FROM employees ORDER BY id";
                             $query_run = mysqli_query($connection, $query);
@@ -116,7 +116,7 @@
                         <div class="inner">
 
                             <?php
-                                    $connection = mysqli_connect("localhost","root","","hrms");
+                                    $connection = mysqli_connect("localhost","root","","hrms2021c");
                             
                                     $query = "SELECT id FROM online_applicants ORDER BY id";
                                     $query_run = mysqli_query($connection, $query);
@@ -143,7 +143,7 @@
                         <div class="inner">
 
                             <?php
-                                $connection = mysqli_connect("localhost","root","","hrms");
+                                $connection = mysqli_connect("localhost","root","","hrms2021c");
                         
                                 $query = "SELECT id FROM leave_types ORDER BY id";
                                 $query_run = mysqli_query($connection, $query);
@@ -171,7 +171,7 @@
                         <div class="inner">
                             
                             <?php
-                                $connection = mysqli_connect("localhost","root","","hrms");
+                                $connection = mysqli_connect("localhost","root","","hrms2021c");
                         
                                 $query = "SELECT id FROM events ORDER BY id";
                                 $query_run = mysqli_query($connection, $query);

@@ -225,15 +225,6 @@ Route::post('/updatecity',[CityController::class,'update'])->name('updateCity');
 Route::get('/deletecity/{id}',[CityController::class,'delete'])->name('deleteCity');
 Route::post('/searchcity',[CityController::class,'search'])->name('searchCity');
 
-// leavetype setting route
-Route::get('/leavetype',[LeavetypeController::class,'show'])->name('showLeavetype');
-Route::get('/leavetype/addleavetype',[LeavetypeController::class,'create'])->name('showAddLeavetype');
-Route::post('/leavetype/store',[LeavetypeController::class,'store'])->name('addLeavetype');
-Route::get('/editleavetype/{id}',[LeavetypeController::class,'edit'])->name('editLeavetype');
-Route::post('/updateleavetype',[LeavetypeController::class,'update'])->name('updateLeavetype');
-Route::get('/deleteleavetype/{id}',[LeavetypeController::class,'delete'])->name('deleteLeavetype');
-Route::post('/searchleavetype',[LeavetypeController::class,'search'])->name('searchLeavetype');
-
 // online applicant system
 Route::get('/onlinerecruitment',[OnlineApplicantController::class,'show'])->name('showOnlineRecruit');
 Route::post('/onlinerecruitment/store',[OnlineApplicantController::class,'store'])->name('addApplicant');
@@ -245,3 +236,65 @@ Route::post('onlinerecruitment/search',[OnlineApplicantController::class,'search
 // send email
 Route::get('/onlinerecruitment/{id}/success',[OnlineApplicantController::class,'sendSuccessful'])->name('send.success');
 Route::get('/onlinerecruitment/{id}/fail',[OnlineApplicantController::class,'sendUnfortunately'])->name('send.fail');
+
+//route for leave type
+Route::get('createLeaveType', function() {
+    return view('admin/leave/createLeaveType');
+ })->name('createLeaveType')->middleware('auth');
+ Route::post('createLeaveType/store', [App\Http\Controllers\LeaveTypeController::class, 'store'])->name('addLeaveType')->middleware('auth');
+ Route::get('leaveType', [App\Http\Controllers\LeaveTypeController::class, 'show'])->name('showLeaveTypes');
+ Route::get('leaveType/edit/{id}', [App\Http\Controllers\LeaveTypeController::class, 'edit'])->name('editLeaveType');
+Route::post('leaveType/update', [App\Http\Controllers\LeaveTypeController::class, 'update'])->name('updateLeaveType');
+Route::get('leaveType/delete/{id}', [App\Http\Controllers\LeaveTypeController::class, 'delete'])->name('deleteLeaveType');
+
+//leave grade
+Route::get('createLeaveGrade', function() {
+    return view('admin/leave/createLeaveGrade');
+ })->name('createLeaveGrade');
+ 
+ Route::post('createLeaveGrade/store', [App\Http\Controllers\LeaveGradeController::class, 'store'])->name('addLeaveGrade');
+
+ Route::get('leaveGrade', [App\Http\Controllers\LeaveGradeController::class, 'show'])->name('showLeaveGrades');
+
+ Route::get('leaveGrade/editLeaveGradeName/{id}', [App\Http\Controllers\LeaveGradeController::class, 'edit'])->name('editLeaveGradeName');
+
+ Route::post('leaveGrade/updateLeaveGradeName', [App\Http\Controllers\LeaveGradeController::class, 'update'])->name('updateLeaveGradeName');
+
+ Route::get('leaveGrade/delete/{id}', [App\Http\Controllers\LeaveGradeController::class, 'delete'])->name('deleteLeaveGrade');
+
+ Route::get('leaveGrade/leaveEntitlement/{id}', [App\Http\Controllers\LeaveEntitlementController::class, 'show'])->name('leaveEntitlement');
+
+Route::post('leaveGrade/leaveEntitlement/{id}/add', [App\Http\Controllers\LeaveEntitlementController::class, 'addLeaveEntitlement'])->name('addLeaveEntitlement');
+
+Route::get('leaveGrade/editLeaveEntitlement/{leaveGradeId}/{id}', [App\Http\Controllers\LeaveEntitlementController::class, 'edit'])->name('editLeaveEntitlement');
+
+Route::post('leaveGrade/leaveEntitlement/edit/{leaveGradeId}/{id}', [App\Http\Controllers\LeaveEntitlementController::class, 'updateLeaveEntitlement'])->name('updateLeaveEntitlement');
+
+Route::get('leaveGrade/deleteLeaveEntitlement/{leaveGradeId}/{id}', [App\Http\Controllers\LeaveEntitlementController::class, 'deleteLeaveEntitlement'])->name('deleteLeaveEntitlement');
+
+Route::get('employeesLeave/all', [App\Http\Controllers\LeaveGradeController::class, 'showAllEmployeesLeaveGrade'])->name('allEmployeesLeaveGrade');
+
+Route::get('employeesLeave/{id}',[App\Http\Controllers\EmployeeLeaveController::class, 'showAnEmployeesLeave'])->name('employeesLeaveGrade');
+
+//leave application
+Route::get('admin/leaveApplicationList', [App\Http\Controllers\LeaveApplicationController::class, 'showLeaveApplicationListAdmin'])->name('showLeaveApplicationListAdmin');
+
+Route::get('admin/approveLeave/{employeeId}/{id}', [App\Http\Controllers\LeaveApplicationController::class, 'approve'])->name('approveLeave');
+
+Route::get('admin/approveMultipleLeave', [App\Http\Controllers\LeaveApplicationController::class, 'approveMultiple'])->name('approveMultipleLeave');
+
+Route::get('admin/reject/{employeeId}/{id}', [App\Http\Controllers\LeaveApplicationController::class, 'reject'])->name('rejectLeave');
+
+Route::get('admin/rejectMultipleLeave', [App\Http\Controllers\LeaveApplicationController::class, 'rejectMultiple'])->name('rejectMultipleLeave');
+
+//leave appliation (employee)
+Route::get('applyLeave', [App\Http\Controllers\LeaveApplicationController::class, 'showApplyLeavePage'])->name('showApplyLeavePage');
+Route::post('applyLeave/submit', [App\Http\Controllers\LeaveApplicationController::class, 'submitApplication'])->name('submitApplication');
+Route::get('leaveApplicationList', [App\Http\Controllers\LeaveApplicationController::class, 'showLeaveApplicationList'])->name('showLeaveApplicationList');
+Route::get('leaveApplication/cancel/{employeeId}/{id}', [App\Http\Controllers\LeaveApplicationController::class, 'cancel'])->name('cancelLeave');
+Route::get('cancelMultipleLeave', [App\Http\Controllers\LeaveApplicationController::class, 'cancelMultiple'])->name('cancelMultiple');
+Route::get('employeesLeave',[App\Http\Controllers\EmployeeLeaveController::class, 'showEmployeeOwnLeave'])->name('employeeOwnLeaveGrade');
+
+//leave record
+Route::get('employeesLeave/createLeaveRecord',[App\Http\Controllers\EmployeeLeaveController::class, 'createLeaveRecord'])->name('createLeaveRecord');
+

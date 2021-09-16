@@ -23,7 +23,6 @@ class CreateLeaveApplicationsTable extends Migration
             $table->string('reason');
             $table->string('document');
             $table->string('status');
-            $table->string('leave_approver');
             $table->timestamps();
         });
     }

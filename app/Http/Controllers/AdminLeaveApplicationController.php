@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use App\Models\AdminLeaveApplication;
-use App\Models\Admin;
 use App\Models\AdminLeave;
 use App\Models\LeaveType;
-use Session;
-Use Auth;
 use Carbon\Carbon;
 
 class AdminLeaveApplicationController extends Controller
@@ -67,7 +66,6 @@ class AdminLeaveApplicationController extends Controller
          'reason'=>$r->reason,
          'document'=>$documentName,
          'status'=>'Applied',
-         'leave_approver'=>$r->leaveApprover,
       ]);
 
       Session::flash('success',"Leave application submitted successfully!");

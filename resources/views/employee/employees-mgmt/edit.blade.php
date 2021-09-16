@@ -217,25 +217,11 @@
                                 </select>
                             </div>
                         </div>
-                        <!--Employee Salary Structure-->
-                        <div class="form-group">
-                            <label for="salary_structure" class="col-md-4 control-label">Salary Structure<span style="color:red">*</span></label>
-                            <div class="col-md-6">
-                                <input type="text" id="salary_structure" name="salary_structure" value="{{ $employee->salary_structure }}" style="width: -webkit-fill-available;" readonly>
-                            </div>
-                        </div>
                         <!--Employee Leave Grade-->
                         <div class="form-group">
                             <label for="leave_grade" class="col-md-4 control-label">Leave Grade<span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <input type="text" id="leave_grade" name="leave_grade" value="{{ $employee->leave_grade }}" style="width: -webkit-fill-available;" readonly>
-                            </div>
-                        </div>
-                        <!--Employee Grade-->
-                        <div class="form-group">
-                            <label for="employee_grade" class="col-md-4 control-label">Employee Grade<span style="color:red">*</span></label>
-                            <div class="col-md-6">
-                                <input type="text" id="employee_grade" name="employee_grade" value="{{ $employee->employee_grade }}" style="width: -webkit-fill-available;" readonly>
                             </div>
                         </div>
                         <!--Employee EPF Number-->

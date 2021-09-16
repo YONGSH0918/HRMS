@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 use App\Models\LeaveApplication;
-use App\Models\Admin;
+// use App\Models\Admin;
 use App\Models\Employee;
 use App\Models\EmployeeLeave;
 use App\Models\LeaveType;
-use Session;
-Use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class LeaveApplicationController extends Controller
 {
@@ -62,7 +63,6 @@ class LeaveApplicationController extends Controller
          'reason'=>$r->reason,
          'document'=>$documentName,
          'status'=>'Applied',
-         'leave_approver'=>$r->leaveApprover,
       ]);
 
       Session::flash('success',"Leave application submitted successfully!");
@@ -86,8 +86,7 @@ class LeaveApplicationController extends Controller
 
       $leaveApplications=DB::table('leave_applications')
       ->leftjoin('leave_types','leave_types.id','=','leave_applications.leave_type_id')
-      ->leftjoin('admins','admins.id','=','leave_applications.leave_approver')
-      ->select('leave_types.name as leaveTypeName','admins.id as leaveApproverId','admins.full_name as leaveApproverName','leave_applications.*')
+      ->select('leave_types.name as leaveTypeName','leave_applications.*')
       ->where('leave_applications.employee','=',Auth::id())
       ->orderBy('id','asc')
       ->get();
@@ -97,7 +96,6 @@ class LeaveApplicationController extends Controller
    }
 
    public function showLeaveApplicationListAdmin() {
-      $admins=Admin::all()->where('id',Auth::id());
       $leaveApplications=DB::table('leave_applications')
       ->get();
 
@@ -114,11 +112,10 @@ class LeaveApplicationController extends Controller
       $leaveApplications=DB::table('leave_applications')
       ->leftjoin('leave_types','leave_types.id','=','leave_applications.leave_type_id')
       ->leftjoin('employees','employees.id','=','leave_applications.employee')
-      ->select('leave_types.name as leaveTypeName','employees.id as employeeId','employees.full_name as employeeName','leave_applications.*')
-      ->where('leave_applications.leave_approver','=',Auth::id())
+      ->select('leave_types.name as leaveTypeName','employees.id as employeeId','employees.employee_Name as employeeName','leave_applications.*')
       ->get();
 
-      return view('admin/leave/leaveApplicationList')->with('admins',$admins)
+      return view('admin/leave/leaveApplicationList')
       ->with('leaveApplications',$leaveApplications);
    }
 
@@ -183,7 +180,7 @@ class LeaveApplicationController extends Controller
       $leaveApplications=LeaveApplication::find($id);
 
       $previousStatus=$leaveApplications->status;
-      if($previousStatus = "Approved") {
+      if($previousStatus == "Approved") {
          //update leave taken
          $employeeLeaves=DB::table('employee_leaves')
          ->where('employee','=',$employeeId)
@@ -219,7 +216,7 @@ class LeaveApplicationController extends Controller
          $application->status='Rejected';
          $application->save();
 
-         if($previousStatus = "Approved") {
+         if($previousStatus == "Approved") {
             $employeeId=$application->employee;
             $employeeLeaves=DB::table('employee_leaves')
             ->where('employee','=',$employeeId)
@@ -247,7 +244,7 @@ class LeaveApplicationController extends Controller
       $leaveApplications=LeaveApplication::find($id);
 
       $previousStatus=$leaveApplications->status;
-      if($previousStatus = "Approved") {
+      if($previousStatus == "Approved") {
          //update leave taken
          $employeeLeaves=DB::table('employee_leaves')
          ->where('employee','=',$employeeId)
@@ -282,7 +279,7 @@ class LeaveApplicationController extends Controller
          $application->status='Cancelled';
          $application->save();
 
-         if($previousStatus = "Approved") {
+         if($previousStatus == "Approved") {
             $employeeId=$application->employee;
             $employeeLeaves=DB::table('employee_leaves')
             ->where('employee','=',$employeeId)

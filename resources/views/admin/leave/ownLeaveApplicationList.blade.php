@@ -37,7 +37,6 @@
             <th>Leave Type</th>
             <th>Start Date</th>
             <th>End Date</th>
-            <th>Leave Approver</th>
             <th>Status</th>
             <th>Reason</th>
             <th>File</th>
@@ -52,7 +51,6 @@
             <td>{{ $adminLeaveApplication->leaveTypeName }}</td>
             <td>{{ $adminLeaveApplication->start_date }}</td>
             <td>{{ $adminLeaveApplication->end_date }}</td>
-            <td>{{ $adminLeaveApplication->leaveApproverId }} {{ $adminLeaveApplication->leaveApproverName }}</td>
             <td>{{ $adminLeaveApplication->status }}</td>
             <td>{{ $adminLeaveApplication->reason }}</td>
             <td>

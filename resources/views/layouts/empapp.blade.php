@@ -56,15 +56,18 @@
                     <a href="{{ route('viewMeA') }}">Attendance</a>
                 </li>
                 <li>
-                    <a href="#pageSubmenu" class="dropdown-toggle" data-bs-toggle="collapse" aria-expanded="false">
+                    <a href="#pageSubmenu2" class="dropdown-toggle" data-bs-toggle="collapse" aria-expanded="false">
                     Leave<i class="fas fa-sort-down" style="margin-left:70%;"></i>
                     </a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <ul class="collapse list-unstyled" id="pageSubmenu2">
                         <li>
-                            <a href="#">{{ __('Apply Leave') }}</a>
+                            <a href="{{ route('showApplyLeavePage') }}">Apply Leave</a>
                         </li>
                         <li>
-                            <a href="#">{{ __('Leave Status') }}</a>
+                            <a href="{{ route('showLeaveApplicationList') }}">Leave Application History</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('employeeOwnLeaveGrade') }}">Leave Grade</a>
                         </li>
                     </ul>
                 </li>

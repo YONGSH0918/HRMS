@@ -153,7 +153,6 @@ function changeEmployeeLeave() {
 
       @foreach($employees as $employee)
       <input type="hidden" class="form-control" name="employee" value="{{ $employee->id }}">
-      <input type="hidden" class="form-control" name="leaveApprover" value="{{ $employee->supervisor }}">
       @endforeach
 
       <div class="card-body" style="width: 450px; margin: 0 auto;">

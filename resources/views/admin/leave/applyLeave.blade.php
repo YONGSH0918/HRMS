@@ -152,7 +152,6 @@ function changeAdminLeave() {
 
       @foreach($admins as $admin)
       <input type="hidden" class="form-control" name="admin" value="{{ $admin->id }}">
-      <input type="hidden" class="form-control" name="leaveApprover" value="{{ $admin->supervisor }}">
       @endforeach
 
       <div class="card-body" style="width: 450px; margin: 0 auto;">

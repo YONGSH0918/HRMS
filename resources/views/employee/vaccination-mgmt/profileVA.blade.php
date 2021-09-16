@@ -113,11 +113,11 @@
                             </tr>
                         </tbody>
                     </table>
-                    @if($va->vaccination_Status == 'N/A')
-                    <form name="formEditMeVA" class="form-horizontal" role="form" method="POST" action="{{ route('updateMeVA', ['id' => $va->id]) }}" enctype="multipart/form-data">
+                    @if($va->status == 'N/A')
+                    <form name="formEditMeVA" class="form-horizontal" role="form" method="POST" action="{{ route('updateMeCPD', ['id' => $cpd->id]) }}" enctype="multipart/form-data">
                         @csrf
                         <button type="submit" name="editMeVA" class="btn btn-primary" onclick="return confirm('Are you sure you have vaccinated already?')">
-                            Vaccinated
+                            Start
                         </button>
                     </form>
                     @endif

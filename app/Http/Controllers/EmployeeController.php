@@ -13,20 +13,25 @@ use App\Models\Position;
 use App\Models\Nationality;
 use App\Models\State;
 use App\Models\Workingtime;
-use App\Models\EmployeeCareerPathInfo;
+use App\Models\EmployeeLeave;
+use App\Models\LeaveGrade;
+use App\Models\LeaveGradeHistory;
+use App\Models\LeaveEntitlement;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Carbon\Carbon;
 
 
 class EmployeeController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
-   }
+    }
 
     //turn page
     public function add()
@@ -42,19 +47,23 @@ class EmployeeController extends Controller
         $states = State::all();
         $workingtimes = Workingtime::all();
         $supervisors = Employee::all();
+        $leavegrades = DB::table('leave_grades')
+            ->where('status', '!=', 'Deleted')
+            ->get();
 
         return view('admin.employees-mgmt.addEmployee')
-        ->with('banknames', $banknames)
-        ->with('cities', $cities)
-        ->with('countries', $countries)
-        ->with('departments', $departments)
-        ->with('employments', $employments)
-        ->with('positions', $positions)
-        ->with('nationalities', $nationalities)
-        ->with('states', $states)
-        ->with('supervisors', $supervisors)
-        ->with('workingtimes', $workingtimes)
-        ->with('supervisors', $supervisors);
+            ->with('banknames', $banknames)
+            ->with('cities', $cities)
+            ->with('countries', $countries)
+            ->with('departments', $departments)
+            ->with('employments', $employments)
+            ->with('positions', $positions)
+            ->with('nationalities', $nationalities)
+            ->with('states', $states)
+            ->with('supervisors', $supervisors)
+            ->with('workingtimes', $workingtimes)
+            ->with('leavegrades', $leavegrades)
+            ->with('supervisors', $supervisors);
     }
 
     public function findWorkingSchedule(Request $request)
@@ -105,9 +114,7 @@ class EmployeeController extends Controller
             'status' => $r->status,
             'employment_ID' => $r->employment_ID,
             'marital_Status' => $r->marital_Status,
-            'salary_structure' => $r->salary_structure,
             'leave_grade' => $r->leave_grade,
-            'employee_grade' => $r->employee_grade,
             'epf_number' => $r->epf_number,
             'bank_Name' => $r->bank_Name,
             'bank_account_number' => $r->bank_account_number,
@@ -115,6 +122,28 @@ class EmployeeController extends Controller
 
         ]);
 
+        //create a new leave grade history record
+        $createLeaveGradeHistory = LeaveGradeHistory::create([
+            'employee' => $r->employee_ID,
+            'leave_grade' => $r->leave_grade,
+            'effective_from' => Carbon::now(),
+        ]);
+
+        $leaveEntitlements = DB::table('leave_entitlements')
+            ->where('leave_entitlements.leaveGrade', '=', $r->leave_grade)
+            ->get();
+
+        foreach ($leaveEntitlements as $leaveEntitlement) {
+            $createEmployeeLeave = EmployeeLeave::create([
+                'employee' => $r->employee_ID,
+                'leave_type' => $leaveEntitlement->leaveType,
+                'total_days' => $leaveEntitlement->num_of_days,
+                'leaves_taken' => 0,
+                'remaining_days' => $leaveEntitlement->num_of_days,
+                'year' => Carbon::now()->format('Y'),
+                'status' => 'Valid',
+            ]);
+        }
 
         Session::flash('success', "Add New Employee Succesful!");
 
@@ -134,31 +163,34 @@ class EmployeeController extends Controller
     public function edit($id)
     {
 
-        $employees = Employee::all()->where('id', $id); 
+        $employees = Employee::all()->where('id', $id);
         $banknames = Bankname::all();
         $cities = City::all();
         $countries = Country::all();
         $departments = Department::all();
         $employments = Employment::all();
-        $positions = Position ::all();
+        $positions = Position::all();
         $nationalities = Nationality::all();
         $states = State::all();
         $workingtimes = Workingtime::all();
         $supervisors = Employee::all();
-        
+        $leavegrades = DB::table('leave_grades')
+            ->where('status', '!=', 'Deleted')
+            ->get();
 
         return view('admin.employees-mgmt.edit')->with('employees', $employees)
-        ->with('banknames', $banknames)
-        ->with('cities', $cities)
-        ->with('countries', $countries)
-        ->with('departments', $departments)
-        ->with('employments', $employments)
-        ->with('positions', $positions)
-        ->with('nationalities', $nationalities)
-        ->with('states', $states)
-        ->with('supervisors', $supervisors)
-        ->with('workingtimes', $workingtimes)
-        ->with('supervisors', $supervisors);
+            ->with('banknames', $banknames)
+            ->with('cities', $cities)
+            ->with('countries', $countries)
+            ->with('departments', $departments)
+            ->with('employments', $employments)
+            ->with('positions', $positions)
+            ->with('nationalities', $nationalities)
+            ->with('states', $states)
+            ->with('supervisors', $supervisors)
+            ->with('workingtimes', $workingtimes)
+            ->with('leavegrades', $leavegrades)
+            ->with('supervisors', $supervisors);
     }
 
     //edit
@@ -203,14 +235,124 @@ class EmployeeController extends Controller
         $employees->status = $r->status;
         $employees->employment_ID = $r->employment_ID;
         $employees->marital_Status = $r->marital_Status;
-        $employees->salary_structure = $r->salary_structure;
         $employees->leave_grade = $r->leave_grade;
-        $employees->employee_grade = $r->employee_grade;
         $employees->epf_number = $r->epf_number;
         $employees->bank_Name = $r->bank_Name;
         $employees->bank_account_number = $r->bank_account_number;
         $employees->workingSchedule = $r->workingSchedule;
         $employees->save(); //run the SQL update statment
+
+        $lastLeaveGradeHistories = DB::table('leave_grade_histories')
+            ->where('employee', '=', $r->employee_ID)
+            ->whereNull('effective_until')
+            ->get();
+
+        foreach ($lastLeaveGradeHistories as $lastLeaveGradeHistory) {
+            $id = $lastLeaveGradeHistory->id;
+            $lastLeaveGradeHistory = LeaveGradeHistory::find($id);
+            $lastLeaveGradeHistory->effective_until = Carbon::now();
+            $lastLeaveGradeHistory->save();
+        }
+
+        //create a new leave grade history record
+        $createLeaveGradeHistory = LeaveGradeHistory::create([
+            'employee' => $r->employee_ID,
+            'leave_grade' => $r->leave_grade,
+            'effective_from' => Carbon::now(),
+        ]);
+
+        $leaveGradeId=$r->leave_grade;
+
+         //retrieve leave entitlement for the new leave grade
+         $leaveEntitlements=DB::table('leave_entitlements')
+         ->where('leave_entitlements.leaveGrade','=',$leaveGradeId)
+         ->get();
+
+         //retrieve employee's leave record for present year
+         $employeeLeaves=DB::table('employee_leaves')
+         ->where('employee','=',$r->employee_ID)
+         ->where('year','=',Carbon::now()->format('Y'))
+         ->get();
+
+         //set isMatched leave entitlement with employee's leave record to 0(false)
+         $isMatched=0;
+
+         //for each leave entitlement for the leave grade ...
+         foreach($leaveEntitlements as $leaveEntitlement) {
+            //set the value of $isMatched to 0(false) for every loop
+            $isMatched=0;
+
+            //find each leave entitlement with its id
+            $leaveEntitlementId=$leaveEntitlement->id;
+            $leaveEntitlement=LeaveEntitlement::find($leaveEntitlementId);
+
+            //need to see if the leave entitlement for the leave grade
+            //so we need to loop evert employeeLeave records
+            foreach($employeeLeaves as $employeeLeave) {
+               //find each employeeLeave record with its id
+               $employeeLeaveId=$employeeLeave->id;
+               $employeeLeave=EmployeeLeave::find($employeeLeaveId);
+
+               //if the employeeLeave leave type matched with the leave entitlement leave type
+               if($employeeLeave->leave_type == $leaveEntitlement->leaveType) {
+                  //set isMatched to 1(true)
+                  $isMatched=1;
+
+                  //update the data of the employee leave
+                  $employeeLeave->total_days=$leaveEntitlement->num_of_days;
+                  $remaining_days=($leaveEntitlement->num_of_days)-($employeeLeave->leaves_taken);
+                  if($leaveEntitlement->num_of_days-$employeeLeave->leaves_taken <0) {
+                     $remaining_days=0;
+                  }
+                  $employeeLeave->remaining_days=$remaining_days;
+                  $employeeLeave->status='Valid';
+                  $employeeLeave->save();
+               }
+            }
+
+            //if match is not found after looping all employee，
+            //we need to create a new employee leave record
+            if($isMatched==0) {
+               $createEmployeeLeave=EmployeeLeave::create([
+                  'employee'=>$r->employee,
+                  'leave_type'=>$leaveEntitlement->leaveType,
+                  'total_days'=>$leaveEntitlement->num_of_days,
+                  'leaves_taken'=>0,
+                  'remaining_days'=>$leaveEntitlement->num_of_days,
+                  'year'=>Carbon::now()->format('Y'),
+                  'status'=>'Valid',
+               ]);
+            }
+         }
+
+         foreach($employeeLeaves as $employeeLeave) {
+            //set isMatched leave entitlement with employee's leave record to 0(false)
+            $isMatched=0;
+
+            //find each employeeLeave record with its id
+            $employeeLeaveId=$employeeLeave->id;
+            $employeeLeave=EmployeeLeave::find($employeeLeaveId);
+
+            foreach($leaveEntitlements as $leaveEntitlement) {
+               //find each leave entitlement with its id
+               $leaveEntitlementId=$leaveEntitlement->id;
+               $leaveEntitlement=LeaveEntitlement::find($leaveEntitlementId);
+
+               if($employeeLeave->leave_type == $leaveEntitlement->leaveType) {
+                  $isMatched=1;
+               }
+            }
+
+            if($isMatched==0) {
+               //because it loops for every employee leave record,
+               //if the employee leave record does not match with any leave entitlement,
+               //it means the leave type is not included in the new leave grade,
+               //so it needs to be set to invalid
+               $employeeLeave->status='Invalid';
+               $employeeLeave->save();
+            }
+         }
+
         Session::flash('update', "Employee updated Succesful!");
         return redirect()->route('viewEmployee');
     }
@@ -237,8 +379,8 @@ class EmployeeController extends Controller
         //select * from products where id='$id'
 
         return view('admin.employees-mgmt.profileEmployee')
-        ->with('employments', $employments)
-        ->with('employees', $employees);
+            ->with('employments', $employments)
+            ->with('employees', $employees);
     }
 
     //----------------------------------------------------------------------------//
@@ -246,7 +388,7 @@ class EmployeeController extends Controller
     public function showMe()
     {
 
-        $employees = Employee::all()->where('employee_ID', Auth::id() );
+        $employees = Employee::all()->where('employee_ID', Auth::id());
 
         return view('employee.employees-mgmt.index')->with('employees', $employees);
     }
@@ -259,38 +401,40 @@ class EmployeeController extends Controller
         //select * from products where id='$id'
 
         return view('employee.employees-mgmt.profileEmployee')
-        ->with('employments', $employments)
-        ->with('employees', $employees);
+            ->with('employments', $employments)
+            ->with('employees', $employees);
     }
 
     public function editMe($id)
     {
 
-        $employees = Employee::all()->where('id', $id); 
+        $employees = Employee::all()->where('id', $id);
         $banknames = Bankname::all();
         $cities = City::all();
         $countries = Country::all();
         $departments = Department::all();
         $employments = Employment::all();
-        $positions = Position ::all();
+        $positions = Position::all();
         $nationalities = Nationality::all();
         $states = State::all();
         $workingtimes = Workingtime::all();
         $supervisors = Employee::all();
-        
+        $leavegrades = LeaveGrade::all();
+
 
         return view('employee.employees-mgmt.edit')->with('employees', $employees)
-        ->with('banknames', $banknames)
-        ->with('cities', $cities)
-        ->with('countries', $countries)
-        ->with('departments', $departments)
-        ->with('employments', $employments)
-        ->with('positions', $positions)
-        ->with('nationalities', $nationalities)
-        ->with('states', $states)
-        ->with('supervisors', $supervisors)
-        ->with('workingtimes', $workingtimes)
-        ->with('supervisors', $supervisors);
+            ->with('banknames', $banknames)
+            ->with('cities', $cities)
+            ->with('countries', $countries)
+            ->with('departments', $departments)
+            ->with('employments', $employments)
+            ->with('positions', $positions)
+            ->with('nationalities', $nationalities)
+            ->with('states', $states)
+            ->with('supervisors', $supervisors)
+            ->with('workingtimes', $workingtimes)
+            ->with('leavegrades', $leavegrades)
+            ->with('supervisors', $supervisors);
     }
 
     //edit
@@ -335,9 +479,7 @@ class EmployeeController extends Controller
         $employees->status = $r->status;
         $employees->employment_ID = $r->employment_ID;
         $employees->marital_Status = $r->marital_Status;
-        $employees->salary_structure = $r->salary_structure;
         $employees->leave_grade = $r->leave_grade;
-        $employees->employee_grade = $r->employee_grade;
         $employees->epf_number = $r->epf_number;
         $employees->bank_Name = $r->bank_Name;
         $employees->bank_account_number = $r->bank_account_number;

@@ -29,7 +29,7 @@
 
    <div class="leave_grade" style="font-color: black; margin: 10px 0;" >
        <label for=""> Employee's ID: {{ $employee->id }}</label><br />
-       <label for="">Employee's Name: {{ $employee->full_name }}</label><br />
+       <label for="">Employee's Name: {{ $employee->employee_Name }}</label><br />
        <label for="">Employee's Leave Grade: {{ $employee->leave_grade }} {{ $employee->leaveGradeName }}</label><br />
    </div>
 

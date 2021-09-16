@@ -12,11 +12,11 @@ class Employee extends Model
     protected $fillable = [
         'employee_ID', 'ic', 'employee_Name', 'image', 'gender',
         'date_of_birth', 'race', 'national', 'country', 'state', 'city', 'address',
-        'contact_Number', 'email', 'department', 'supervisor' , 'jobtitle',
+        'contact_Number', 'email', 'department', 'supervisor', 'jobtitle',
         'salary', 'start_Date', 'end_Date', 'emergency_Name',
         'emergency_Contact_Number', 'document', 'status',
-        'employment_ID', 'marital_Status', 'salary_structure', 'leave_grade',
-        'employee_grade', 'epf_number', 'bank_Name', 'bank_account_number', 'workingSchedule'
+        'employment_ID', 'marital_Status', 'leave_grade', 
+        'epf_number', 'bank_Name', 'bank_account_number', 'workingSchedule'
     ];
 
     public function administrator()
