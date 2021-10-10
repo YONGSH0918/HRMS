@@ -36,7 +36,7 @@
 
          <p>
             <label for="employeeName">Employee Name</label>
-            <input type="text" name="full_name" value="{{ $employee->full_name }}" class="form-control" readonly>
+            <input type="text" name="full_name" value="{{ $employee->employee_Name}}" class="form-control" readonly>
          </p>
 
          <p>

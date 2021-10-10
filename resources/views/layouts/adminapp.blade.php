@@ -74,25 +74,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                <a href="#pageSubmenu3" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payroll 
-                    <i class="fas fa-sort-down" style="margin-left:5%;"></i>
-                    </a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu3">
-                        <li>
-                            <a href="{{ route('showCategoryOfSalaryComponent')}}">Cateogry of Salary Component</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('showSalaryComponent') }}">Salary Component</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('showSalaryComponentForAllJobTitle') }}">Salary Structure for Job Title</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('showPayrollPage') }}">Payroll for This Month</a>
-                        </li>
-                    </ul>
-                </li>
+                
                 <li>
                     <a href="{{ route('admin.recruitment') }}">
                         Online Recruitment <span class="label label-pill label-danger count"></span>

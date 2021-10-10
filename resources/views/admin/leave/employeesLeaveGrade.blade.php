@@ -34,7 +34,7 @@
    </p>
 
    <p class="font-weight-bold">
-      Employee's Name: {{ $employee->full_name }}
+      Employee's Name: {{ $employee->employee_Name }}
    </p>
 
    <p class="font-weight-bold">

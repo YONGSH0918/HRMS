@@ -77,12 +77,6 @@ class EmployeeLeaveController extends Controller
      ->where('employees.id','=',$id)
      ->get();
 
-     foreach($employees as $employee) {
-        $employee=Employee::find($employee->id);
-        $supervisor=$employee->supervisor;
-     }
-
-     if($supervisor == Auth::id()) {
         $employeeLeaves=DB::table('employee_leaves')
        ->leftjoin('leave_types','leave_types.id','=','employee_leaves.leave_type')
        ->select('leave_types.name as leaveTypeName','employee_leaves.*')
@@ -92,10 +86,7 @@ class EmployeeLeaveController extends Controller
 
        return view('admin/leave/employeesLeaveGrade')->with('employees',$employees)
        ->with('employeeLeaves',$employeeLeaves);
-    } else {
-      Session::flash('danger',"The employee is not under your supervision.");
-      return redirect()->route('allEmployeesLeaveGrade');
-   }
+    
   }
 
 

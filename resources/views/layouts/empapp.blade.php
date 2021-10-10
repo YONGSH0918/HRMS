@@ -72,9 +72,6 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Payroll</a>
-                </li>
-                <li>
                     <a href="{{ route('emp.showCalendar') }}">Calendar</a>
                 </li>
             </ul>

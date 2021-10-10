@@ -276,6 +276,9 @@ Route::get('employeesLeave/all', [App\Http\Controllers\LeaveGradeController::cla
 
 Route::get('employeesLeave/{id}',[App\Http\Controllers\EmployeeLeaveController::class, 'showAnEmployeesLeave'])->name('employeesLeaveGrade');
 
+Route::get('setEmployeesLeaveGrade/{id}',[App\Http\Controllers\LeaveGradeController::class, 'setEmployeesLeaveGradePage'])->name('setEmployeesLeaveGrade');
+
+
 //leave application
 Route::get('admin/leaveApplicationList', [App\Http\Controllers\LeaveApplicationController::class, 'showLeaveApplicationListAdmin'])->name('showLeaveApplicationListAdmin');
 
@@ -330,3 +333,5 @@ Route::get('payroll',[App\Http\Controllers\PayrollController::class, 'showPayrol
 Route::get('payroll/{id}',[App\Http\Controllers\PayrollController::class, 'showPayrollItemPage'])->name('showPayrollItemPage');
 
 Route::get('payroll/addPayrollItem',[App\Http\Controllers\PayrollController::class, 'addPayrollItem'])->name('addPayrollItem');
+
+Route::post('setEmployeesLeaveGrade/update',[App\Http\Controllers\LeaveGradeController::class, 'updateEmployeesLeaveGrade'])->name('updateEmployeesLeaveGrade');

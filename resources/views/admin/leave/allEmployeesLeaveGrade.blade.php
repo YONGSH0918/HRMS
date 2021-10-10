@@ -58,7 +58,7 @@
          @foreach($employees as $employee)
          <tr>
             <td>{{ $employee->id }}</td>
-            <td>{{ $employee->full_name }}</td>
+            <td>{{ $employee->employee_Name }}</td>
             <td>{{ $employee->leave_grade }} {{ $employee->leaveGradeName }}</td>
             <td>
                <a href="{{ route('employeesLeaveGrade', ['id' => $employee->id]) }}" class="btn btn-primary">View/Edit Leave Information</a>
